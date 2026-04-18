@@ -13,6 +13,13 @@ import { Footer } from "../components/Footer";
 import { Chatbot } from "../components/Chatbot";
 import { useChatbot } from "../contexts/ChatbotContext";
 import { useEffect, useMemo, useState } from "react";
+import { services } from "../data/services";
+import { HomeTrustSection } from "../components/home/HomeTrustSection";
+import { HomeIndustry40Section } from "../components/home/HomeIndustry40Section";
+import { HomeUseCasesSection } from "../components/home/HomeUseCasesSection";
+import { HomeProcessSection } from "../components/home/HomeProcessSection";
+import { HomeFinalCtaSection } from "../components/home/HomeFinalCtaSection";
+import { FloatingWhatsApp } from "../components/home/FloatingWhatsApp";
 
 type Language = "tr" | "en";
 
@@ -27,87 +34,141 @@ const translations = {
     },
     hero: {
       kicker: "Industrial Automation",
-      title: "Reliable automation products with clear technical guidance",
+      title: "Industry 4.0–ready sensing and automation for your plant",
       description:
-        "We help teams choose the right components for drives, control, and field applications—then we support you through supply and commissioning.",
-      ctaPrimary: "Contact Us",
-      ctaSecondary: "Call Now",
+        "Maximum precision on the line with a disciplined approach to error reduction, transparent procurement, and responsive engineering support.",
+      ctaPrimary: "Request a quote",
+      ctaSecondary: "WhatsApp us",
     },
     counters: [
-      { value: 6, suffix: "", label: "Product Lines" },
-      { value: 15, suffix: "+", label: "Years Experience" },
-      { value: 100, suffix: "%", label: "Commitment" },
+      { value: 6, suffix: "", label: "Product lines" },
+      { value: 15, suffix: "+", label: "Years in the field" },
+      { value: 100, suffix: "%", label: "Commitment to clarity" },
     ],
-    services: {
-      kicker: "Products",
-      title: "Featured product range",
-      description:
-        "Browse our core references. For datasheets, compatibility checks, and lead times, reach out by phone or WhatsApp.",
-      list: [
+    trust: {
+      title: "The partner plants rely on",
+      intro:
+        "We work with manufacturers and integrators who need predictable answers, disciplined supply, and field-credible components.",
+      logos: ["Automation Partner A", "Systems Integrator B", "Process OEM C", "Machine Builder D", "Energy Plant E", "Food Producer F"],
+      bullets: [
         {
-          title: "Product 1",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 1",
+          title: "Domestic manufacturing strength",
+          text: "Solutions aligned with local standards, faster logistics, and accountable after-sales access.",
         },
         {
-          title: "Product 2",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 2",
+          title: "Fast supply & support",
+          text: "Stock-aware guidance and same-day responses for most availability questions via phone or WhatsApp.",
         },
         {
-          title: "Product 3",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 3",
-        },
-        {
-          title: "Product 4",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 4",
-        },
-        {
-          title: "Product 5",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 5",
-        },
-        {
-          title: "Product 6",
-          description:
-            "Industrial automation component from our catalog—request technical details and availability.",
-          highlight: "Product 6",
+          title: "Industrial-grade durability",
+          text: "Selection driven by environment, duty cycle, and protection class—not marketing specs.",
         },
       ],
-      action: "View Details",
+    },
+    industry40: {
+      title: "Industry 4.0: a new chapter on the shop floor",
+      cards: [
+        {
+          title: "Real-time data visibility",
+          description: "Monitor critical variables as they happen to catch drift before it becomes downtime.",
+          icon: "data" as const,
+        },
+        {
+          title: "Lower error rates",
+          description: "Consistent sensing and control reduce rework, scrap, and unplanned interventions.",
+          icon: "error" as const,
+        },
+        {
+          title: "Higher productivity",
+          description: "Stable cycles and clearer operator context translate directly into output per shift.",
+          icon: "efficiency" as const,
+        },
+        {
+          title: "Energy savings",
+          description: "Right-sized drives and smarter control cut wasted kWh without compromising throughput.",
+          icon: "energy" as const,
+        },
+      ],
+    },
+    useCases: {
+      title: "Where we add value",
+      cards: [
+        {
+          title: "Automotive production",
+          description: "Precision sensing, robust fieldbus, and repeatable control for high-mix assembly lines.",
+        },
+        {
+          title: "Food & beverage",
+          description: "Washdown-friendly components and traceable supply for hygiene-sensitive environments.",
+        },
+        {
+          title: "Factory automation",
+          description: "Retrofits and greenfield lines with clear BOMs, documentation, and commissioning support.",
+        },
+        {
+          title: "Machine builders",
+          description: "OEM-focused selection with lead-time transparency for your bill of materials.",
+        },
+      ],
+    },
+    homeProcess: {
+      title: "How the engagement works",
+      steps: [
+        {
+          title: "Requirements review",
+          description: "We clarify voltage, environment, communications, and integration constraints up front.",
+        },
+        {
+          title: "Product selection",
+          description: "A short list of viable catalog references—no generic catalog dumps.",
+        },
+        {
+          title: "Installation & commissioning",
+          description: "Structured handover with documentation and remote or on-site guidance when needed.",
+        },
+        {
+          title: "Ongoing technical support",
+          description: "Direct access for spares, alternates, and troubleshooting as your line evolves.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Want to reduce error and variability on your line?",
+      ctaQuote: "Request a quote",
+      ctaContact: "Contact us",
+    },
+    services: {
+      kicker: "Products",
+      title: "Value-led product lines",
+      description:
+        "Each card links to a detailed page. For datasheets, compatibility, and lead times, reach us on phone or WhatsApp.",
+      action: "View details",
     },
     whyUs: {
-      kicker: "Why Us",
-      title: "Technical clarity, disciplined supply, and responsive communication.",
+      kicker: "Why us",
+      title: "Why Yazıcı Otomasyon?",
       description:
-        "Automation projects move faster when product selection is unambiguous and expectations are aligned from day one.",
+        "We combine domestic supply strength with field-credible engineering so your line decisions are defensible in production.",
       list: [
         {
-          title: "Application-first guidance",
+          title: "Domestic manufacturing strength",
           description:
-            "We translate your constraints into a short list of viable references—not a generic catalog dump.",
+            "Locally aligned components, faster logistics, and accountable support when schedules are tight.",
         },
         {
-          title: "Predictable procurement",
+          title: "Technical support",
           description:
-            "Clear lead times, transparent options, and structured follow-up until material is on its way.",
+            "Engineers who speak in clear constraints: voltage, duty, environment, and integration—not buzzwords.",
         },
         {
-          title: "After-sales accessibility",
+          title: "Fast resolution",
           description:
-            "Direct access when questions arise during integration, commissioning, or spare cycles.",
+            "Short feedback loops on stock, alternates, and documentation so projects keep momentum.",
         },
         {
-          title: "Nationwide coverage",
+          title: "Industrial expertise",
           description:
-            "We support customers across Turkey with the same standards of responsiveness.",
+            "Selection discipline honed on real plants—from drives and control to field instrumentation.",
         },
       ],
     },
@@ -193,87 +254,159 @@ const translations = {
     },
     hero: {
       kicker: "Endüstriyel Otomasyon",
-      title: "Güvenilir otomasyon ürünleri ve net teknik yönlendirme",
-      description:
-        "Sürücü, kontrol ve saha uygulamalarınız için doğru bileşeni seçmenize yardımcı olur; tedarik ve devreye almada yanınızda oluruz.",
-      ctaPrimary: "İletişime Geç",
-      ctaSecondary: "Hemen Ara",
+      title: "Endüstri 4.0 Uyumlu Sensör ve Otomasyon Çözümleri",
+      description: "Üretim hatlarınızda maksimum hassasiyet, minimum hata payı.",
+      ctaPrimary: "Teklif Al",
+      ctaSecondary: "WhatsApp ile İletişime Geç",
     },
     counters: [
-      { value: 6, suffix: "", label: "Ürün vitrini" },
-      { value: 15, suffix: "+", label: "Yıl deneyim" },
-      { value: 100, suffix: "%", label: "Taahhüt" },
+      { value: 6, suffix: "", label: "Ürün hattı" },
+      { value: 15, suffix: "+", label: "Saha deneyimi" },
+      { value: 100, suffix: "%", label: "Şeffaflık taahhüdü" },
     ],
-    services: {
-      kicker: "Ürünlerimiz",
-      title: "Öne çıkan ürün gamımız",
-      description:
-        "Aşağıdaki referansları inceleyin. Teknik veri, uyumluluk ve termin için telefon veya WhatsApp ile yazın.",
-      list: [
+    trust: {
+      title: "Tercih Edilen Çözüm Ortağınız",
+      intro:
+        "Üreticiler ve entegratörlerle; öngörülebilir cevaplar, disiplinli tedarik ve sahada güvenilir bileşenler üzerinde çalışıyoruz.",
+      logos: [
+        "Otomasyon Ortağı A",
+        "Üretim Sistemleri B",
+        "Endüstri Çözümleri C",
+        "Makina Üretici D",
+        "Proses Teknoloji E",
+        "Enerji Otomasyon F",
+      ],
+      bullets: [
         {
-          title: "Ürün 1",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 1",
+          title: "Yerli üretim gücü",
+          text: "Yerel standartlara uyum, hızlı lojistik ve satış sonrasında erişilebilir destek.",
         },
         {
-          title: "Ürün 2",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 2",
+          title: "Hızlı tedarik ve destek",
+          text: "Stok bilinciyle yönlendirme; birçok müsaitlik sorusuna telefon veya WhatsApp ile aynı gün dönüş.",
         },
         {
-          title: "Ürün 3",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 3",
-        },
-        {
-          title: "Ürün 4",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 4",
-        },
-        {
-          title: "Ürün 5",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 5",
-        },
-        {
-          title: "Ürün 6",
-          description:
-            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
-          highlight: "Ürün 6",
+          title: "Endüstriyel dayanıklılık",
+          text: "Ortam, görev döngüsü ve koruma sınıfına göre seçim — broşür değil, saha gerçeği.",
         },
       ],
+    },
+    industry40: {
+      title: "Endüstri 4.0 ile Üretimde Yeni Dönem",
+      cards: [
+        {
+          title: "Gerçek zamanlı veri takibi",
+          description:
+            "Kritik değişkenleri anlık izleyerek sapmayı duruşa dönüşmeden yakalarsınız.",
+          icon: "data" as const,
+        },
+        {
+          title: "Hata oranında azalma",
+          description:
+            "Tutarlı algılama ve kontrol; hurda, yeniden işleme ve plansız müdahaleyi azaltır.",
+          icon: "error" as const,
+        },
+        {
+          title: "Üretim verimliliğinde artış",
+          description:
+            "İstikrarlı çevrimler ve net operatör görünümü, vardiya başına çıktıyı doğrudan destekler.",
+          icon: "efficiency" as const,
+        },
+        {
+          title: "Enerji tasarrufu",
+          description:
+            "Doğru boyutlu sürücü ve akıllı kontrol; verimi düşürmeden gereksiz kWh tüketimini kısar.",
+          icon: "energy" as const,
+        },
+      ],
+    },
+    useCases: {
+      title: "Kullanım Alanları",
+      cards: [
+        {
+          title: "Otomotiv üretimi",
+          description:
+            "Yüksek tekrarlanabilirlikte algılama, sağlam saha veri yolu ve çok çeşitli montaj hatlarında kontrol.",
+        },
+        {
+          title: "Gıda üretimi",
+          description:
+            "Yıkamaya dayanıklı bileşenler ve hijyen odaklı ortamlarda izlenebilir tedarik.",
+        },
+        {
+          title: "Fabrika otomasyonu",
+          description:
+            "Modernizasyon ve yeni hatlar için net BOM, dokümantasyon ve devreye alma desteği.",
+        },
+        {
+          title: "Makine üreticileri",
+          description:
+            "OEM odaklı seçim ve malzeme listeniz için şeffaf termin yönetimi.",
+        },
+      ],
+    },
+    homeProcess: {
+      title: "Süreç Nasıl İşliyor?",
+      steps: [
+        {
+          title: "İhtiyaç Analizi",
+          description:
+            "Gerilim, ortam, haberleşme ve mevcut sistemle entegrasyon kısıtlarını baştan netleştiririz.",
+        },
+        {
+          title: "Ürün Seçimi",
+          description:
+            "Katalogdan uygulanabilir kısa liste — jenerik yığın değil, sahada tutarlı çözüm.",
+        },
+        {
+          title: "Kurulum",
+          description:
+            "Dokümantasyonla yapılandırılmış devreye alma; gerektiğinde uzaktan veya sahada eşlik.",
+        },
+        {
+          title: "Teknik Destek",
+          description:
+            "Yedek, muadil ve arıza giderme için doğrudan hat; hat evriminize göre yanınızdayız.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Üretimde Hata Payını Azaltmak İster Misiniz?",
+      ctaQuote: "Teklif Al",
+      ctaContact: "Bize Ulaşın",
+    },
+    services: {
+      kicker: "Ürünlerimiz",
+      title: "Fayda odaklı ürün hatlarımız",
+      description:
+        "Her kart ilgili ürün sayfasına gider. Teknik veri, uyumluluk ve termin için telefon veya WhatsApp ile yazın.",
       action: "Detayları Gör",
     },
     whyUs: {
       kicker: "Neden Biz",
-      title: "Teknik netlik, disiplinli tedarik ve hızlı iletişim.",
+      title: "Neden Yazıcı Otomasyon?",
       description:
-        "Ürün seçimi şeffaf olduğunda otomasyon projeleri daha hızlı ilerler; beklentileri ilk günden netleştiririz.",
+        "Yerli üretim gücünü sahadan gelen mühendislik disipliniyle birleştiriyor; hat kararlarınızı üretimde savunulabilir kılıyoruz.",
       list: [
         {
-          title: "Uygulama odaklı yönlendirme",
+          title: "Yerli üretim",
           description:
-            "Kısıtlarınızı kısa bir uygun referans listesine çeviririz — jenerik katalog yığını değil.",
+            "Yerel standartlara uygun bileşenler, hızlı lojistik ve termin baskısında hesap verebilir tedarik.",
         },
         {
-          title: "Öngörülebilir tedarik",
+          title: "Teknik destek",
           description:
-            "Net terminler, şeffaf seçenekler ve malzeme yola çıkana kadar düzenli takip.",
+            "Gerilim, görev, ortam ve entegrasyon kısıtlarıyla konuşan net mühendislik dili.",
         },
         {
-          title: "Satış sonrası erişilebilirlik",
+          title: "Hızlı çözüm",
           description:
-            "Entegrasyon, devreye alma veya yedek döngülerinde sorularınız için doğrudan hat.",
+            "Stok, muadil ve dokümantasyon sorularında kısa geri bildirim döngüleriyle proje ivmesini koruruz.",
         },
         {
-          title: "Türkiye geneli",
+          title: "Endüstriyel uzmanlık",
           description:
-            "Tüm Türkiye'de aynı hız ve standartta yanıt vermeyi hedefleriz.",
+            "Sürücüden kontrole, saha ölçümünden pano bileşenlerine gerçek tesis deneyimiyle seçim disiplini.",
         },
       ],
     },
@@ -442,6 +575,17 @@ export default function Home() {
     }));
   }, [content.faq.list]);
 
+  const productCards = useMemo(
+    () =>
+      services.map((s) => ({
+        id: s.id,
+        title: s[lang].title,
+        description: s[lang].description,
+        highlight: s[lang].eyebrow,
+      })),
+    [lang]
+  );
+
   return (
     <div className="bg-background text-foreground m-0 p-0">
       {/* Schema Markup */}
@@ -454,7 +598,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-dark/80 -z-10" />
         <div className="absolute inset-0 lilac-gradient -z-10 opacity-60" />
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
-          <a href="#" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <Image
               src="/img/yazici-logo.png"
               alt={content.brand}
@@ -464,7 +608,7 @@ export default function Home() {
               priority
             />
             <span className="sr-only">{content.brand}</span>
-          </a>
+          </Link>
           <div className="flex items-center gap-6">
             <DesktopNav
               language={lang}
@@ -514,6 +658,15 @@ export default function Home() {
       <main className="m-0 p-0">
         <section className="relative min-h-screen overflow-hidden bg-dark text-white m-0 p-0 -mt-0">
           <div className="absolute inset-0 lilac-gradient" />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.09]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)",
+              backgroundSize: "44px 44px",
+            }}
+            aria-hidden
+          />
           <motion.div
             className="absolute inset-0 grain-overlay opacity-60"
             animate={{ opacity: [0.25, 0.45, 0.25] }}
@@ -526,33 +679,59 @@ export default function Home() {
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             initial={false}
           />
-          <div className="relative z-10 flex min-h-screen items-center pt-0">
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 pb-20 sm:px-10 lg:px-20 pt-0">
-              <div className="max-w-3xl space-y-6">
+          <motion.div
+            className="absolute bottom-0 left-1/2 h-64 w-[120%] -translate-x-1/2 rounded-[100%] bg-lilac/10 blur-3xl"
+            animate={{ opacity: [0.2, 0.35, 0.2] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            initial={false}
+            aria-hidden
+          />
+          <div className="relative z-10 flex min-h-screen items-center py-16 lg:py-24">
+            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-6 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-20">
+              <div className="max-w-2xl space-y-8">
                 <p className="text-xs uppercase tracking-[0.4em] text-soft-lavender">
                   {content.hero.kicker}
                 </p>
                 <h1 className="text-balance text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
                   {content.hero.title}
                 </h1>
-                <p className="text-lg text-white/70 sm:text-xl">
-                  {content.hero.description}
-                </p>
+                <p className="text-lg text-white/75 sm:text-xl">{content.hero.description}</p>
+                <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+                  <a
+                    href="#contact"
+                    className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-lilac px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-soft-lavender hover:text-dark"
+                  >
+                    {content.hero.ctaPrimary}
+                  </a>
+                  <a
+                    href="https://wa.me/905530568939"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-soft-lavender hover:bg-white/10 hover:text-soft-lavender"
+                  >
+                    {content.hero.ctaSecondary}
+                  </a>
+                </div>
               </div>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-lilac px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-soft-lavender hover:text-dark"
-                >
-                  {content.hero.ctaPrimary}
-                </a>
-                <a
-                  href="tel:+905530568939"
-                  className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-soft-lavender hover:text-soft-lavender"
-                >
-                  {content.hero.ctaSecondary}
-                </a>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, ease: "easeOut" }}
+                className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl border border-white/15 shadow-2xl shadow-black/30 lg:mx-0 lg:max-w-none"
+              >
+                <Image
+                  src="/img/product-1.jpg"
+                  alt={lang === "tr" ? "Endüstriyel sensör ve otomasyon görseli" : "Industrial sensor and automation visual"}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-tr from-dark/55 via-dark/15 to-transparent"
+                  aria-hidden
+                />
+              </motion.div>
             </div>
           </div>
         </section>
@@ -564,6 +743,9 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <HomeTrustSection content={content.trust} />
+        <HomeIndustry40Section content={content.industry40} />
 
         <section id="products" className="section-padding bg-background">
           <div className="mx-auto flex max-w-6xl flex-col gap-12">
@@ -579,15 +761,7 @@ export default function Home() {
               </p>
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {content.services.list.map((service, idx) => {
-                const serviceIds = [
-                  "product-1",
-                  "product-2",
-                  "product-3",
-                  "product-4",
-                  "product-5",
-                  "product-6",
-                ] as const;
+              {productCards.map((service, idx) => {
                 const serviceImages = [
                   "/img/product-1.jpg",
                   "/img/product-2.jpg",
@@ -596,12 +770,11 @@ export default function Home() {
                   "/img/product-5.jpg",
                   "/img/product-6.jpg",
                 ];
-                const serviceId = serviceIds[idx] ?? `product-${idx + 1}`;
                 const serviceImage = serviceImages[idx] ?? "/img/product-1.jpg";
                 return (
                   <Link
-                    key={service.title}
-                    href={`/services/${serviceId}`}
+                    key={service.id}
+                    href={`/services/${service.id}`}
                     className="group relative block overflow-hidden rounded-3xl border border-dark/10 bg-white p-8 shadow-lg transition hover:-translate-y-2 focus-within:ring-2 focus-within:ring-lilac/50 focus:outline-none cursor-pointer"
                     aria-label={`${content.services.action}: ${service.title}`}
                   >
@@ -692,6 +865,9 @@ export default function Home() {
           </div>
         </section>
 
+        <HomeUseCasesSection content={content.useCases} />
+        <HomeProcessSection content={content.homeProcess} />
+
         <section id="proof" className="section-padding bg-background text-dark">
           <div className="mx-auto flex max-w-6xl flex-col gap-10">
             <div className="space-y-4">
@@ -747,6 +923,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <HomeFinalCtaSection content={content.finalCta} />
 
         <section id="contact" className="section-padding bg-dark text-white">
           <div className="mx-auto max-w-5xl">
@@ -895,6 +1073,7 @@ export default function Home() {
 
       <Footer language={lang} />
 
+      <FloatingWhatsApp label={content.mobile.whatsapp} />
       <Chatbot />
       <MobileStickyCTA language={lang} />
     </div>

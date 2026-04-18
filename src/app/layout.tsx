@@ -20,9 +20,9 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
+  title: "Yazıcı Otomasyon | Endüstri 4.0 Sensör ve Otomasyon",
   description:
-    "Endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürün gamımızı inceleyin; stok ve teknik bilgi için +90 553 056 89 39.",
+    "Endüstri 4.0 uyumlu sensör ve otomasyon çözümleri. Üretimde hassasiyet ve düşük hata payı için teknik danışmanlık ve tedarik: +90 553 056 89 39.",
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
     shortcut: "/favicon.png",
@@ -74,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="tr" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${playfair.variable} antialiased`}
         suppressHydrationWarning
