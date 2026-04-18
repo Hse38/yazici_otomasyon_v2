@@ -647,7 +647,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
           <Link href="/" className="flex items-center">
             <Image
-              src="/img/yazici-logo.png"
+              src="/img/logo1.png"
               alt={content.brand}
               width={280}
               height={80}
