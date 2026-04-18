@@ -3,7 +3,6 @@ import "./globals.css";
 import { Inter, Playfair_Display } from "next/font/google";
 import { ChatbotProvider } from "../contexts/ChatbotContext";
 import { NavProvider } from "../contexts/NavContext";
-import { IntroVideoOverlay } from "../components/IntroVideoOverlay";
 import { PageTransition } from "../components/PageTransition";
 import { getPublicSiteUrl } from "../lib/seo";
 
@@ -85,7 +84,6 @@ export default function RootLayout({
             <PageTransition>
               {children}
             </PageTransition>
-            <IntroVideoOverlay />
           </NavProvider>
         </ChatbotProvider>
       </body>
