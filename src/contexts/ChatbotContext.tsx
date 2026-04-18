@@ -55,19 +55,21 @@ export function ChatbotProvider({ children }: { children: ReactNode }) {
     if (messages.length === 0) {
       const welcomeMessages = {
         en: {
-          content: "I'm your Event Catering Assistant. I provide guidance on our catering services, event planning capabilities, and operational processes.\n\nHow can I assist you today?",
+          content:
+            "I'm the Yazıcı Otomasyon assistant. I can guide you through our industrial automation products, technical topics, and how to reach our team.\n\nHow can I help you today?",
           suggestions: [
-            "What catering services do you offer?",
-            "Tell me about your event planning process",
-            "What's your capacity for large events?",
+            "What products do you offer?",
+            "I need help choosing a drive or field device",
+            "How do I request a quote or call you?",
           ],
         },
         tr: {
-          content: "Etkinlik Catering Asistanınızım. Catering hizmetlerimiz, etkinlik planlama yeteneklerimiz ve operasyonel süreçlerimiz hakkında rehberlik sağlıyorum.\n\nBugün size nasıl yardımcı olabilirim?",
+          content:
+            "Yazıcı Otomasyon asistanıyım. Endüstriyel otomasyon ürünlerimiz, teknik konular ve ekibimize ulaşım hakkında yönlendirme yapabilirim.\n\nBugün nasıl yardımcı olabilirim?",
           suggestions: [
-            "Hangi catering hizmetlerini sunuyorsunuz?",
-            "Etkinlik planlama sürecinizi anlatın",
-            "Büyük etkinlikler için kapasiteniz nedir?",
+            "Hangi ürünleri sunuyorsunuz?",
+            "Sürücü veya saha ekipmanı seçiminde yardım istiyorum",
+            "Teklif veya telefon ile nasıl iletişime geçerim?",
           ],
         },
       };
@@ -125,49 +127,97 @@ export function ChatbotProvider({ children }: { children: ReactNode }) {
       const newInterests: string[] = [];
       const newTopics: string[] = [];
 
-      if (lowerContent.includes("corporate") || lowerContent.includes("kurumsal")) {
-        newInterests.push("corporate events");
-        newTopics.push("corporate event catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "corporate" }));
+      if (
+        lowerContent.includes("sürücü") ||
+        lowerContent.includes("drive") ||
+        lowerContent.includes("vfd") ||
+        lowerContent.includes("inverter") ||
+        lowerContent.includes("frekans")
+      ) {
+        newInterests.push("motor drives");
+        newTopics.push("drives");
+        setConversationMemory((prev) => ({
+          ...prev,
+          serviceType: "motor drive / inverter",
+        }));
       }
-      if (lowerContent.includes("wedding") || lowerContent.includes("düğün") || lowerContent.includes("nişan")) {
-        newInterests.push("wedding events");
-        newTopics.push("wedding catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "wedding" }));
+      if (
+        lowerContent.includes("plc") ||
+        lowerContent.includes("scada") ||
+        lowerContent.includes("hmi") ||
+        lowerContent.includes("operatör") ||
+        lowerContent.includes("kontrolör")
+      ) {
+        newInterests.push("control");
+        newTopics.push("plc hmi");
+        setConversationMemory((prev) => ({
+          ...prev,
+          serviceType: "PLC / HMI / control",
+        }));
       }
-      if (lowerContent.includes("festival") || lowerContent.includes("büyük etkinlik") || lowerContent.includes("large event")) {
-        newInterests.push("large events");
-        newTopics.push("festival catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "festival" }));
+      if (lowerContent.includes("motor") || lowerContent.includes("redüktör") || lowerContent.includes("gearbox")) {
+        newInterests.push("motion");
+        newTopics.push("motors");
+        setConversationMemory((prev) => ({ ...prev, serviceType: "motor & motion" }));
       }
-      if (lowerContent.includes("workshop") || lowerContent.includes("özel deneyim")) {
-        newInterests.push("workshop events");
-        newTopics.push("workshop catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "workshop" }));
+      if (
+        lowerContent.includes("sensor") ||
+        lowerContent.includes("sensör") ||
+        lowerContent.includes("encoder") ||
+        lowerContent.includes("fieldbus") ||
+        lowerContent.includes("saha")
+      ) {
+        newInterests.push("field");
+        newTopics.push("sensors field");
+        setConversationMemory((prev) => ({ ...prev, serviceType: "field devices & sensing" }));
       }
-      if (lowerContent.includes("seminar") || lowerContent.includes("konferans") || lowerContent.includes("conference")) {
-        newInterests.push("conference events");
-        newTopics.push("seminar catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "seminar" }));
+      if (lowerContent.includes("kablo") || lowerContent.includes("cable") || lowerContent.includes("konnektör")) {
+        newInterests.push("connectivity");
+        newTopics.push("cables");
+        setConversationMemory((prev) => ({ ...prev, serviceType: "cables & connectivity" }));
       }
-      if (lowerContent.includes("outdoor") || lowerContent.includes("açık alan") || lowerContent.includes("aktivite")) {
-        newInterests.push("outdoor events");
-        newTopics.push("outdoor catering");
-        setConversationMemory((prev) => ({ ...prev, serviceType: "outdoor" }));
+      if (lowerContent.includes("panel") || lowerContent.includes("pano") || lowerContent.includes("şalter")) {
+        newInterests.push("panels");
+        newTopics.push("electrical panels");
+        setConversationMemory((prev) => ({ ...prev, serviceType: "panels & power" }));
       }
-      if (lowerContent.includes("capacity") || lowerContent.includes("kapasite") || lowerContent.includes("guest count") || lowerContent.includes("misafir sayısı")) {
-        newInterests.push("capacity");
-        newTopics.push("event capacity");
+      if (
+        lowerContent.includes("capacity") ||
+        lowerContent.includes("kapasite") ||
+        lowerContent.includes("stok") ||
+        lowerContent.includes("stock") ||
+        lowerContent.includes("lead time") ||
+        lowerContent.includes("termin")
+      ) {
+        newInterests.push("availability");
+        newTopics.push("stock lead time");
       }
-      if (lowerContent.includes("quote") || lowerContent.includes("teklif") || lowerContent.includes("pricing") || lowerContent.includes("fiyat")) {
+      if (
+        lowerContent.includes("quote") ||
+        lowerContent.includes("teklif") ||
+        lowerContent.includes("pricing") ||
+        lowerContent.includes("fiyat")
+      ) {
         newInterests.push("pricing");
         newTopics.push("quotation");
       }
-      if (lowerContent.includes("menu") || lowerContent.includes("menü") || lowerContent.includes("food") || lowerContent.includes("yemek")) {
-        newTopics.push("menu planning");
+      if (
+        lowerContent.includes("spec") ||
+        lowerContent.includes("teknik") ||
+        lowerContent.includes("datasheet") ||
+        lowerContent.includes("kurulum") ||
+        lowerContent.includes("commissioning")
+      ) {
+        newTopics.push("technical specs");
       }
-      if (lowerContent.includes("logistics") || lowerContent.includes("lojistik") || lowerContent.includes("delivery") || lowerContent.includes("teslimat")) {
-        newTopics.push("logistics");
+      if (
+        lowerContent.includes("logistics") ||
+        lowerContent.includes("lojistik") ||
+        lowerContent.includes("delivery") ||
+        lowerContent.includes("teslimat") ||
+        lowerContent.includes("kargo")
+      ) {
+        newTopics.push("shipping");
       }
 
       setConversationMemory((prev) => ({
@@ -252,124 +302,124 @@ export function useChatbot() {
   return context;
 }
 
-// Translation helper for Event Catering
+// Copy for industrial automation assistant (mock responses)
 const t = {
   en: {
     serviceDetail: {
       process: (serviceType: string) => ({
-        content: `For ${serviceType} catering, our operational process:\n\n1. Event Planning & Requirements\n   • Detailed consultation and requirement analysis\n   • Timeline development and coordination\n   • Guest count and service flow planning\n\n2. Menu Development & Approval\n   • Custom menu design aligned with event theme\n   • Dietary considerations and approvals\n   • Presentation planning\n\n3. Production & Preparation\n   • Controlled production in dedicated facilities\n   • Quality checkpoints at each stage\n   • Temperature-controlled preparation\n\n4. Logistics & Transportation\n   • Temperature-stable transport\n   • Real-time tracking and coordination\n   • On-site delivery coordination\n\n5. On-Site Setup & Service\n   • Early arrival for staging and setup\n   • Service execution with on-site supervision\n   • Real-time adjustments and support\n\n6. Post-Event Review\n   • Service documentation\n   • Feedback collection\n   • Continuous improvement\n\nWhich stage requires more detail?`,
+        content: `For ${serviceType}, a typical engagement looks like this:\n\n1. Application review\n   • Load, environment, network/power constraints\n   • Standards and integration points\n\n2. Product selection\n   • Matching catalog items to your BOM\n   • Alternatives where stock or lead time matters\n\n3. Quotation & alignment\n   • Commercial terms and delivery schedule\n   • Optional commissioning support\n\n4. Supply & documentation\n   • Datasheets, certificates on request\n   • Packing and shipment coordination\n\n5. After-sales\n   • Technical questions via phone/WhatsApp\n   • Reorders and spare guidance\n\nWhich step should we go deeper on?`,
         suggestions: [
-          "Explain menu development process",
-          "What's the typical timeline?",
-          "Tell me about on-site setup",
+          "What do you need for a quote?",
+          "Typical lead times?",
+          "Do you support commissioning?",
         ],
       }),
       pricing: (serviceType: string) => ({
-        content: `Pricing for ${serviceType} catering depends on:\n• Guest count and event scale\n• Menu selection and customization\n• Service level and presentation requirements\n• Event duration and timing\n• Location and logistics complexity\n• Additional services (staffing, equipment, etc.)\n\nI can direct you to our quotation process. Would you like to proceed?`,
+        content: `Pricing for ${serviceType} depends on:\n• Manufacturer, range, and options\n• Quantity and project framing\n• Warranty, certificates, and Incoterms\n• Stock vs. factory order\n\nThe fastest path is a short call or WhatsApp with your part list / motor plate photo. Shall we go there?`,
         suggestions: [
-          "Yes, request a quotation",
-          "What's included in the pricing?",
-          "Explain payment terms",
+          "Yes — how do I send a part list?",
+          "What details shorten quoting?",
+          "Do you ship across Turkey?",
         ],
       }),
       capacity: (serviceType: string) => ({
-        content: `Our capacity for ${serviceType} events:\n• Corporate events: 20 - 500 guests\n• Wedding events: 50 - 500 guests\n• Festival events: 500 - 10,000 guests\n• Workshop events: 10 - 200 guests\n• Conference events: 50 - 1,000 attendees\n• Outdoor events: 50 - 1,000 guests\n\nWhat guest count are you planning for?`,
+        content: `For ${serviceType}, availability is case-by-case:\n• We optimize for honest lead times, not inflated guest counts.\n• Stock programs rotate; tell us priority lines.\n• Project bundles (drives + accessories) can ship together when planned.\n\nShare SKU or a photo of nameplates and we'll outline options.`,
         suggestions: [
-          "I need capacity for a large event",
-          "What's the minimum guest count?",
-          "Tell me about multi-venue coordination",
+          "I need something urgently",
+          "Stock vs. factory order?",
+          "Can you cross-reference brands?",
         ],
       }),
     },
     serviceList: {
       categories: {
-        content: `Our catering service categories:\n\n• Corporate Event Catering\n  Meetings, launches, executive summits, annual meetings\n\n• Wedding & Engagement Catering\n  Wedding ceremonies, engagement parties, receptions\n\n• Festival & Large Event Catering\n  Public festivals, large celebrations, multi-day events\n\n• Workshop & Special Experience Catering\n  Curated events, brand experiences, concept-based menus\n\n• Seminar & Conference Catering\n  Professional events, multi-day conferences, continuous service\n\n• Outdoor & Activity Catering\n  Outdoor festivals, park gatherings, mobile setups\n\nWhich category aligns with your event?`,
+        content: `We list six product lines on the site (Ürünler / Products):\n\n• Industrial drives & motion accessories\n• Control, PLC/HMI, and supervision building blocks\n• Motors, mechanics, and power transmission\n• Field devices, sensors, and industrial networking\n• Power, protection, and panel hardware\n• Cables, connectors, and installation consumables\n\nOpen each card for photos and narrative. Which line matches your project?`,
         suggestions: [
-          "Explain corporate event catering",
-          "What's included in wedding catering?",
-          "Tell me about festival catering",
+          "Compare drives vs. soft starters",
+          "I need fieldbus device advice",
+          "Walk me through requesting a quote",
         ],
       },
     },
     general: {
       process: {
-        content: `Our event catering process:\n\n1. Event Planning & Consultation\n   • Requirement analysis and event understanding\n   • Guest count and timeline planning\n   • Service flow and coordination planning\n\n2. Menu Development & Approval\n   • Custom menu design aligned with event theme\n   • Dietary considerations and client approval\n   • Presentation and service planning\n\n3. Production & Preparation\n   • Controlled production in dedicated facilities\n   • Quality checkpoints at each stage\n   • Temperature-controlled preparation\n\n4. Logistics & Transportation\n   • Temperature-stable transport\n   • Real-time tracking and coordination\n   • On-site delivery coordination\n\n5. On-Site Setup & Service\n   • Early arrival for staging and setup\n   • Service execution with supervision\n   • Real-time adjustments and support\n\n6. Post-Event Review\n   • Service documentation and feedback\n   • Continuous improvement\n\nWhich stage requires more detail?`,
+        content: `How we usually work:\n\n1. Understand the application (motor data, voltage, environment).\n2. Shortlist products from our range or equivalent lines.\n3. Quote with lead time and commercial terms.\n4. Supply with documentation; support basic commissioning questions.\n5. Stay available for follow-up orders.\n\nTell me your voltage, power, and control platform if you want sharper guidance.`,
         suggestions: [
-          "Explain menu development",
-          "What's the planning timeline?",
-          "Tell me about logistics",
+          "What info do you need up front?",
+          "Typical response time?",
+          "Do you visit sites?",
         ],
       },
       services: {
-        content: `We offer comprehensive catering services:\n\n• Corporate Event Catering\n  Structured service flow for business events\n\n• Wedding & Engagement Catering\n  Celebration-focused service with premium presentation\n\n• Festival & Large Event Catering\n  High-volume operations with speed and coordination\n\n• Workshop & Special Experience Catering\n  Concept-based menus and curated experiences\n\n• Seminar & Conference Catering\n  Continuous service for long-duration events\n\n• Outdoor & Activity Catering\n  Mobile setups and flexible service points\n\nWhich service interests you?`,
+        content: `Yazıcı Otomasyon supplies industrial automation products with clear technical guidance:\n\n• Curated catalog-style offerings (six featured product families on the homepage)\n• Sizing and compatibility pointers for common drive/motor/control questions\n• Quotation and logistics handled directly by our team\n• Phone +90 553 056 89 39 and WhatsApp for fast answers\n\nWhich product family should we open first?`,
         suggestions: [
-          "Tell me about corporate catering",
-          "What's wedding catering like?",
-          "Explain festival catering",
+          "Show me the product list flow",
+          "I have a motor plate photo",
+          "Explain support after purchase",
         ],
       },
       capacity: {
-        content: `Our event capacity:\n• Corporate events: 20 - 500 guests\n• Wedding events: 50 - 500 guests\n• Festival events: 500 - 10,000 guests\n• Workshop events: 10 - 200 guests\n• Conference events: 50 - 1,000 attendees\n• Outdoor events: 50 - 1,000 guests\n• Multi-venue coordination available\n• Scalable operations for any size\n\nWhat guest count are you planning?`,
+        content: `We don't quote "guest capacity" — we align on electrical and mechanical limits per device:\n• Motor kW, voltage, duty, ambient\n• Network topology and cable lengths\n• Panel heat dissipation and protection degree\n\nSend the closest datasheet or nameplate snapshot and we'll reason from specs.`,
         suggestions: [
-          "I need capacity for a large event",
-          "What's the minimum guest count?",
-          "Tell me about multi-venue events",
+          "How to read a motor nameplate",
+          "IP rating vs. cabinet cooling",
+          "I need a bill of materials review",
         ],
       },
       menu: {
-        content: `Our menu planning approach:\n• Custom menu design aligned with event theme\n• Dietary considerations (vegetarian, vegan, allergies)\n• Presentation planning and service style\n• Tasting sessions for approval\n• Concept-based menus for special events\n• Premium presentation standards\n\nWould you like to discuss menu options?`,
+        content: `If you're asking about options and configurations:\n• We help map features (communications, filters, braking, STO, etc.) to your application.\n• Software/tooling compatibility varies by brand — mention what you already use.\n• For exotic requests, we may propose a substitute with shorter lead time.\n\nWhat equipment is already installed on site?`,
         suggestions: [
-          "Tell me about dietary options",
-          "What menu styles do you offer?",
-          "Explain the tasting process",
+          "Profibus vs. Profinet in my plant",
+          "Safe torque off requirements",
+          "Harmonic mitigation options",
         ],
       },
       quote: {
-        content: `To provide an accurate quotation, I'll need:\n• Event date and duration\n• Guest count\n• Event type and location\n• Service level requirements\n• Menu preferences\n• Additional services needed\n\nWould you like to request a detailed quotation?`,
+        content: `To prepare a useful quotation, please share:\n• Part numbers or clear photos of nameplates\n• Required quantity and desired delivery window\n• Voltage, environment (temp/dust), and control system if relevant\n• Billing / ship-to city\n\nCall +90 553 056 89 39 or message on WhatsApp with the list — fastest turnaround.`,
         suggestions: [
-          "Yes, request a quotation",
-          "What information do you need?",
-          "How long does quotation take?",
+          "I only have photos, no part numbers",
+          "Corporate PO process",
+          "Export / documentation needs",
         ],
       },
       logistics: {
-        content: `Our logistics and delivery capabilities:\n• Temperature-controlled transportation\n• Real-time tracking and coordination\n• On-site setup and staging\n• Multi-venue coordination\n• Equipment and staffing support\n• Complete documentation\n\nWhere is your event located?`,
+        content: `Shipping & handling:\n• Domestic freight arranged per order size.\n• Packaging oriented to industrial goods (shock, moisture awareness).\n• Documents (invoice, packing list) as required.\n• For time-critical lines, say so up front — we'll flag stock paths first.\n\nWhich city should we plan delivery to?`,
         suggestions: [
-          "Explain transportation process",
-          "What about on-site setup?",
-          "Do you handle equipment?",
+          "Pickup vs. courier?",
+          "Partial shipments OK?",
+          "Insurance on high-value drives",
         ],
       },
       timeline: {
-        content: `Typical planning timeline:\n• Initial consultation: 1-2 days\n• Menu development: 3-5 days\n• Approval and adjustments: 2-3 days\n• Production and preparation: Event day\n• On-site setup: 2-4 hours before event\n\nFor urgent events, we can expedite the process. What's your event date?`,
+        content: `Lead times depend on manufacturer backlog and whether goods are local stock:\n• Same-day answers are realistic for product questions via phone/WhatsApp.\n• Quotation: often within one business day if data is complete.\n• Physical delivery: quoted per SKU after stock check.\n\nWhen do you need material on site?`,
         suggestions: [
-          "I need faster planning",
-          "What's the minimum notice?",
-          "Tell me about urgent events",
+          "I need material this week",
+          "Factory order expectations",
+          "Can you hold stock for a project?",
         ],
       },
       quality: {
-        content: `Our quality assurance:\n\n• Pre-Event\n  Menu planning, ingredient sourcing, quality verification\n\n• Production\n  Controlled production environment, quality checkpoints\n\n• Transportation\n  Temperature control, real-time monitoring\n\n• On-Site\n  Service supervision, real-time adjustments\n\n• Post-Event\n  Feedback collection, continuous improvement\n\nWe maintain strict quality standards for every event.`,
+        content: `Quality posture:\n\n• Source through reputable industrial channels.\n• Verify labeling, packing integrity, and accessories completeness on dispatch.\n• Support traceability requests where manufacturers allow.\n• Transparent communication if a substitute is proposed.\n\nAsk for any certificate or factory document you need for your QA process.`,
         suggestions: [
-          "How do you ensure food quality?",
-          "Explain your quality control process",
-          "What about food safety?",
+          "Warranty handling",
+          "Counterfeit avoidance tips",
+          "Returns / DOA policy",
         ],
       },
       unclear: {
-        content: `Could you provide more details? I can assist with:\n• Catering service categories\n• Event planning and processes\n• Capacity and guest counts\n• Menu planning and options\n• Pricing and quotations\n• Logistics and delivery\n• Timeline and scheduling`,
+        content: `I can help with:\n• Our six product categories and what's on each page\n• Drive/motor/control selection basics\n• Quotations, lead times, and delivery\n• How to reach us by phone or WhatsApp\n\nWhat part of your project should we tackle first?`,
         suggestions: [
-          "Explain your services",
-          "What's your planning process?",
-          "How do I request a quotation?",
+          "List your product categories",
+          "I need a human on the phone",
+          "Explain the website sections",
         ],
       },
       clarify: {
-        content: (userMessage: string) => `I understand you're asking about "${userMessage}".\n\nTo assist you effectively, could you clarify:\n• What type of event are you planning?\n• Do you need information about services, pricing, or capacity?\n• What's your guest count and event date?\n\nI can also guide you to the relevant section of our website.`,
+        content: (userMessage: string) => `I see you're asking about "${userMessage}".\n\nTo give a precise answer, it helps to know:\n• Which machine or line (voltage, power, brand already installed)\n• Whether you need pricing, stock, or technical fit\n• Your timeline\n\nYou can also browse Ürünler and return here with a product name.`,
         suggestions: [
-          "Show me service categories",
-          "Explain planning process",
-          "I need quotation information",
+          "Open the products section topics",
+          "I want a quote for a bill of materials",
+          "Call me — I prefer voice",
         ],
       },
     },
@@ -377,126 +427,126 @@ const t = {
   tr: {
     serviceDetail: {
       process: (serviceType: string) => ({
-        content: `${serviceType} catering için operasyonel sürecimiz:\n\n1. Etkinlik Planlama ve Gereksinimler\n   • Detaylı danışmanlık ve gereksinim analizi\n   • Zaman çizelgesi geliştirme ve koordinasyon\n   • Misafir sayısı ve servis akış planlaması\n\n2. Menü Geliştirme ve Onay\n   • Etkinlik temasına uygun özel menü tasarımı\n   • Diyetetik düşünceler ve onaylar\n   • Sunum planlaması\n\n3. Üretim ve Hazırlık\n   • Özel tesislerde kontrollü üretim\n   • Her aşamada kalite kontrol noktaları\n   • Sıcaklık kontrollü hazırlık\n\n4. Lojistik ve Taşıma\n   • Sıcaklık kontrollü taşıma\n   • Gerçek zamanlı takip ve koordinasyon\n   • Sahada teslimat koordinasyonu\n\n5. Sahada Kurulum ve Servis\n   • Staging ve kurulum için erken varış\n   • Sahada denetim ile servis uygulaması\n   • Gerçek zamanlı ayarlamalar ve destek\n\n6. Etkinlik Sonrası İnceleme\n   • Servis dokümantasyonu\n   • Geri bildirim toplama\n   • Sürekli iyileştirme\n\nHangi aşama için daha fazla detay istersiniz?`,
+        content: `${serviceType} için tipik süreç:\n\n1. Uygulama özeti\n   • Yük, ortam, şebeke/güç sınırları\n   • Standartlar ve entegrasyon noktaları\n\n2. Ürün seçimi\n   • BOM'unuzla uyumlu katalog kalemleri\n   • Stok/termin durumuna göre alternatifler\n\n3. Teklif ve netleştirme\n   • Ticari koşullar ve teslim planı\n   • İsteğe bağlı devreye alma desteği\n\n4. Tedarik ve dokümantasyon\n   • Data sheet, sertifika talepleri\n   • Paketleme ve sevkiyat koordinasyonu\n\n5. Satış sonrası\n   • Telefon/WhatsApp ile teknik sorular\n   • Yeniden sipariş ve yedek yönlendirmesi\n\nHangi adımı detaylandıralım?`,
         suggestions: [
-          "Menü geliştirme sürecini açıklayın",
-          "Tipik zaman çizelgesi nedir?",
-          "Sahada kurulum hakkında bilgi verin",
+          "Teklif için ne göndermeliyim?",
+          "Terminler genelde nasıl?",
+          "Devreye alma desteği var mı?",
         ],
       }),
       pricing: (serviceType: string) => ({
-        content: `${serviceType} catering için fiyatlandırma şunlara bağlıdır:\n• Misafir sayısı ve etkinlik ölçeği\n• Menü seçimi ve özelleştirme\n• Servis seviyesi ve sunum gereksinimleri\n• Etkinlik süresi ve zamanlaması\n• Lokasyon ve lojistik karmaşıklığı\n• Ek hizmetler (personel, ekipman, vb.)\n\nSizi teklif sürecimize yönlendirebilirim. Devam etmek ister misiniz?`,
+        content: `${serviceType} fiyatı şunlara bağlıdır:\n• Üretici, seri ve opsiyonlar\n• Miktar ve proje çerçevesi\n• Garanti, sertifika ve teslim şekli\n• Stok mu fabrika siparişi mi\n\nEn hızlı yol: kısa telefon veya WhatsApp + motor plakası / parça listesi. Oradan mı ilerleyelim?`,
         suggestions: [
-          "Evet, teklif talep ediyorum",
-          "Fiyatlandırmaya neler dahil?",
-          "Ödeme koşullarını açıklayın",
+          "Parça listesini nasıl iletirim?",
+          "Teklifi hızlandıran bilgiler",
+          "Türkiye geneli sevkiyat",
         ],
       }),
       capacity: (serviceType: string) => ({
-        content: `${serviceType} etkinlikler için kapasitemiz:\n• Kurumsal etkinlikler: 20 - 500 misafir\n• Düğün etkinlikleri: 50 - 500 misafir\n• Festival etkinlikleri: 500 - 10.000 misafir\n• Workshop etkinlikleri: 10 - 200 misafir\n• Konferans etkinlikleri: 50 - 1.000 katılımcı\n• Açık hava etkinlikleri: 50 - 1.000 misafir\n\nHangi misafir sayısını planlıyorsunuz?`,
+        content: `${serviceType} için durum ürün bazlıdır:\n• “Misafir kapasitesi” yerine elektriksel/mekanik limitler konuşuruz.\n• Stok programı döner; öncelikli hatları belirtin.\n• Set siparişlerinde (sürücü + aksesuar) planlı sevkiyat mümkün.\n\nSKU veya etiket fotoğrafı paylaşırsanız seçenekleri özetleriz.`,
         suggestions: [
-          "Büyük etkinlik için kapasiteye ihtiyacım var",
-          "Minimum misafir sayısı nedir?",
-          "Çoklu mekan koordinasyonu hakkında bilgi verin",
+          "Acil ihtiyacım var",
+          "Stok vs. fabrika siparişi",
+          "Marka çapraz referans yapıyor musunuz?",
         ],
       }),
     },
     serviceList: {
       categories: {
-        content: `Catering hizmet kategorilerimiz:\n\n• Kurumsal Etkinlik Catering\n  Toplantılar, lansmanlar, yönetici zirveleri, yıllık toplantılar\n\n• Düğün & Nişan Catering\n  Düğün törenleri, nişan partileri, resepsiyonlar\n\n• Festival & Büyük Etkinlik Catering\n  Halka açık festivaller, büyük kutlamalar, çok günlü etkinlikler\n\n• Workshop & Özel Deneyim Catering\n  Küratörlü etkinlikler, marka deneyimleri, konsept bazlı menüler\n\n• Seminer & Konferans Catering\n  Profesyonel etkinlikler, çok günlü konferanslar, sürekli servis\n\n• Açık Alan & Aktivite Catering\n  Açık hava festivalleri, park toplantıları, mobil kurulumlar\n\nHangi kategori etkinliğinizle uyumlu?`,
+        content: `Sitede altı ürün kartı (Ürünler) bulunur:\n\n• Endüstriyel sürücüler ve hareket aksesuarları\n• Kontrol, PLC/HMI ve gözetim bileşenleri\n• Motor, mekanik ve güç aktarımı\n• Saha cihazları, sensörler ve endüstriyel ağ\n• Güç, koruma ve pano donanımı\n• Kablo, konnektör ve montaj sarfı\n\nHer kartta görsel ve anlatım var. Projenize hangi hat daha yakın?`,
         suggestions: [
-          "Kurumsal etkinlik catering'i açıklayın",
-          "Düğün catering'ine neler dahil?",
-          "Festival catering hakkında bilgi verin",
+          "Sürücü ile yumuşak yol arası fark",
+          "Saha veri yolu için öneri",
+          "Teklif talebini adım adım anlat",
         ],
       },
     },
     general: {
       process: {
-        content: `Etkinlik catering sürecimiz:\n\n1. Etkinlik Planlama ve Danışmanlık\n   • Gereksinim analizi ve etkinlik anlayışı\n   • Misafir sayısı ve zaman çizelgesi planlaması\n   • Servis akışı ve koordinasyon planlaması\n\n2. Menü Geliştirme ve Onay\n   • Etkinlik temasına uygun özel menü tasarımı\n   • Diyetetik düşünceler ve müşteri onayı\n   • Sunum ve servis planlaması\n\n3. Üretim ve Hazırlık\n   • Özel tesislerde kontrollü üretim\n   • Her aşamada kalite kontrol noktaları\n   • Sıcaklık kontrollü hazırlık\n\n4. Lojistik ve Taşıma\n   • Sıcaklık kontrollü taşıma\n   • Gerçek zamanlı takip ve koordinasyon\n   • Sahada teslimat koordinasyonu\n\n5. Sahada Kurulum ve Servis\n   • Staging ve kurulum için erken varış\n   • Denetim ile servis uygulaması\n   • Gerçek zamanlı ayarlamalar ve destek\n\n6. Etkinlik Sonrası İnceleme\n   • Servis dokümantasyonu ve geri bildirim\n   • Sürekli iyileştirme\n\nHangi aşama için daha fazla detay istersiniz?`,
+        content: `Genelde şöyle çalışıyoruz:\n\n1. Uygulamayı anlarız (motor verisi, gerilim, ortam).\n2. Ürün gamımızdan veya eşdeğer hatlardan kısa liste çıkarırız.\n3. Termin ve ticari koşullarla teklif veririz.\n4. Dokümantasyonla tedarik; temel devreye alma sorularında yönlendiririz.\n5. Sonraki siparişlerde yanınızda oluruz.\n\nNet yönlendirme için gerilim, güç ve kontrol platformunuzu yazın.`,
         suggestions: [
-          "Menü geliştirmeyi açıklayın",
-          "Planlama zaman çizelgesi nedir?",
-          "Lojistik hakkında bilgi verin",
+          "Başta hangi bilgiler şart?",
+          "Dönüş süresi?",
+          "Sahaya geliyor musunuz?",
         ],
       },
       services: {
-        content: `Kapsamlı catering hizmetleri sunuyoruz:\n\n• Kurumsal Etkinlik Catering\n  İş etkinlikleri için yapılandırılmış servis akışı\n\n• Düğün & Nişan Catering\n  Premium sunum ile kutlama odaklı servis\n\n• Festival & Büyük Etkinlik Catering\n  Hız ve koordinasyon ile yüksek hacimli operasyonlar\n\n• Workshop & Özel Deneyim Catering\n  Konsept bazlı menüler ve küratörlü deneyimler\n\n• Seminer & Konferans Catering\n  Uzun süreli etkinlikler için sürekli servis\n\n• Açık Alan & Aktivite Catering\n  Mobil kurulumlar ve esnek servis noktaları\n\nHangi hizmet ilginizi çekiyor?`,
+        content: `Yazıcı Otomasyon; endüstriyel otomasyon ürünlerini net teknik yönlendirme ile sunar:\n\n• Ana sayfadaki altı öne çıkan ürün ailesi\n• Sürücü/motor/kontrol için sık sorulan uyumluluk konularında yol gösterme\n• Teklif ve lojistik doğrudan ekibimizle\n• +90 553 056 89 39 telefon ve WhatsApp ile hızlı iletişim\n\nÖnce hangi ürün ailesine bakalım?`,
         suggestions: [
-          "Kurumsal catering hakkında bilgi verin",
-          "Düğün catering'i nasıl?",
-          "Festival catering'i açıklayın",
+          "Ürün listesinde nasıl gezerim?",
+          "Motor plakası fotoğrafım var",
+          "Satış sonrası destek",
         ],
       },
       capacity: {
-        content: `Etkinlik kapasitemiz:\n• Kurumsal etkinlikler: 20 - 500 misafir\n• Düğün etkinlikleri: 50 - 500 misafir\n• Festival etkinlikleri: 500 - 10.000 misafir\n• Workshop etkinlikleri: 10 - 200 misafir\n• Konferans etkinlikleri: 50 - 1.000 katılımcı\n• Açık hava etkinlikleri: 50 - 1.000 misafir\n• Çoklu mekan koordinasyonu mevcut\n• Her boyut için ölçeklenebilir operasyonlar\n\nHangi misafir sayısını planlıyorsunuz?`,
+        content: `“Kapasite”yi misafir sayısı olarak değil, cihazın elektriksel/mekanik sınırları olarak ele alırız:\n• Motor kW, gerilim, görev, ortam sıcaklığı\n• Ağ topolojisi ve kablo mesafeleri\n• Pano ısısı ve koruma derecesi (IP)\n\nEn yakın data sheet veya etiket fotoğrafı ile başlayın.`,
         suggestions: [
-          "Büyük etkinlik için kapasiteye ihtiyacım var",
-          "Minimum misafir sayısı nedir?",
-          "Çoklu mekan etkinlikleri hakkında bilgi verin",
+          "Motor etiketi nasıl okunur?",
+          "IP ile kabinet soğutma",
+          "Malzeme listesi (BOM) incelemesi",
         ],
       },
       menu: {
-        content: `Menü planlama yaklaşımımız:\n• Etkinlik temasına uygun özel menü tasarımı\n• Diyetetik düşünceler (vejetaryen, vegan, alerjiler)\n• Sunum planlaması ve servis stili\n• Onay için tadım seansları\n• Özel etkinlikler için konsept bazlı menüler\n• Premium sunum standartları\n\nMenü seçeneklerini tartışmak ister misiniz?`,
+        content: `Seçenek ve konfigürasyon soruyorsanız:\n• Haberleşme, filtre, fren, STO gibi özellikleri uygulamaya göre eşleriz.\n• Yazılım/araç uyumluluğu markaya göre değişir — mevcut altyapınızı belirtin.\n• Özel taleplerde daha kısa terminli muadil önerebiliriz.\n\nSahada halihazırda hangi ekipmanlar var?`,
         suggestions: [
-          "Diyetetik seçenekler hakkında bilgi verin",
-          "Hangi menü stillerini sunuyorsunuz?",
-          "Tadım sürecini açıklayın",
+          "Profibus vs. Profinet",
+          "Güvenli kapama (STO) ihtiyacı",
+          "Harmonik giderme seçenekleri",
         ],
       },
       quote: {
-        content: `Doğru bir teklif sağlamak için şunlara ihtiyacım var:\n• Etkinlik tarihi ve süresi\n• Misafir sayısı\n• Etkinlik türü ve lokasyon\n• Servis seviyesi gereksinimleri\n• Menü tercihleri\n• Gerekli ek hizmetler\n\nDetaylı bir teklif talep etmek ister misiniz?`,
+        content: `Sağlıklı teklif için:\n• Parça numaraları veya net etiket fotoğrafları\n• Miktar ve hedef teslim tarihi\n• Gerilim, ortam (toz/sıcaklık), varsa kontrol sistemi\n• Fatura/sevk şehri\n\nListeyi +90 553 056 89 39 veya WhatsApp ile göndermeniz en hızlı yoldur.`,
         suggestions: [
-          "Evet, teklif talep ediyorum",
-          "Hangi bilgilere ihtiyacınız var?",
-          "Teklif ne kadar sürer?",
+          "Sadece fotoğrafım var, kod yok",
+          "Kurumsal sipariş / PO süreci",
+          "İhracat belgeleri",
         ],
       },
       logistics: {
-        content: `Lojistik ve teslimat yeteneklerimiz:\n• Sıcaklık kontrollü taşıma\n• Gerçek zamanlı takip ve koordinasyon\n• Sahada kurulum ve staging\n• Çoklu mekan koordinasyonu\n• Ekipman ve personel desteği\n• Tam dokümantasyon\n\nEtkinliğiniz nerede?`,
+        content: `Sevkiyat:\n• Sipariş hacmine göre yurtiçi nakliye planlanır.\n• Endüstriyel ürüne uygun paketleme (şok/nem bilinci).\n• Fatura, sevk irsaliyesi vb. ihtiyaçlarınıza göre.\n• Zaman kritikse baştan belirtin — önce stok yollarını söyleriz.\n\nTeslimat şehri neresi?`,
         suggestions: [
-          "Taşıma sürecini açıklayın",
-          "Sahada kurulum hakkında ne dersiniz?",
-          "Ekipmanı hallediyor musunuz?",
+          "Elden teslim mümkün mü?",
+          "Kısmi sevkiyat?",
+          "Yüksek bedelli sürücü sigortası",
         ],
       },
       timeline: {
-        content: `Tipik planlama zaman çizelgesi:\n• İlk danışmanlık: 1-2 gün\n• Menü geliştirme: 3-5 gün\n• Onay ve ayarlamalar: 2-3 gün\n• Üretim ve hazırlık: Etkinlik günü\n• Sahada kurulum: Etkinlikten 2-4 saat önce\n\nAcil etkinlikler için süreci hızlandırabiliriz. Etkinlik tarihiniz nedir?`,
+        content: `Termin; üretici yoğunluğu ve stok durumuna bağlıdır:\n• Ürün sorularına telefon/WhatsApp ile aynı gün dönüş hedeflenir.\n• Teklif: veri tam ise çoğu zaman bir iş günü içinde.\n• Fiziksel teslimat: stok kontrolü sonrası kaleme göre.\n\nMalzemenin sahada olması gereken tarih?`,
         suggestions: [
-          "Daha hızlı planlamaya ihtiyacım var",
-          "Minimum bildirim süresi nedir?",
-          "Acil etkinlikler hakkında bilgi verin",
+          "Bu hafta içi lazım",
+          "Fabrika siparişi beklentisi",
+          "Proje için stok tutulur mu?",
         ],
       },
       quality: {
-        content: `Kalite güvencemiz:\n\n• Etkinlik Öncesi\n  Menü planlaması, malzeme tedariki, kalite doğrulama\n\n• Üretim\n  Kontrollü üretim ortamı, kalite kontrol noktaları\n\n• Taşıma\n  Sıcaklık kontrolü, gerçek zamanlı izleme\n\n• Sahada\n  Servis denetimi, gerçek zamanlı ayarlamalar\n\n• Etkinlik Sonrası\n  Geri bildirim toplama, sürekli iyileştirme\n\nHer etkinlik için sıkı kalite standartları uyguluyoruz.`,
+        content: `Kalite yaklaşımı:\n\n• Güvenilir endüstriyel tedarik kanalları\n• Sevkiyatta etiket, ambalaj bütünlüğü ve aksesuar kontrolü\n• Üretici izin verdiği ölçüde izlenebilirlik talepleri\n• Muadil önerilirse şeffaf iletişim\n\nQA süreciniz için gereken sertifikayı sorun.`,
         suggestions: [
-          "Yemek kalitesini nasıl sağlıyorsunuz?",
-          "Kalite kontrol sürecinizi açıklayın",
-          "Gıda güvenliği hakkında ne dersiniz?",
+          "Garanti süreçleri",
+          "Sahte ürün riskine karşı",
+          "İade / DOA",
         ],
       },
       unclear: {
-        content: `Daha fazla detay sağlayabilir misiniz? Şunlarda yardımcı olabilirim:\n• Catering hizmet kategorileri\n• Etkinlik planlama ve süreçler\n• Kapasite ve misafir sayıları\n• Menü planlama ve seçenekler\n• Fiyatlandırma ve teklifler\n• Lojistik ve teslimat\n• Zaman çizelgesi ve planlama`,
+        content: `Şunlarda yardımcı olabilirim:\n• Altı ürün kategorisi ve sayfa içerikleri\n• Sürücü/motor/kontrol seçimi için başlangıç soruları\n• Teklif, termin, teslimat\n• Telefon ve WhatsApp ile ulaşım\n\nÖnce projenin hangi kısmını ele alalım?`,
         suggestions: [
-          "Hizmetlerinizi açıklayın",
-          "Planlama süreciniz nedir?",
-          "Nasıl teklif talep edebilirim?",
+          "Ürün kategorilerini özetle",
+          "İnsanla telefonda konuşmak istiyorum",
+          "Site bölümlerini anlat",
         ],
       },
       clarify: {
-        content: (userMessage: string) => `"${userMessage}" hakkında sorduğunuzu anlıyorum.\n\nSize etkili bir şekilde yardımcı olabilmem için şunları netleştirebilir misiniz:\n• Hangi tür etkinlik planlıyorsunuz?\n• Hizmetler, fiyatlandırma veya kapasite hakkında bilgi mi gerekiyor?\n• Misafir sayınız ve etkinlik tarihiniz nedir?\n\nAyrıca sizi web sitemizin ilgili bölümüne yönlendirebilirim.`,
+        content: (userMessage: string) => `"${userMessage}" konusunda yazdığınızı görüyorum.\n\nNet cevap için:\n• Hangi makine/hat (gerilim, güç, sahada kurulu marka)\n• Teklif mi, stok mu, teknik uyum mu\n• Zaman çizelgeniz\n\nÜrünler bölümünden bir isimle de dönebilirsiniz.`,
         suggestions: [
-          "Hizmet kategorilerini gösterin",
-          "Planlama sürecini açıklayın",
-          "Teklif bilgisine ihtiyacım var",
+          "Ürünler bölümündeki başlıklar",
+          "BOM için teklif istiyorum",
+          "Sesli görüşmeyi tercih ederim",
         ],
       },
     },
   },
 };
 
-// Mock AI Response Generator for Event Catering
+// Mock response generator (rule-based, no external AI)
 function generateResponse(
   userMessage: string,
   pageContext: string,
@@ -506,100 +556,226 @@ function generateResponse(
   const lowerMessage = userMessage.toLowerCase();
   const translations = t[language];
 
-  // Page-aware responses
-  if (pageContext === "service-detail") {
-    const serviceType = memory.serviceType || (language === "tr" ? "bu catering hizmeti" : "this catering service");
-    
-    if (lowerMessage.includes("process") || lowerMessage.includes("süreç") || lowerMessage.includes("planning") || lowerMessage.includes("planlama")) {
+  if (pageContext === "product-detail") {
+    const serviceType =
+      memory.serviceType || (language === "tr" ? "bu ürün hattı" : "this product line");
+
+    if (
+      lowerMessage.includes("process") ||
+      lowerMessage.includes("süreç") ||
+      lowerMessage.includes("planning") ||
+      lowerMessage.includes("planlama") ||
+      lowerMessage.includes("nasıl") ||
+      lowerMessage.includes("how")
+    ) {
       return translations.serviceDetail.process(serviceType);
     }
-    if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("quote") || lowerMessage.includes("pricing") || lowerMessage.includes("fiyat") || lowerMessage.includes("teklif")) {
+    if (
+      lowerMessage.includes("price") ||
+      lowerMessage.includes("cost") ||
+      lowerMessage.includes("quote") ||
+      lowerMessage.includes("pricing") ||
+      lowerMessage.includes("fiyat") ||
+      lowerMessage.includes("teklif") ||
+      lowerMessage.includes("maliyet")
+    ) {
       return translations.serviceDetail.pricing(serviceType);
     }
-    if (lowerMessage.includes("capacity") || lowerMessage.includes("volume") || lowerMessage.includes("scale") || lowerMessage.includes("kapasite") || lowerMessage.includes("hacim") || lowerMessage.includes("guest") || lowerMessage.includes("misafir")) {
+    if (
+      lowerMessage.includes("capacity") ||
+      lowerMessage.includes("volume") ||
+      lowerMessage.includes("scale") ||
+      lowerMessage.includes("kapasite") ||
+      lowerMessage.includes("hacim") ||
+      lowerMessage.includes("stok") ||
+      lowerMessage.includes("stock") ||
+      lowerMessage.includes("lead time") ||
+      lowerMessage.includes("termin") ||
+      lowerMessage.includes("availability")
+    ) {
       return translations.serviceDetail.capacity(serviceType);
     }
   }
 
-  if (pageContext === "service-list" || pageContext === "home") {
-    if (lowerMessage.includes("what") || lowerMessage.includes("service") || lowerMessage.includes("offer") || lowerMessage.includes("category") || lowerMessage.includes("hizmet") || lowerMessage.includes("kategori") || lowerMessage.includes("ne")) {
+  if (pageContext === "product-list" || pageContext === "home") {
+    if (
+      lowerMessage.includes("what") ||
+      lowerMessage.includes("service") ||
+      lowerMessage.includes("offer") ||
+      lowerMessage.includes("category") ||
+      lowerMessage.includes("hizmet") ||
+      lowerMessage.includes("kategori") ||
+      lowerMessage.includes("ürün") ||
+      lowerMessage.includes("product") ||
+      lowerMessage.includes("sunuyor") ||
+      lowerMessage.includes("hangi") ||
+      lowerMessage.includes("ne ")
+    ) {
       return translations.serviceList.categories;
     }
   }
 
-  // General responses
-  if (lowerMessage.includes("process") || lowerMessage.includes("süreç") || lowerMessage.includes("planning") || lowerMessage.includes("planlama") || (lowerMessage.includes("how") && lowerMessage.includes("work"))) {
+  if (
+    lowerMessage.includes("process") ||
+    lowerMessage.includes("süreç") ||
+    lowerMessage.includes("planning") ||
+    lowerMessage.includes("planlama") ||
+    (lowerMessage.includes("how") && lowerMessage.includes("work"))
+  ) {
     return translations.general.process;
   }
 
-  if (lowerMessage.includes("service") || lowerMessage.includes("hizmet") || lowerMessage.includes("offer") || lowerMessage.includes("sunuyor")) {
+  if (
+    lowerMessage.includes("service") ||
+    lowerMessage.includes("hizmet") ||
+    lowerMessage.includes("offer") ||
+    lowerMessage.includes("sunuyor") ||
+    lowerMessage.includes("company") ||
+    lowerMessage.includes("şirket")
+  ) {
     return translations.general.services;
   }
 
-  if (lowerMessage.includes("capacity") || lowerMessage.includes("kapasite") || lowerMessage.includes("guest count") || lowerMessage.includes("misafir sayısı") || lowerMessage.includes("how many") || lowerMessage.includes("kaç")) {
+  if (
+    lowerMessage.includes("capacity") ||
+    lowerMessage.includes("kapasite") ||
+    lowerMessage.includes("how many") ||
+    lowerMessage.includes("kaç") ||
+    lowerMessage.includes("stok") ||
+    lowerMessage.includes("stock")
+  ) {
     return translations.general.capacity;
   }
 
-  if (lowerMessage.includes("menu") || lowerMessage.includes("menü") || lowerMessage.includes("food") || lowerMessage.includes("yemek") || lowerMessage.includes("meal") || lowerMessage.includes("yemek")) {
+  if (
+    lowerMessage.includes("menu") ||
+    lowerMessage.includes("menü") ||
+    lowerMessage.includes("spec") ||
+    lowerMessage.includes("datasheet") ||
+    lowerMessage.includes("seçenek") ||
+    lowerMessage.includes("option") ||
+    lowerMessage.includes("konfigür") ||
+    lowerMessage.includes("configure")
+  ) {
     return translations.general.menu;
   }
 
-  if (lowerMessage.includes("quote") || lowerMessage.includes("teklif") || lowerMessage.includes("pricing") || lowerMessage.includes("fiyat") || lowerMessage.includes("cost") || lowerMessage.includes("maliyet")) {
+  if (
+    lowerMessage.includes("quote") ||
+    lowerMessage.includes("teklif") ||
+    lowerMessage.includes("pricing") ||
+    lowerMessage.includes("fiyat") ||
+    lowerMessage.includes("cost") ||
+    lowerMessage.includes("maliyet")
+  ) {
     return translations.general.quote;
   }
 
-  if (lowerMessage.includes("logistics") || lowerMessage.includes("lojistik") || lowerMessage.includes("delivery") || lowerMessage.includes("teslimat") || lowerMessage.includes("transport") || lowerMessage.includes("taşıma")) {
+  if (
+    lowerMessage.includes("logistics") ||
+    lowerMessage.includes("lojistik") ||
+    lowerMessage.includes("delivery") ||
+    lowerMessage.includes("teslimat") ||
+    lowerMessage.includes("transport") ||
+    lowerMessage.includes("taşıma") ||
+    lowerMessage.includes("ship") ||
+    lowerMessage.includes("sevkiyat")
+  ) {
     return translations.general.logistics;
   }
 
-  if (lowerMessage.includes("timeline") || lowerMessage.includes("zaman çizelgesi") || lowerMessage.includes("lead time") || lowerMessage.includes("süre") || lowerMessage.includes("how long") || lowerMessage.includes("ne kadar")) {
+  if (
+    lowerMessage.includes("timeline") ||
+    lowerMessage.includes("zaman çizelgesi") ||
+    lowerMessage.includes("lead time") ||
+    lowerMessage.includes("süre") ||
+    lowerMessage.includes("how long") ||
+    lowerMessage.includes("ne kadar") ||
+    lowerMessage.includes("termin")
+  ) {
     return translations.general.timeline;
   }
 
-  if (lowerMessage.includes("quality") || lowerMessage.includes("kalite") || lowerMessage.includes("standard") || lowerMessage.includes("standart")) {
+  if (
+    lowerMessage.includes("quality") ||
+    lowerMessage.includes("kalite") ||
+    lowerMessage.includes("standard") ||
+    lowerMessage.includes("standart") ||
+    lowerMessage.includes("warranty") ||
+    lowerMessage.includes("garanti")
+  ) {
     return translations.general.quality;
   }
 
-  // Service-specific responses
-  if (lowerMessage.includes("corporate") || lowerMessage.includes("kurumsal")) {
+  if (
+    lowerMessage.includes("sürücü") ||
+    lowerMessage.includes("drive") ||
+    lowerMessage.includes("vfd") ||
+    lowerMessage.includes("inverter") ||
+    lowerMessage.includes("frekans")
+  ) {
     return {
-      content: language === "tr" 
-        ? "Kurumsal etkinlik catering hizmetimiz:\n\n• Yapılandırılmış servis akışı\n• Kurumsal disiplin ve zamanında teslimat\n• Toplantılar, lansmanlar, yönetici zirveleri için\n• 20 - 500 misafir kapasitesi\n• Kurumsal seviye koordinasyon\n\nHangi kurumsal etkinlik türünü planlıyorsunuz?"
-        : "Our corporate event catering service:\n\n• Structured service flow\n• Corporate discipline and on-time delivery\n• For meetings, launches, executive summits\n• 20 - 500 guest capacity\n• Corporate-level coordination\n\nWhat type of corporate event are you planning?",
-      suggestions: language === "tr"
-        ? ["Toplantı catering'i hakkında bilgi verin", "Lansman etkinlikleri için ne sunuyorsunuz?", "Yönetici zirveleri için kapasite nedir?"]
-        : ["Tell me about meeting catering", "What do you offer for launch events?", "What's capacity for executive summits?"],
+      content:
+        language === "tr"
+          ? "Motor sürücüleri / frekans invertörleri için güç, gerilim, ortam ve haberleşme (ör. fieldbus) bilgisiyle başlarız. Motor plakası veya mevcut sürücü etiketi fotoğrafı teklifi hızlandırır.\n\nHız, tork limi, frenleme veya harmonik gibi özel bir kısıtınız var mı?"
+          : "For drives / inverters we start from power, voltage, environment, and communications (e.g. fieldbus). A motor nameplate photo or existing drive label speeds quoting.\n\nAny constraints on speed, torque limits, braking, or harmonics?",
+      suggestions:
+        language === "tr"
+          ? ["Motor plakası göndereceğim", "Haberleşme seçimi", "Teklif için arayın"]
+          : ["I'll send a motor nameplate", "Fieldbus choice", "Call me for a quote"],
     };
   }
 
-  if (lowerMessage.includes("wedding") || lowerMessage.includes("düğün") || lowerMessage.includes("nişan")) {
+  if (lowerMessage.includes("plc") || lowerMessage.includes("hmi") || lowerMessage.includes("scada")) {
     return {
-      content: language === "tr"
-        ? "Düğün & Nişan catering hizmetimiz:\n\n• Misafir akış yönetimi\n• Servis koreografisi\n• Premium sunum\n• Düğün ölçeğinde operasyonlar\n• 50 - 500 misafir kapasitesi\n• Kutlama odaklı servis\n\nDüğününüz için hangi hizmetlere ihtiyacınız var?"
-        : "Our wedding & engagement catering service:\n\n• Guest flow management\n• Service choreography\n• Premium presentation\n• Wedding-scale operations\n• 50 - 500 guest capacity\n• Celebration-focused service\n\nWhat services do you need for your wedding?",
-      suggestions: language === "tr"
-        ? ["Düğün menüsü hakkında bilgi verin", "Nişan partisi için ne sunuyorsunuz?", "Düğün kapasitesi nedir?"]
-        : ["Tell me about wedding menus", "What do you offer for engagement parties?", "What's wedding capacity?"],
+      content:
+        language === "tr"
+          ? "PLC / HMI tarafında mevcut marka, yazılım sürümü ve I/O sayısı netleştikçe doğru modül/ekran önerisi yapılır. Retrofit mi yeni hat mı olduğunu da yazın.\n\nSahada hangi platform kullanılıyor?"
+          : "For PLC / HMI we narrow options once we know installed brand, software revision, and I/O counts. Note whether this is a retrofit or a greenfield line.\n\nWhich platform is running on site?",
+      suggestions:
+        language === "tr"
+          ? ["Siemens kullanıyoruz", "Retrofit projesi", "Operatör paneli önerisi"]
+          : ["We use Siemens", "Retrofit project", "Operator panel advice"],
     };
   }
 
-  if (lowerMessage.includes("festival") || lowerMessage.includes("büyük etkinlik") || lowerMessage.includes("large event")) {
+  if (lowerMessage.includes("motor") || lowerMessage.includes("redüktör")) {
     return {
-      content: language === "tr"
-        ? "Festival & Büyük Etkinlik catering hizmetimiz:\n\n• Yüksek hacimli üretim\n• Hız ve koordinasyon\n• Saha lojistiği\n• Toplu catering operasyonları\n• 500 - 10.000 misafir kapasitesi\n• Çok günlü etkinlik desteği\n\nHangi tür festival veya büyük etkinlik planlıyorsunuz?"
-        : "Our festival & large event catering service:\n\n• High-volume production\n• Speed and coordination\n• Field logistics\n• Mass catering operations\n• 500 - 10,000 guest capacity\n• Multi-day event support\n\nWhat type of festival or large event are you planning?",
-      suggestions: language === "tr"
-        ? ["Festival menüsü hakkında bilgi verin", "Büyük etkinlikler için kapasite nedir?", "Çok günlü etkinlikler için ne sunuyorsunuz?"]
-        : ["Tell me about festival menus", "What's capacity for large events?", "What do you offer for multi-day events?"],
+      content:
+        language === "tr"
+          ? "Motor seçiminde kW, gerilim, görev (S1/S4 vb.), montaj (B3/B5), flanş ve encoder ihtiyacı belirleyicidir. Sürücü ile birlikte düşünüyorsanız birlikte konuşmak en doğrusu.\n\nAC mi DC mi, servo mu asenkron mu?"
+          : "Motors hinge on kW, voltage, duty (S1/S4…), mounting (B3/B5), flange, and encoder needs. If this pairs with a drive, we usually review both together.\n\nAC vs DC, servo vs induction?",
+      suggestions:
+        language === "tr"
+          ? ["Asenkron + sürücü", "Servo hattı", "Teklif için veri listesi"]
+          : ["Induction + drive", "Servo line", "Data list for quote"],
     };
   }
 
-  // Fallback for unclear questions
+  if (
+    lowerMessage.includes("phone") ||
+    lowerMessage.includes("call") ||
+    lowerMessage.includes("whatsapp") ||
+    lowerMessage.includes("ara") ||
+    lowerMessage.includes("telefon") ||
+    lowerMessage.includes("iletişim")
+  ) {
+    return {
+      content:
+        language === "tr"
+          ? "Doğrudan arayabilir veya WhatsApp üzerinden yazılı liste/fotoğraf gönderebilirsiniz:\n+90 553 056 89 39\n\nKısa bir özet: uygulama, gerilim/güç, istenen termin."
+          : "Call or WhatsApp with a short list or photos:\n+90 553 056 89 39\n\nA one-line summary helps: application, voltage/power, required delivery window.",
+      suggestions:
+        language === "tr"
+          ? ["Teklif istiyorum", "Sadece teknik soru", "Ürün sayfasına gitmek istiyorum"]
+          : ["I need a quote", "Technical question only", "Point me to products"],
+    };
+  }
+
   if (lowerMessage.length < 5) {
     return translations.general.unclear;
   }
 
-  // Default intelligent response
   return {
     content: translations.general.clarify.content(userMessage),
     suggestions: translations.general.clarify.suggestions,

@@ -4,6 +4,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useChatbot } from "../contexts/ChatbotContext";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 
+const uiCopy = {
+  tr: {
+    fabAria: "Yazıcı Otomasyon asistanını aç",
+    panelAria: "Yazıcı Otomasyon asistanı",
+    title: "Yazıcı Otomasyon Asistanı",
+    subtitle: "Ürün ve teknik yönlendirme",
+    placeholder: "Ürün, teklif veya teknik konuda yazın…",
+    close: "Sohbeti kapat",
+  },
+  en: {
+    fabAria: "Open Yazıcı Otomasyon assistant",
+    panelAria: "Yazıcı Otomasyon assistant",
+    title: "Yazıcı Otomasyon Assistant",
+    subtitle: "Products & technical guidance",
+    placeholder: "Ask about products, quotes, or technical fit…",
+    close: "Close chat",
+  },
+} as const;
+
 export function Chatbot() {
   const {
     messages,
@@ -12,7 +31,10 @@ export function Chatbot() {
     openChat,
     closeChat,
     sendMessage,
+    language,
   } = useChatbot();
+
+  const labels = uiCopy[language];
 
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -94,20 +116,13 @@ export function Chatbot() {
     await sendMessage(suggestion);
   };
 
-  const formatTime = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(date);
-  };
-
   return (
     <>
       {/* Chat Button */}
       <motion.button
         onClick={openChat}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-dark shadow-lg transition hover:bg-dark/90 focus:outline-none focus:ring-2 focus:ring-lilac/50 md:bottom-6 md:right-6"
-        aria-label="Open Event Catering Assistant"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-lilac text-white shadow-lg shadow-lilac/25 transition hover:bg-lilac/90 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 md:bottom-6 md:right-6"
+        aria-label={labels.fabAria}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         initial={{ opacity: 0, y: 20 }}
@@ -134,26 +149,26 @@ export function Chatbot() {
         {isOpen && (
           <motion.div
             ref={panelRef}
-            className="fixed bottom-24 right-6 z-50 flex h-[calc(100vh-7rem)] w-[calc(100vw-3rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:bottom-6 md:h-[520px] md:w-[380px]"
+            className="fixed bottom-24 right-6 z-50 flex h-[calc(100vh-7rem)] w-[calc(100vw-3rem)] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-lilac/15 bg-white shadow-2xl shadow-lilac/10 md:bottom-6 md:h-[520px] md:w-[380px]"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             role="dialog"
-            aria-label="Event Catering Assistant"
+            aria-label={labels.panelAria}
             aria-modal="true"
           >
             {/* Header */}
-            <div className="sticky top-0 z-10 border-b border-gray-100 bg-white px-6 py-4">
+            <div className="sticky top-0 z-10 border-b border-lilac/15 bg-gradient-to-b from-soft-lavender/12 to-white px-6 py-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-dark">Event Catering Assistant</h3>
-                  <p className="mt-0.5 text-xs text-gray-500">Event Planning & Service Guidance</p>
+                  <h3 className="font-serif text-lg font-semibold tracking-tight text-dark">{labels.title}</h3>
+                  <p className="mt-0.5 text-xs text-dark-purple/80">{labels.subtitle}</p>
                 </div>
                 <button
                   onClick={closeChat}
                   className="ml-4 -mr-2 rounded-lg p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-lilac/50"
-                  aria-label="Close chat"
+                  aria-label={labels.close}
                 >
                   <svg
                     width="20"
@@ -186,8 +201,8 @@ export function Chatbot() {
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                         message.role === "user"
-                          ? "bg-white border border-gray-200 text-dark"
-                          : "bg-gray-100 text-dark"
+                          ? "border border-gray-200 bg-white text-dark"
+                          : "border-l-2 border-lilac/35 bg-slate-50 text-dark"
                       }`}
                     >
                       <p className="whitespace-pre-line text-sm leading-relaxed">{message.content}</p>
@@ -197,7 +212,7 @@ export function Chatbot() {
                             <button
                               key={idx}
                               onClick={() => handleSuggestion(suggestion)}
-                              className="block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-left text-xs text-dark transition hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-lilac/50"
+                              className="block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-left text-xs text-dark transition hover:border-lilac/40 hover:bg-soft-lavender/15 focus:outline-none focus:ring-2 focus:ring-lilac/40"
                             >
                               {suggestion}
                             </button>
@@ -214,7 +229,7 @@ export function Chatbot() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex justify-start"
                   >
-                    <div className="rounded-2xl bg-gray-100 px-4 py-3">
+                    <div className="rounded-2xl border-l-2 border-lilac/25 bg-slate-50 px-4 py-3">
                       <div className="flex space-x-1.5">
                         <div className="h-2 w-2 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "0ms" }} />
                         <div className="h-2 w-2 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "150ms" }} />
@@ -229,21 +244,21 @@ export function Chatbot() {
             </div>
 
             {/* Input */}
-            <div className="border-t border-gray-100 bg-white p-4">
+            <div className="border-t border-lilac/10 bg-white p-4">
               <form onSubmit={handleSubmit} className="flex gap-2">
                 <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about services, events, or capabilities..."
-                  className="flex-1 rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-dark placeholder:text-gray-400 focus:border-lilac focus:outline-none focus:ring-2 focus:ring-lilac/50"
+                  placeholder={labels.placeholder}
+                  className="flex-1 rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-dark placeholder:text-gray-400 focus:border-lilac focus:outline-none focus:ring-2 focus:ring-lilac/35"
                   disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="rounded-lg bg-dark px-4 py-2.5 text-sm font-medium text-white transition hover:bg-dark/90 focus:outline-none focus:ring-2 focus:ring-lilac/50 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="rounded-lg bg-lilac px-4 py-2.5 text-sm font-medium text-white shadow-sm shadow-lilac/20 transition hover:bg-lilac/90 focus:outline-none focus:ring-2 focus:ring-lilac/45 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <svg
                     width="18"
