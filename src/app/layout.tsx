@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   description:
     "Endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürün gamımızı inceleyin; stok ve teknik bilgi için +90 553 056 89 39.",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
   keywords: [
     "endüstriyel otomasyon",
