@@ -49,7 +49,14 @@ const translations = {
       title: "The partner plants rely on",
       intro:
         "We work with manufacturers and integrators who need predictable answers, disciplined supply, and field-credible components.",
-      logos: ["Automation Partner A", "Systems Integrator B", "Process OEM C", "Machine Builder D", "Energy Plant E", "Food Producer F"],
+      logos: [
+        "Automation Partner\u00a0A",
+        "Systems Integrator\u00a0B",
+        "Process OEM\u00a0C",
+        "Machine Builder\u00a0D",
+        "Energy Plant\u00a0E",
+        "Food Producer\u00a0F",
+      ],
       bullets: [
         {
           title: "Domestic manufacturing strength",
@@ -271,12 +278,12 @@ const translations = {
       intro:
         "Üreticiler ve entegratörlerle; öngörülebilir cevaplar, disiplinli tedarik ve sahada güvenilir bileşenler üzerinde çalışıyoruz.",
       logos: [
-        "Otomasyon Ortağı A",
-        "Üretim Sistemleri B",
-        "Endüstri Çözümleri C",
-        "Makina Üretici D",
-        "Proses Teknoloji E",
-        "Enerji Otomasyon F",
+        "Otomasyon Ortağı\u00a0A",
+        "Üretim Sistemleri\u00a0B",
+        "Endüstri Çözümleri\u00a0C",
+        "Makina Üretici\u00a0D",
+        "Proses Teknoloji\u00a0E",
+        "Enerji Otomasyon\u00a0F",
       ],
       bullets: [
         {

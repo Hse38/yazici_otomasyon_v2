@@ -49,9 +49,10 @@ export function HomeTrustSection({ content }: { content: TrustContent }) {
           {content.logos.map((name) => (
             <div
               key={name}
-              className="flex min-h-[72px] items-center justify-center rounded-xl border border-dark/8 bg-background px-3 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-dark/45"
+              title={name}
+              className="flex min-h-[72px] min-w-0 items-center justify-center overflow-hidden rounded-xl border border-dark/8 bg-background px-2 py-4 text-center text-[10px] font-semibold uppercase leading-snug tracking-[0.08em] text-dark/45 sm:px-3 sm:text-[11px] sm:tracking-[0.1em]"
             >
-              {name}
+              <span className="block max-w-full whitespace-nowrap text-ellipsis">{name}</span>
             </div>
           ))}
         </motion.div>
