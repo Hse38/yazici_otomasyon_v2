@@ -8,12 +8,19 @@ export const SITE_ORIGIN = "https://yaziciotomasyon.com";
 /** Canonical base URL: production domain on Vercel prod, else current deploy URL, else local SITE_ORIGIN. */
 export function getPublicSiteUrl(): string {
   if (typeof process === "undefined") return SITE_ORIGIN;
+
+  const withProto = (value: string) => {
+    const v = value.trim();
+    if (v.startsWith("http://") || v.startsWith("https://")) return v;
+    return `https://${v}`;
+  };
+
   if (process.env.VERCEL_ENV === "production") {
     const host =
       process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
-    if (host) return `https://${host}`;
+    if (host) return withProto(host);
   }
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.VERCEL_URL) return withProto(process.env.VERCEL_URL);
   return SITE_ORIGIN;
 }
 
