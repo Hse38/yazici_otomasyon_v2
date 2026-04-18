@@ -35,7 +35,7 @@ const footerContent = {
     services: "Ürünler",
     company: "Şirket",
     companyLinks: {
-      about: "Hakkımızda",
+      whyUs: "Neden Biz",
       gallery: "Galeri",
       process: "Ürünler",
       contact: "İletişim",
@@ -52,7 +52,7 @@ const footerContent = {
     services: "Products",
     company: "Company",
     companyLinks: {
-      about: "About Us",
+      whyUs: "Why Us",
       gallery: "Gallery",
       process: "Products",
       contact: "Contact",
@@ -116,7 +116,7 @@ export function Footer({ language }: FooterProps) {
                 href="/#why-us"
                 className="text-sm text-white/60 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
               >
-                {content.companyLinks.about}
+                {content.companyLinks.whyUs}
               </Link>
               <Link
                 href="/#proof"
