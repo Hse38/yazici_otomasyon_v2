@@ -121,7 +121,7 @@ export function Chatbot() {
       {/* Chat Button */}
       <motion.button
         onClick={openChat}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-lilac text-white shadow-lg shadow-lilac/25 transition hover:bg-lilac/90 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 md:bottom-6 md:right-6"
+        className="fixed bottom-[5.75rem] right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-lilac text-white shadow-lg shadow-lilac/25 transition hover:bg-lilac/90 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 md:bottom-6 md:right-6"
         aria-label={labels.fabAria}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}

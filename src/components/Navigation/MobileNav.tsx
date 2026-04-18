@@ -184,7 +184,7 @@ export function MobileNav({
                   : { duration: 0.25, ease: [0.4, 0, 0.2, 1] }
               }
               onClick={closeAllMenus}
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-md md:hidden"
+              className="fixed inset-0 z-[90] bg-black/50 backdrop-blur-md md:hidden"
             />
 
             {/* Main Menu */}
@@ -202,41 +202,40 @@ export function MobileNav({
                       ease: [0.4, 0, 0.2, 1], // ease-in-out
                     }
               }
-              className="fixed right-0 top-0 z-50 h-full w-[90%] max-w-[420px] bg-white shadow-2xl md:hidden rounded-l-3xl"
+              className="fixed right-0 top-0 z-[100] flex h-[100dvh] w-[min(100%,420px)] max-w-full flex-col bg-white shadow-2xl md:hidden rounded-l-2xl border-l border-lilac/10"
               role="dialog"
               aria-modal="true"
               aria-label={language === "tr" ? "Ana menü" : "Main menu"}
             >
-              <div className="flex h-full flex-col">
-                {/* Header - Sticky */}
-                <div className="sticky top-0 z-10 bg-white">
-                  <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+              <div className="flex min-h-0 flex-1 flex-col">
+                {/* Top bar: logo + lang + close */}
+                <div className="shrink-0 border-b border-lilac/10 bg-white px-5 py-3">
+                  <div className="flex items-center justify-between gap-3">
                     <Link
                       href="/"
                       onClick={closeAllMenus}
-                      className="flex items-center"
+                      className="min-w-0 flex-1"
                     >
                       <Image
-                        src="/img/logolu.png"
+                        src="/img/yazici-logo-dark.png"
                         alt={brand}
-                        width={200}
-                        height={60}
-                        className="h-10 w-auto object-contain opacity-90"
+                        width={260}
+                        height={72}
+                        className="h-10 w-auto max-w-[200px] object-contain object-left sm:h-11"
                         priority
                       />
                     </Link>
-                    <div className="flex items-center gap-4">
-                      {/* Language Selector - Same style as desktop */}
-                      <div className="flex items-center gap-2">
+                    <div className="flex shrink-0 items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <button
                           type="button"
                           onClick={() => {
                             onLanguageChange("tr");
                           }}
-                          className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                          className={`rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] transition ${
                             currentLang === "tr"
-                              ? "border-soft-lavender bg-soft-lavender text-dark"
-                              : "border-dark/20 text-dark/70 hover:border-soft-lavender hover:text-dark"
+                              ? "border-lilac/50 bg-lilac/12 text-dark"
+                              : "border-dark/15 text-dark/60 hover:border-lilac/30 hover:text-dark"
                           }`}
                         >
                           TR
@@ -246,10 +245,10 @@ export function MobileNav({
                           onClick={() => {
                             onLanguageChange("en");
                           }}
-                          className={`rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                          className={`rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] transition ${
                             currentLang === "en"
-                              ? "border-soft-lavender bg-soft-lavender text-dark"
-                              : "border-dark/20 text-dark/70 hover:border-soft-lavender hover:text-dark"
+                              ? "border-lilac/50 bg-lilac/12 text-dark"
+                              : "border-dark/15 text-dark/60 hover:border-lilac/30 hover:text-dark"
                           }`}
                         >
                           EN
@@ -258,7 +257,7 @@ export function MobileNav({
                       <button
                         type="button"
                         onClick={closeAllMenus}
-                        className="flex h-10 w-10 items-center justify-center rounded-lg text-dark/60 transition hover:bg-gray-100 hover:text-dark focus:outline-none focus:ring-2 focus:ring-lilac/50"
+                        className="flex h-10 w-10 items-center justify-center rounded-lg text-dark/55 transition hover:bg-lilac/8 hover:text-dark focus:outline-none focus:ring-2 focus:ring-lilac/40"
                         aria-label={language === "tr" ? "Menüyü kapat" : "Close menu"}
                       >
                         <svg
@@ -277,21 +276,10 @@ export function MobileNav({
                       </button>
                     </div>
                   </div>
-                  
-                  {/* CTA Button - Below Header */}
-                  <div className="border-b border-gray-200 bg-white px-6 pb-4">
-                    <Link
-                      href="/#contact"
-                      onClick={closeAllMenus}
-                      className="block w-full min-h-[48px] flex items-center justify-center rounded-full bg-lilac px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-soft-lavender hover:text-dark focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2"
-                    >
-                      {ctaText}
-                    </Link>
-                  </div>
                 </div>
 
-                {/* Navigation Content */}
-                <div className="flex-1 overflow-y-auto min-h-0">
+                {/* Scrollable navigation */}
+                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
                   <AnimatePresence mode="wait">
                     {!isServicesSubMenuOpen ? (
                       <motion.nav
@@ -304,52 +292,66 @@ export function MobileNav({
                             ? { duration: 0 }
                             : { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
                         }
-                        className="flex flex-col gap-1 p-6 w-full"
+                        className="flex flex-col px-5 py-4"
                       >
-                        <button
-                          type="button"
-                          onClick={openServicesSubMenu}
-                          className="flex min-h-[48px] items-center justify-between py-3 text-left text-sm uppercase tracking-[0.2em] font-semibold text-dark transition hover:text-lilac focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 rounded-lg px-2 -mx-2"
-                        >
-                          <span>{navItems.services}</span>
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-dark/40"
+                        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-dark-purple/80">
+                          {language === "tr" ? "Menü" : "Menu"}
+                        </p>
+                        <div className="flex flex-col divide-y divide-gray-100 border border-gray-100 rounded-xl overflow-hidden bg-white">
+                          <Link
+                            href="/"
+                            onClick={closeAllMenus}
+                            className="flex min-h-[48px] items-center px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-dark transition hover:bg-lilac/6 hover:text-lilac focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lilac/35"
                           >
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </button>
+                            {language === "tr" ? "Ana Sayfa" : "Home"}
+                          </Link>
 
-                        <Link
-                          href="/#why-us"
-                          onClick={closeAllMenus}
-                          className="flex min-h-[48px] items-center py-3 text-sm uppercase tracking-[0.2em] font-semibold text-dark transition hover:text-lilac focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 rounded-lg px-2 -mx-2"
-                        >
-                          {navItems.whyUs}
-                        </Link>
+                          <button
+                            type="button"
+                            onClick={openServicesSubMenu}
+                            className="flex min-h-[48px] w-full items-center justify-between px-4 py-3.5 text-left text-sm font-semibold uppercase tracking-[0.16em] text-dark transition hover:bg-lilac/6 hover:text-lilac focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lilac/35"
+                          >
+                            <span>{navItems.services}</span>
+                            <svg
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="shrink-0 text-dark/35"
+                              aria-hidden
+                            >
+                              <path d="M9 18l6-6-6-6" />
+                            </svg>
+                          </button>
 
-                        <Link
-                          href="/#proof"
-                          onClick={closeAllMenus}
-                          className="flex min-h-[48px] items-center py-3 text-sm uppercase tracking-[0.2em] font-semibold text-dark transition hover:text-lilac focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 rounded-lg px-2 -mx-2"
-                        >
-                          {navItems.proof}
-                        </Link>
+                          <Link
+                            href="/#why-us"
+                            onClick={closeAllMenus}
+                            className="flex min-h-[48px] items-center px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-dark transition hover:bg-lilac/6 hover:text-lilac focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lilac/35"
+                          >
+                            {navItems.whyUs}
+                          </Link>
 
-                        <Link
-                          href="/#contact"
-                          onClick={closeAllMenus}
-                          className="flex min-h-[48px] items-center py-3 text-sm uppercase tracking-[0.2em] font-semibold text-dark transition hover:text-lilac focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 rounded-lg px-2 -mx-2"
-                        >
-                          {navItems.contact}
-                        </Link>
+                          <Link
+                            href="/#proof"
+                            onClick={closeAllMenus}
+                            className="flex min-h-[48px] items-center px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-dark transition hover:bg-lilac/6 hover:text-lilac focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lilac/35"
+                          >
+                            {navItems.proof}
+                          </Link>
+
+                          <Link
+                            href="/#contact"
+                            onClick={closeAllMenus}
+                            className="flex min-h-[48px] items-center px-4 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-dark transition hover:bg-lilac/6 hover:text-lilac focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-lilac/35"
+                          >
+                            {navItems.contact}
+                          </Link>
+                        </div>
                       </motion.nav>
                     ) : (
                       <motion.nav
@@ -363,13 +365,12 @@ export function MobileNav({
                             ? { duration: 0 }
                             : { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
                         }
-                        className="flex flex-col p-6"
+                        className="flex flex-col px-5 py-4"
                       >
-                        {/* Back Button */}
                         <button
                           type="button"
                           onClick={closeServicesSubMenu}
-                          className="mb-6 flex min-h-[48px] items-center gap-2 rounded-lg px-2 py-3 text-sm font-medium text-dark/70 transition hover:bg-gray-50 hover:text-dark focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 -mx-2"
+                          className="mb-4 flex min-h-[44px] w-fit items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium text-dark/70 transition hover:bg-lilac/8 hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-lilac/40"
                         >
                           <svg
                             width="18"
@@ -380,30 +381,33 @@ export function MobileNav({
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            aria-hidden
                           >
                             <path d="M15 18l-6-6 6-6" />
                           </svg>
-                          <span className="font-medium">
-                            {language === "tr" ? "Geri" : "Back"}
-                          </span>
+                          <span>{language === "tr" ? "Geri" : "Back"}</span>
                         </button>
 
-                        <h2 className="mb-6 text-xl font-semibold text-dark">
+                        <h2 className="mb-1 font-serif text-lg font-semibold text-dark">
                           {navItems.services}
                         </h2>
+                        <Link
+                          href="/#products"
+                          onClick={closeAllMenus}
+                          className="mb-4 text-sm font-medium text-lilac underline-offset-4 hover:underline"
+                        >
+                          {language === "tr" ? "Tüm ürünler özetine git" : "View all products on homepage"}
+                        </Link>
 
-                        {/* Products list */}
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2.5">
                           {products[language].map((item) => (
                             <Link
                               key={item.id}
                               href={`/services/${item.id}`}
                               onClick={closeAllMenus}
-                              className="flex min-h-[56px] items-center rounded-lg border border-gray-200 bg-white px-5 py-4 text-left transition hover:border-lilac hover:bg-lilac/5 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2"
+                              className="flex min-h-[52px] items-center rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-left transition hover:border-lilac/50 hover:bg-lilac/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-lilac/40"
                             >
-                              <span className="text-base font-medium text-dark">
-                                {item.title}
-                              </span>
+                              <span className="text-[15px] font-medium text-dark">{item.title}</span>
                             </Link>
                           ))}
                         </div>
@@ -412,6 +416,16 @@ export function MobileNav({
                   </AnimatePresence>
                 </div>
 
+                {/* Sticky CTA inside drawer (above system bottom bars) */}
+                <div className="shrink-0 border-t border-lilac/10 bg-white px-5 pb-[max(1rem,env(safe-area-inset-bottom,0px))] pt-4">
+                  <Link
+                    href="/#contact"
+                    onClick={closeAllMenus}
+                    className="flex min-h-[48px] w-full items-center justify-center rounded-full bg-lilac px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md shadow-lilac/20 transition hover:bg-soft-lavender hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-lilac/50 focus-visible:ring-offset-2"
+                  >
+                    {ctaText}
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </>
