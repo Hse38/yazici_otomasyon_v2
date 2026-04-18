@@ -1032,7 +1032,7 @@ export default function Home() {
             </p>
 
             {/* Primary Action Buttons */}
-            <div id="contact-channels" className="mb-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <div id="contact-channels" className="flex flex-col gap-4 sm:flex-row sm:justify-center">
               {/* WhatsApp Button - PRIMARY CTA */}
               <a
                 href="https://wa.me/905530568939"
@@ -1074,88 +1074,6 @@ export default function Home() {
                 </svg>
                 {content.contact.call}
               </a>
-            </div>
-
-            {/* Contact Details Block */}
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Phone Numbers */}
-              <div className="space-y-3">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
-                  {lang === "tr" ? "Telefon" : "Phone"}
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <a
-                      href={`tel:${content.contact.phone1.replace(/\s/g, "")}`}
-                      className="block text-lg font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                      aria-label={`${lang === "tr" ? "Ara" : "Call"} ${content.contact.phone1}`}
-                    >
-                      {content.contact.phone1}
-                    </a>
-                    <span className="rounded-full bg-lilac/20 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.1em] text-soft-lavender">
-                      WhatsApp
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Address */}
-              <div className="space-y-3">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
-                  {lang === "tr" ? "Adres" : "Address"}
-                </h3>
-                <address className="not-italic text-base leading-relaxed text-white/80">
-                  {content.contact.address.street ? (
-                    <a
-                      href={`https://maps.google.com/?q=${encodeURIComponent(
-                        `${content.contact.address.street} ${content.contact.address.city} ${content.contact.address.country}`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                    >
-                      <div>{content.contact.address.street}</div>
-                      <div>{content.contact.address.city}</div>
-                      <div>{content.contact.address.country}</div>
-                    </a>
-                  ) : (
-                    <div>
-                      <div>{content.contact.address.city}</div>
-                      {content.contact.address.country ? (
-                        <div>{content.contact.address.country}</div>
-                      ) : null}
-                    </div>
-                  )}
-                </address>
-              </div>
-
-              {/* Email & Website */}
-              <div className="space-y-3">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/60">
-                  {lang === "tr" ? "İletişim" : "Contact"}
-                </h3>
-                <div className="space-y-2">
-                  {content.contact.email ? (
-                    <a
-                      href={`mailto:${content.contact.email}`}
-                      className="block text-base font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                      aria-label={`${lang === "tr" ? "E-posta gönder" : "Send email"} ${content.contact.email}`}
-                    >
-                      {content.contact.email}
-                    </a>
-                  ) : null}
-                  {content.contact.website ? (
-                    <a
-                      href={`https://${content.contact.website}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-sm text-white/60 transition hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                    >
-                      {content.contact.website}
-                    </a>
-                  ) : null}
-                </div>
-              </div>
             </div>
           </div>
         </section>
