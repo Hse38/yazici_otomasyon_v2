@@ -74,6 +74,8 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
     ];
   }, [service.id, language, content.title]);
 
+  const heroCover = galleryImages[0];
+
   return (
     <div className="bg-background text-foreground">
       {/* Header */}
@@ -164,52 +166,73 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
 
       {/* 1. Hero Section */}
       <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-lilac/5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(107,78,255,0.08),transparent_50%)]" />
-        <div className="section-padding relative z-10 mx-auto flex max-w-6xl items-center">
-          <div className="w-full space-y-8 py-20">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="text-xs uppercase tracking-[0.4em] text-dark-purple"
-            >
-              {content.eyebrow}
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-balance text-4xl font-semibold leading-tight text-dark sm:text-5xl lg:text-6xl"
-            >
-              {content.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="max-w-2xl text-lg text-dark/70 sm:text-xl"
-            >
-              {content.description}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="flex flex-col gap-4 sm:flex-row"
-            >
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full bg-lilac px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-soft-lavender hover:text-dark"
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(41,171,226,0.12),transparent_52%)]" />
+        <div className="section-padding relative z-10 mx-auto max-w-6xl py-16 lg:flex lg:min-h-[70vh] lg:items-center lg:py-20">
+          <div
+            className={`grid w-full items-center gap-10 ${heroCover ? "lg:grid-cols-2 lg:gap-12 xl:gap-16" : ""}`}
+          >
+            {heroCover && (
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl border border-lilac/20 bg-slate-100 shadow-lg shadow-lilac/10 lg:mx-0 lg:max-w-none"
               >
-                {content.finalCta.primary}
-              </a>
-              <a
-                href="tel:+905530568939"
-                className="inline-flex items-center justify-center rounded-full border border-dark/20 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-dark transition hover:border-lilac hover:text-lilac"
+                <Image
+                  src={heroCover.src}
+                  alt={heroCover.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </motion.div>
+            )}
+            <div className="space-y-8">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-xs uppercase tracking-[0.4em] text-dark-purple"
               >
-                {content.finalCta.secondary}
-              </a>
-            </motion.div>
+                {content.eyebrow}
+              </motion.p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="text-balance text-4xl font-semibold leading-tight text-dark sm:text-5xl lg:text-6xl"
+              >
+                {content.title}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="max-w-2xl text-lg text-dark/70 sm:text-xl"
+              >
+                {content.description}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="flex flex-col gap-4 sm:flex-row"
+              >
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-full bg-lilac px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-soft-lavender hover:text-dark"
+                >
+                  {content.finalCta.primary}
+                </a>
+                <a
+                  href="tel:+905530568939"
+                  className="inline-flex items-center justify-center rounded-full border border-dark/20 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-dark transition hover:border-lilac hover:text-lilac"
+                >
+                  {content.finalCta.secondary}
+                </a>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -301,14 +324,11 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
         </div>
       </section>
 
-      {/* Gallery Section */}
-      {galleryImages.length > 0 && (
+      {/* Gallery: skip when only hero image (already shown above) */}
+      {galleryImages.length > 1 && (
         <section id="gallery" className="section-padding bg-white">
           <div className="mx-auto max-w-6xl">
-            <ServiceGallery 
-              images={galleryImages} 
-              language={language}
-            />
+            <ServiceGallery images={galleryImages} language={language} />
           </div>
         </section>
       )}
