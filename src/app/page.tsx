@@ -38,6 +38,7 @@ const translations = {
         "Maximum precision on the line with a disciplined approach to error reduction, transparent procurement, and responsive engineering support.",
       ctaPrimary: "Request a quote",
       ctaSecondary: "WhatsApp us",
+      scrollAria: "Scroll to content",
     },
     counters: [
       { value: 6, suffix: "", label: "Product lines" },
@@ -258,6 +259,7 @@ const translations = {
       description: "Üretim hatlarınızda maksimum hassasiyet, minimum hata payı.",
       ctaPrimary: "Teklif Al",
       ctaSecondary: "WhatsApp ile İletişime Geç",
+      scrollAria: "İçeriğe kaydır",
     },
     counters: [
       { value: 6, suffix: "", label: "Ürün hattı" },
@@ -521,7 +523,17 @@ function Counter({ value, suffix, label }: { value: number; suffix: string; labe
 export default function Home() {
   const { setPageContext, setLanguage } = useChatbot();
   const [lang, setLang] = useState<Language>("tr");
+  const [headerScrolled, setHeaderScrolled] = useState(false);
   const content = useMemo(() => translations[lang], [lang]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setHeaderScrolled(window.scrollY > 32);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const stored = localStorage.getItem("lang");
@@ -593,11 +605,25 @@ export default function Home() {
       <SchemaMarkup language={lang} faqItems={faqItems} />
 
       <header
-        className="sticky top-0 z-20 w-full backdrop-blur-md m-0"
+        className={`sticky top-0 z-20 m-0 w-full border-b transition-[border-color,box-shadow,backdrop-filter,background-color] duration-300 ${
+          headerScrolled
+            ? "border-white/10 bg-dark/88 shadow-md shadow-black/20 backdrop-blur-md"
+            : "border-white/[0.06] bg-dark/[0.14] shadow-none backdrop-blur-md"
+        }`}
         id="main-header"
       >
-        <div className="absolute inset-0 bg-dark/80 -z-10" />
-        <div className="absolute inset-0 lilac-gradient -z-10 opacity-60" />
+        <div
+          className={`absolute inset-0 -z-10 transition-opacity duration-300 ${
+            headerScrolled ? "opacity-100" : "opacity-0"
+          } bg-dark/75`}
+          aria-hidden
+        />
+        <div
+          className={`absolute inset-0 -z-10 lilac-gradient transition-opacity duration-300 ${
+            headerScrolled ? "opacity-50" : "opacity-[0.42]"
+          }`}
+          aria-hidden
+        />
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
           <Link href="/" className="flex items-center">
             <Image
@@ -657,7 +683,10 @@ export default function Home() {
       </header>
 
       <main className="m-0 p-0">
-        <section className="relative min-h-screen overflow-hidden bg-dark text-white m-0 p-0 -mt-0">
+        <section
+          id="hero"
+          className="relative -mt-[4.5rem] min-h-screen overflow-hidden bg-dark pb-20 pt-[4.5rem] text-white sm:-mt-20 sm:pb-16 sm:pt-20"
+        >
           <div className="absolute inset-0 lilac-gradient" />
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.09]"
@@ -735,6 +764,34 @@ export default function Home() {
               </motion.div>
             </div>
           </div>
+
+          <a
+            href="#trust"
+            className="absolute bottom-6 left-1/2 z-[12] flex -translate-x-1/2 flex-col items-center gap-1 max-md:bottom-28 md:bottom-8"
+            aria-label={content.hero.scrollAria}
+          >
+            <motion.span
+              className="block h-9 w-px rounded-full bg-gradient-to-b from-white/65 via-white/35 to-transparent"
+              animate={{ opacity: [0.35, 0.85, 0.35] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.span
+              className="flex h-3 w-3 items-center justify-center text-white/50"
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              aria-hidden
+            >
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="text-current">
+                <path
+                  d="M1 1.5L5 4.5L9 1.5"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.span>
+          </a>
         </section>
 
         <section className="section-padding bg-dark text-white">
