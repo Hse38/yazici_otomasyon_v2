@@ -27,7 +27,7 @@ const translations = {
     brand: "Yazıcı Otomasyon",
     nav: {
       services: "Products",
-      whyUs: "Why Us",
+      whyUs: "About Us",
       proof: "Gallery",
       contact: "Contact",
     },
@@ -145,7 +145,7 @@ const translations = {
       action: "View details",
     },
     whyUs: {
-      kicker: "Why us",
+      kicker: "About us",
       title: "Why Yazıcı Otomasyon?",
       description:
         "We combine domestic supply strength with field-credible engineering so your line decisions are defensible in production.",
@@ -249,7 +249,7 @@ const translations = {
     brand: "Yazıcı Otomasyon",
     nav: {
       services: "ÜRÜNLER",
-      whyUs: "NEDEN BİZ",
+      whyUs: "HAKKIMIZDA",
       proof: "GALERİ",
       contact: "İLETİŞİM",
     },
@@ -385,7 +385,7 @@ const translations = {
       action: "Detayları Gör",
     },
     whyUs: {
-      kicker: "Neden Biz",
+      kicker: "Hakkımızda",
       title: "Neden Yazıcı Otomasyon?",
       description:
         "Yerli üretim gücünü sahadan gelen mühendislik disipliniyle birleştiriyor; hat kararlarınızı üretimde savunulabilir kılıyoruz.",

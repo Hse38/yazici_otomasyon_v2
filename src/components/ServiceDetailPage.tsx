@@ -27,7 +27,7 @@ const navTranslations = {
     brand: "Yazıcı Otomasyon",
     nav: {
       services: "Ürünler",
-      whyUs: "Neden Biz",
+      whyUs: "Hakkımızda",
       proof: "Galeri",
       contact: "İletişim",
     },
@@ -36,7 +36,7 @@ const navTranslations = {
     brand: "Yazıcı Otomasyon",
     nav: {
       services: "Products",
-      whyUs: "Why Us",
+      whyUs: "About Us",
       proof: "Gallery",
       contact: "Contact",
     },

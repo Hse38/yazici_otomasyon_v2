@@ -35,7 +35,7 @@ const footerContent = {
     services: "Ürünler",
     company: "Şirket",
     companyLinks: {
-      whyUs: "Neden Biz",
+      whyUs: "Hakkımızda",
       gallery: "Galeri",
       process: "Ürünler",
       contact: "İletişim",
@@ -52,7 +52,7 @@ const footerContent = {
     services: "Products",
     company: "Company",
     companyLinks: {
-      whyUs: "Why Us",
+      whyUs: "About Us",
       gallery: "Gallery",
       process: "Products",
       contact: "Contact",
