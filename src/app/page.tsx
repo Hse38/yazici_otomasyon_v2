@@ -19,7 +19,6 @@ import { HomeIndustry40Section } from "../components/home/HomeIndustry40Section"
 import { HomeUseCasesSection } from "../components/home/HomeUseCasesSection";
 import { HomeProcessSection } from "../components/home/HomeProcessSection";
 import { HomeFinalCtaSection } from "../components/home/HomeFinalCtaSection";
-import { FloatingWhatsApp } from "../components/home/FloatingWhatsApp";
 
 type Language = "tr" | "en";
 
@@ -1090,7 +1089,6 @@ export default function Home() {
 
       <Footer language={lang} />
 
-      <FloatingWhatsApp label={content.mobile.whatsapp} />
       <Chatbot />
       <MobileStickyCTA language={lang} />
     </div>
