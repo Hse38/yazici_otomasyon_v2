@@ -209,6 +209,7 @@ const translations = {
       title: "Talk to us about your next requirement.",
       description:
         "Call or message us with your application notes. We will respond quickly with clear next steps.",
+      primaryCta: "Get in touch",
       whatsapp: "WhatsApp",
       call: "Call Now",
       phone1: "+90 553 056 89 39",
@@ -447,6 +448,7 @@ const translations = {
       title: "İhtiyacınızı birlikte netleştirelim.",
       description:
         "Uygulama notlarınızı telefon veya WhatsApp ile iletin; hızlı ve net adımlarla dönüş yapalım.",
+      primaryCta: "İletişime Geç",
       whatsapp: "WhatsApp",
       call: "Hemen Ara",
       phone1: "+90 553 056 89 39",
@@ -929,7 +931,7 @@ export default function Home() {
         <section id="contact" className="section-padding bg-dark text-white">
           <div className="mx-auto max-w-5xl">
             {/* Headline & Copy */}
-            <div className="mb-12 text-center">
+            <div className="mb-10 text-center">
               <h2 className="text-balance text-4xl font-semibold text-white sm:text-5xl">
                 {content.contact.title}
               </h2>
@@ -938,8 +940,23 @@ export default function Home() {
               </p>
             </div>
 
+            {/* Ana iletişim CTA — görünür tek tık */}
+            <div className="mb-10 flex justify-center px-2">
+              <a
+                href={`tel:${content.contact.phone1.replace(/\s/g, "")}`}
+                className="inline-flex w-full max-w-lg items-center justify-center rounded-full bg-lilac px-10 py-4 text-center text-sm font-bold uppercase tracking-[0.22em] text-white shadow-lg shadow-lilac/35 transition hover:bg-soft-lavender hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-dark sm:w-auto sm:px-14 sm:py-[1.1rem]"
+                aria-label={content.contact.primaryCta}
+              >
+                {content.contact.primaryCta}
+              </a>
+            </div>
+
+            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
+              {lang === "tr" ? "veya doğrudan kanallar" : "or reach us directly"}
+            </p>
+
             {/* Primary Action Buttons */}
-            <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <div id="contact-channels" className="mb-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
               {/* WhatsApp Button - PRIMARY CTA */}
               <a
                 href="https://wa.me/905530568939"
