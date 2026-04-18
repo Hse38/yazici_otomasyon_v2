@@ -14,7 +14,7 @@ export type HomeContactMapContent = {
 
 const BG = "/img/harita.png";
 
-const MAP_KEN = { scale: [1.05, 1.1] };
+const MAP_KEN = { scale: [1.02, 1.06] };
 
 const MAP_TRANSITION = {
   duration: 18,
@@ -30,41 +30,28 @@ export function HomeContactMapSection({ content }: { content: HomeContactMapCont
   return (
     <section
       id="contact"
-      className="relative isolate flex min-h-[min(92vh,820px)] w-full items-center overflow-hidden bg-[#020617] py-20 text-white sm:py-24 md:py-28"
+      className="relative isolate flex min-h-[min(92vh,820px)] w-full items-center overflow-hidden bg-slate-900 py-20 text-white sm:py-24 md:py-28"
       aria-labelledby="contact-map-heading"
     >
       {/* Map texture — absolute full bleed */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden>
         <motion.div
-          className="absolute inset-[-8%] origin-[28%_45%] will-change-transform"
+          className="absolute inset-[-6%] origin-center will-change-transform"
           initial={false}
           animate={reduceMotion ? undefined : MAP_KEN}
           transition={reduceMotion ? undefined : MAP_TRANSITION}
         >
+          {/* Harita doğrudan görünsün — ağır filtre / filigran yok */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat [filter:grayscale(1)_brightness(0.35)_blur(3px)]"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat [filter:brightness(0.98)_contrast(1.02)]"
             style={{ backgroundImage: `url(${BG})` }}
           />
         </motion.div>
 
-        {/* Vignette — spotlight biased toward left content */}
+        {/* İsteğe bağlı çok hafif kenar okuması (haritayı maskelemez) */}
         <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse 75% 90% at 22% 50%, rgba(2,6,23,0.18) 0%, rgba(2,6,23,0.62) 48%, rgba(0,0,0,0.94) 100%),
-              radial-gradient(ellipse 90% 120% at 100% 50%, rgba(0,0,0,0.55), transparent 52%)
-            `,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-black/90" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/[0.88]" />
-        <div
-          className="absolute inset-0 opacity-40 mix-blend-overlay"
-          style={{
-            background:
-              "radial-gradient(circle at 24% 46%, rgba(59,130,246,0.12), transparent 42%)",
-          }}
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_100%_at_50%_50%,transparent_55%,rgba(0,0,0,0.12)_100%)]"
+          aria-hidden
         />
       </div>
 
@@ -78,8 +65,8 @@ export function HomeContactMapSection({ content }: { content: HomeContactMapCont
         <div className="flex w-full justify-start">
           {/* Glass card — spec: rgba black 50%, blur 12px, border 10% white */}
           <div
-            className="w-full max-w-[min(100%,28rem)] rounded-2xl border border-white/10 bg-black/50 p-10 shadow-[0_40px_100px_-28px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-[12px] sm:p-11 md:max-w-md md:p-12"
-            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+            className="w-full max-w-[min(100%,28rem)] rounded-2xl border border-white/10 bg-black/55 p-10 shadow-[0_40px_100px_-28px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-[14px] sm:p-11 md:max-w-md md:p-12"
+            style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
           >
             <h2
               id="contact-map-heading"
