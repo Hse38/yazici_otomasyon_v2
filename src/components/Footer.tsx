@@ -101,7 +101,7 @@ export function Footer({ language }: FooterProps) {
               "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(41,171,226,0.12), transparent 55%)",
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 py-12 sm:px-10 sm:py-16 lg:px-20 lg:py-16">
+        <div className="relative mx-auto max-w-6xl px-6 pb-3 pt-12 sm:px-10 sm:pb-4 sm:pt-16 lg:px-20 lg:pb-4 lg:pt-16">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
             {/* Brand + positioning + CTA */}
             <div className="space-y-5 lg:space-y-6 lg:col-span-5">
@@ -217,7 +217,7 @@ export function Footer({ language }: FooterProps) {
 
           {/* Secondary nav — compact single band */}
           <nav
-            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-white/[0.06] pt-4 sm:gap-x-7 sm:pt-5"
+            className="mt-5 flex min-h-0 flex-wrap items-center gap-x-4 gap-y-0.5 border-t border-white/[0.06] py-2 sm:gap-x-6 sm:py-2.5"
             aria-label={t.explore}
           >
             <span className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/35">
@@ -253,10 +253,10 @@ export function Footer({ language }: FooterProps) {
       </div>
 
       <div className="border-t border-white/[0.06] bg-black/40">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-3.5 text-xs text-white/45 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:px-10 lg:px-20">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-2.5 text-xs text-white/45 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:px-10 lg:px-20">
           <span className="order-2 sm:order-1">{t.rights}</span>
           <nav
-            className="order-1 flex flex-wrap items-center gap-x-6 gap-y-2 sm:order-2"
+            className="order-1 flex flex-wrap items-center gap-x-5 gap-y-1 sm:order-2"
             aria-label="Legal"
           >
             <Link
