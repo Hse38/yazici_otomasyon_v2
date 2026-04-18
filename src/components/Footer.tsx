@@ -101,10 +101,10 @@ export function Footer({ language }: FooterProps) {
               "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(41,171,226,0.12), transparent 55%)",
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-24">
-          <div className="grid gap-14 lg:grid-cols-12 lg:gap-12">
+        <div className="relative mx-auto max-w-6xl px-6 py-12 sm:px-10 sm:py-16 lg:px-20 lg:py-16">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
             {/* Brand + positioning + CTA */}
-            <div className="space-y-8 lg:col-span-5">
+            <div className="space-y-5 lg:space-y-6 lg:col-span-5">
               <Link href="/" className="inline-block transition opacity-90 hover:opacity-100">
                 <Image
                   src="/img/logo1.png"
@@ -215,41 +215,45 @@ export function Footer({ language }: FooterProps) {
             </div>
           </div>
 
-          {/* Secondary nav */}
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-2 border-t border-white/[0.06] pt-10">
-            <p className="w-full text-[11px] font-semibold uppercase tracking-[0.28em] text-white/35 sm:w-auto sm:pr-4">
+          {/* Secondary nav — compact single band */}
+          <nav
+            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-white/[0.06] pt-4 sm:gap-x-7 sm:pt-5"
+            aria-label={t.explore}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/35">
               {t.explore}
-            </p>
+            </span>
+            <span className="hidden h-3 w-px bg-white/15 sm:block" aria-hidden />
             <Link
               href="/#why-us"
-              className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 transition hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 transition hover:text-white"
             >
               {t.exploreLinks.about}
             </Link>
             <Link
               href="/#proof"
-              className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 transition hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 transition hover:text-white"
             >
               {t.exploreLinks.gallery}
             </Link>
             <Link
               href="/#products"
-              className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 transition hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 transition hover:text-white"
             >
               {t.exploreLinks.products}
             </Link>
             <Link
               href="/#contact"
-              className="text-xs font-medium uppercase tracking-[0.14em] text-white/45 transition hover:text-white"
+              className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/45 transition hover:text-white"
             >
               {t.exploreLinks.contact}
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
 
       <div className="border-t border-white/[0.06] bg-black/40">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-5 text-xs text-white/45 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:px-10 lg:px-20">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-3.5 text-xs text-white/45 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:px-10 lg:px-20">
           <span className="order-2 sm:order-1">{t.rights}</span>
           <nav
             className="order-1 flex flex-wrap items-center gap-x-6 gap-y-2 sm:order-2"
