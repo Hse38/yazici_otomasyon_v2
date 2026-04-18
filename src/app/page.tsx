@@ -19,6 +19,7 @@ import { HomeIndustry40Section } from "../components/home/HomeIndustry40Section"
 import { HomeUseCasesSection } from "../components/home/HomeUseCasesSection";
 import { HomeProcessSection } from "../components/home/HomeProcessSection";
 import { HomeFinalCtaSection } from "../components/home/HomeFinalCtaSection";
+import { AnimatedMap } from "../components/home/AnimatedMap";
 
 type Language = "tr" | "en";
 
@@ -143,6 +144,12 @@ const translations = {
       title: "Want to reduce error and variability on your line?",
       ctaQuote: "Request a quote",
       ctaContact: "Contact us",
+    },
+    animatedMap: {
+      title: "On-site technical support in Istanbul",
+      description:
+        "With Yazıcı Otomasyon, fast and reliable solutions for your production processes.",
+      cta: "Contact us",
     },
     services: {
       kicker: "Products",
@@ -383,6 +390,12 @@ const translations = {
       title: "Üretimde Hata Payını Azaltmak İster Misiniz?",
       ctaQuote: "Teklif Al",
       ctaContact: "Bize Ulaşın",
+    },
+    animatedMap: {
+      title: "İstanbul'da Yerinde Teknik Destek",
+      description:
+        "Yazıcı Otomasyon ile üretim süreçlerinize hızlı ve güvenilir çözümler.",
+      cta: "Bize Ulaşın",
     },
     services: {
       kicker: "Ürünlerimiz",
@@ -1147,8 +1160,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Visual Separation - Large padding before footer */}
-        <div className="h-20 bg-dark/95" aria-hidden="true" />
+        <section
+          className="border-t border-white/[0.06] bg-dark px-6 pb-10 pt-8 sm:px-10 sm:pb-14 sm:pt-10 lg:px-20"
+          aria-label={lang === "tr" ? "Konum ve teknik destek" : "Location and technical support"}
+        >
+          <AnimatedMap content={content.animatedMap} contactHref="#contact" />
+        </section>
+
+        <div className="h-12 bg-dark/95 sm:h-16" aria-hidden="true" />
       </main>
 
       <Footer language={lang} />
