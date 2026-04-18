@@ -2,13 +2,14 @@
 
 :root {
   color-scheme: light;
-  --background: #f7f5ff;
-  --foreground: #111111;
-  --lilac: #6b4eff;
-  --dark-purple: #2b193d;
-  --soft-lavender: #c7b8ff;
-  --gold: #d6b36a;
-  --dark: #0e0b14;
+  /* Palette aligned with YZC logo cyan (#29ABE2) + industrial dark blues / slate */
+  --background: #f0f8fc;
+  --foreground: #0f172a;
+  --lilac: #29abe2;
+  --dark-purple: #153f56;
+  --soft-lavender: #8bd9f4;
+  --gold: #64748b;
+  --dark: #070f16;
 }
 
 @theme inline {
@@ -49,14 +50,14 @@ h4 {
 }
 
 .glass-panel {
-  background: rgba(15, 12, 22, 0.6);
-  border: 1px solid rgba(107, 78, 255, 0.2);
+  background: rgba(7, 15, 22, 0.62);
+  border: 1px solid rgba(41, 171, 226, 0.22);
   backdrop-filter: blur(18px);
 }
 
 .lilac-gradient {
-  background: radial-gradient(circle at top, rgba(107, 78, 255, 0.35), transparent 55%),
-    linear-gradient(140deg, rgba(43, 25, 61, 0.9), rgba(14, 11, 20, 0.95));
+  background: radial-gradient(circle at top, rgba(41, 171, 226, 0.38), transparent 55%),
+    linear-gradient(140deg, rgba(13, 47, 62, 0.92), rgba(7, 15, 22, 0.96));
 }
 
 .grain-overlay {
