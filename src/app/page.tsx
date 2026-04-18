@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import HorizontalScroll from "../components/HorizontalScroll";
 import { getGlobalGalleryImages } from "../components/GlobalGallery";
 import { HorizontalGallery } from "../components/HorizontalGallery";
 import { SchemaMarkup } from "../components/SEO/SchemaMarkup";
@@ -20,181 +18,157 @@ type Language = "tr" | "en";
 
 const translations = {
   en: {
-    brand: "En Tatlı Telaşım",
+    brand: "Yazıcı Otomasyon",
     nav: {
-      services: "Services",
+      services: "Products",
       whyUs: "Why Us",
-      proof: "Proof",
+      proof: "Gallery",
       contact: "Contact",
     },
     hero: {
-      kicker: "Premium Dessert Logistics",
-      title: "Premium Dessert & Catering Solutions for Large-Scale Events",
+      kicker: "Industrial Automation",
+      title: "Reliable automation products with clear technical guidance",
       description:
-        "From corporate organizations to high-volume events, we deliver flawless dessert logistics with absolute reliability.",
-      ctaPrimary: "Get a Quote",
+        "We help teams choose the right components for drives, control, and field applications—then we support you through supply and commissioning.",
+      ctaPrimary: "Contact Us",
       ctaSecondary: "Call Now",
     },
     counters: [
-      { value: 420, suffix: "+", label: "Events Delivered" },
-      { value: 160, suffix: "+", label: "Corporate Clients" },
-      { value: 100, suffix: "%", label: "On-Time Delivery" },
+      { value: 6, suffix: "", label: "Product Lines" },
+      { value: 15, suffix: "+", label: "Years Experience" },
+      { value: 100, suffix: "%", label: "Commitment" },
     ],
     services: {
-      kicker: "Services",
-      title: "Event Catering & Organization Solutions",
+      kicker: "Products",
+      title: "Featured product range",
       description:
-        "Professional event catering operations designed for scale, precision, and seamless guest experience.",
+        "Browse our core references. For datasheets, compatibility checks, and lead times, reach out by phone or WhatsApp.",
       list: [
         {
-          title: "Corporate Event Catering",
+          title: "Product 1",
           description:
-            "Planned service flow, corporate discipline, and on-time catering for meetings, launches, and internal corporate events.",
-          highlight: "Corporate event catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 1",
         },
         {
-          title: "Wedding & Engagement Catering",
+          title: "Product 2",
           description:
-            "Wedding-scale catering operations with guest flow management, service choreography, and premium presentation.",
-          highlight: "Wedding catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 2",
         },
         {
-          title: "Festival & Large Event Catering",
+          title: "Product 3",
           description:
-            "High-volume, high-pressure mass catering with speed, coordination, and field logistics for large-scale events.",
-          highlight: "Festival catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 3",
         },
         {
-          title: "Workshop & Special Experience Catering",
+          title: "Product 4",
           description:
-            "Small-to-medium scale curated events with concept-based menus, controlled service, and brand-aligned experience.",
-          highlight: "Workshop catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 4",
         },
         {
-          title: "Seminar & Conference Catering",
+          title: "Product 5",
           description:
-            "Long-duration professional events with continuous service, break-time catering, and predictable quality.",
-          highlight: "Conference catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 5",
         },
         {
-          title: "Outdoor & Activity Catering",
+          title: "Product 6",
           description:
-            "Outdoor and dynamic events with mobile setups, flexible service points, and environmental adaptation.",
-          highlight: "Outdoor catering",
+            "Industrial automation component from our catalog—request technical details and availability.",
+          highlight: "Product 6",
         },
       ],
       action: "View Details",
     },
     whyUs: {
-      kicker: "Why Choose Us",
-      title: "Corporate-grade precision with luxury hospitality standards.",
+      kicker: "Why Us",
+      title: "Technical clarity, disciplined supply, and responsive communication.",
       description:
-        "We operate like a logistics company and present like a luxury brand. The result: flawless execution with zero tolerance for mistakes.",
+        "Automation projects move faster when product selection is unambiguous and expectations are aligned from day one.",
       list: [
         {
-          title: "Operational Strength",
+          title: "Application-first guidance",
           description:
-            "Documented workflows, strict QA, and cross-functional oversight ensure every delivery is measured and verified.",
+            "We translate your constraints into a short list of viable references—not a generic catalog dump.",
         },
         {
-          title: "Large-Scale Logistics",
+          title: "Predictable procurement",
           description:
-            "Fleet coordination, redundant cold-chain systems, and disciplined staging for complex venues.",
+            "Clear lead times, transparent options, and structured follow-up until material is on its way.",
         },
         {
-          title: "Corporate Discipline",
+          title: "After-sales accessibility",
           description:
-            "Structured communication and accountability aligned with enterprise procurement expectations.",
+            "Direct access when questions arise during integration, commissioning, or spare cycles.",
         },
         {
-          title: "Zero-Risk Execution",
+          title: "Nationwide coverage",
           description:
-            "Back-up inventory, contingency planning, and on-site leadership eliminate uncertainty.",
+            "We support customers across Turkey with the same standards of responsiveness.",
         },
       ],
     },
     proof: {
-      kicker: "Social Proof",
-      title: "Trusted by executive teams who cannot risk failure.",
+      kicker: "Gallery",
+      title: "A snapshot of our product visuals.",
       description:
-        "Documented event coverage, verified delivery records, and repeat enterprise engagements.",
+        "Explore the gallery below—each tile links to its product page for more context.",
       gallery: [
-        {
-          id: 1,
-          title: "Executive Gala Showcase",
-          description: "Premium dessert staging for leadership audiences.",
-        },
-        {
-          id: 2,
-          title: "Corporate Summit Lounge",
-          description: "High-throughput service with luxury presentation.",
-        },
-        {
-          id: 3,
-          title: "VIP Hospitality Suite",
-          description: "White-glove dessert service for VIP guests.",
-        },
-        {
-          id: 4,
-          title: "Multi-Venue Deployment",
-          description: "Synchronized delivery across complex venues.",
-        },
+        { id: 1, title: "Product imagery", description: "Representative visuals from our range." },
+        { id: 2, title: "Product imagery", description: "Representative visuals from our range." },
+        { id: 3, title: "Product imagery", description: "Representative visuals from our range." },
+        { id: 4, title: "Product imagery", description: "Representative visuals from our range." },
       ],
-      logos: [
-        "Altair Holdings",
-        "Marmara Finance",
-        "Vertex Global",
-        "Pera Hospitality",
-        "NorthBridge Tech",
-      ],
+      logos: ["Elco", "Gefran", "Industry 4.0", "Drives", "Sensors"],
     },
     faq: {
       kicker: "FAQ",
-      title: "Decisions made faster when answers are clear.",
+      title: "Common questions",
       list: [
         {
-          question: "How early should we book for large-scale events?",
-          answer:
-            "For enterprise events, we recommend reserving production windows at least 4-6 weeks in advance to secure logistics capacity.",
+          question: "Do you ship across Turkey?",
+          answer: "Yes. We coordinate delivery nationwide and share lead times up front.",
         },
         {
-          question: "Do you offer on-site coordination?",
+          question: "Can you help with compatibility against an existing panel?",
           answer:
-            "Yes. Dedicated on-site supervisors manage setup, temperature control, and service flow for every high-volume event.",
+            "Share photos, nameplates, and any manuals you have. We will confirm fitment or propose the closest equivalent.",
         },
         {
-          question: "Can you handle multi-location deployments?",
+          question: "How fast can I get an answer on stock?",
           answer:
-            "We deploy multi-venue logistics with synchronized delivery schedules and real-time tracking to protect timing and quality.",
+            "Most availability questions are answered the same day when you reach us by phone or WhatsApp.",
         },
       ],
     },
     contact: {
-      title: "Your event cannot afford mistakes.",
+      title: "Talk to us about your next requirement.",
       description:
-        "Speak directly with our leadership team. We respond within hours, with a plan, timeline, and a clear execution path.",
-      whatsapp: "Contact via WhatsApp",
+        "Call or message us with your application notes. We will respond quickly with clear next steps.",
+      whatsapp: "WhatsApp",
       call: "Call Now",
-      phone1: "+90 212 466 13 83",
-      phone2: "+90 532 617 46 23",
-      phone2WhatsApp: true,
-      email: "info@entatlitelasim.com",
+      phone1: "+90 553 056 89 39",
+      phone2: "",
+      phone2WhatsApp: false,
+      email: "",
       address: {
-        street: "Kocasinan Merkez Mahallesi, Mareşal Çakmak Caddesi No:25",
-        city: "Bahçelievler / İstanbul",
-        country: "Türkiye",
+        street: "",
+        city: "Türkiye",
+        country: "",
       },
-      website: "entatlitelasim.com",
+      website: "",
     },
     footer: {
-      rights: "© 2026 En Tatlı Telaşım. All rights reserved.",
-      address: "Maslak, Istanbul · +90 212 555 01 02",
+      rights: "© 2026 Yazıcı Otomasyon. All rights reserved.",
+      address: "Turkey · +90 553 056 89 39",
     },
     chat: {
-      title: "Executive Concierge",
-      description:
-        "Tell us your event date and guest count. We will respond with a tailored execution plan.",
-      action: "Start Quote",
+      title: "Yazıcı Otomasyon",
+      description: "Share your application and timeline. We will guide you to the right product path.",
+      action: "Contact",
       toggle: "Chat",
       aria: "Toggle chatbot",
     },
@@ -204,187 +178,163 @@ const translations = {
     },
     schema: {
       description:
-        "Premium dessert and catering logistics for corporate organizations and large-scale events.",
+        "Industrial automation products and technical supply support from Yazıcı Otomasyon.",
       serviceDescription:
-        "Enterprise-grade dessert production, logistics, and on-site hospitality execution.",
+        "Product selection guidance, availability checks, and dependable delivery for automation projects.",
     },
   },
   tr: {
-    brand: "En Tatlı Telaşım",
-      nav: {
-        services: "HİZMETLER",
-        whyUs: "NEDEN BİZ",
-        proof: "GALERİ & REFERANSLAR",
-        contact: "İLETİŞİM",
-      },
+    brand: "Yazıcı Otomasyon",
+    nav: {
+      services: "ÜRÜNLER",
+      whyUs: "NEDEN BİZ",
+      proof: "GALERİ",
+      contact: "İLETİŞİM",
+    },
     hero: {
-      kicker: "Premium Catering & Event Hizmeti",
-      title: "Büyük Ölçekli Etkinlikler için Premium Event & Catering Çözümleri",
+      kicker: "Endüstriyel Otomasyon",
+      title: "Güvenilir otomasyon ürünleri ve net teknik yönlendirme",
       description:
-        "Kurumsal organizasyonlardan yüksek hacimli etkinliklere kadar kusursuz catering hizmeti sunarız.",
-      ctaPrimary: "Teklif Al",
+        "Sürücü, kontrol ve saha uygulamalarınız için doğru bileşeni seçmenize yardımcı olur; tedarik ve devreye almada yanınızda oluruz.",
+      ctaPrimary: "İletişime Geç",
       ctaSecondary: "Hemen Ara",
     },
     counters: [
-      { value: 420, suffix: "+", label: "Gerçekleşen Etkinlik" },
-      { value: 160, suffix: "+", label: "Kurumsal Müşteri" },
-      { value: 100, suffix: "%", label: "Zamanında Teslim" },
+      { value: 6, suffix: "", label: "Ürün vitrini" },
+      { value: 15, suffix: "+", label: "Yıl deneyim" },
+      { value: 100, suffix: "%", label: "Taahhüt" },
     ],
     services: {
-      kicker: "Hizmetlerimiz",
-      title: "Etkinlik Catering & Organizasyon Çözümleri",
+      kicker: "Ürünlerimiz",
+      title: "Öne çıkan ürün gamımız",
       description:
-        "Ölçek, hassasiyet ve kesintisiz misafir deneyimi için tasarlanmış profesyonel etkinlik catering operasyonları.",
+        "Aşağıdaki referansları inceleyin. Teknik veri, uyumluluk ve termin için telefon veya WhatsApp ile yazın.",
       list: [
         {
-          title: "Kurumsal Etkinlik Catering",
+          title: "Ürün 1",
           description:
-            "Toplantılar, lansmanlar ve kurumsal iç etkinlikler için planlı servis akışı, kurumsal disiplin ve zamanında catering.",
-          highlight: "Kurumsal etkinlik catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 1",
         },
         {
-          title: "Düğün & Nişan Catering",
+          title: "Ürün 2",
           description:
-            "Misafir akış yönetimi, servis koreografisi ve premium sunum ile düğün ölçeğinde catering operasyonları.",
-          highlight: "Düğün catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 2",
         },
         {
-          title: "Festival & Büyük Etkinlik Catering",
+          title: "Ürün 3",
           description:
-            "Büyük ölçekli etkinlikler için hız, koordinasyon ve saha lojistiği ile yüksek hacimli, yüksek baskılı toplu catering.",
-          highlight: "Festival catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 3",
         },
         {
-          title: "Workshop & Özel Deneyim Catering",
+          title: "Ürün 4",
           description:
-            "Konsept bazlı menüler, kontrollü servis ve marka uyumlu deneyim ile küçük-orta ölçekli küratörlü etkinlikler.",
-          highlight: "Workshop catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 4",
         },
         {
-          title: "Seminer & Konferans Catering",
+          title: "Ürün 5",
           description:
-            "Sürekli servis, mola zamanı catering ve öngörülebilir kalite ile uzun süreli profesyonel etkinlikler.",
-          highlight: "Konferans catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 5",
         },
         {
-          title: "Açık Alan & Aktivite Catering",
+          title: "Ürün 6",
           description:
-            "Mobil kurulumlar, esnek servis noktaları ve çevresel adaptasyon ile açık hava ve dinamik etkinlikler.",
-          highlight: "Açık alan catering",
+            "Katalogumuzdan endüstriyel otomasyon bileşeni — teknik detay ve stok için iletişime geçin.",
+          highlight: "Ürün 6",
         },
       ],
       action: "Detayları Gör",
     },
     whyUs: {
       kicker: "Neden Biz",
-      title: "Kurumsal hassasiyet, lüks misafirperverlik standardı.",
+      title: "Teknik netlik, disiplinli tedarik ve hızlı iletişim.",
       description:
-        "Lojistik şirketi gibi çalışır, lüks marka gibi sunarız. Sonuç: sıfır toleransla kusursuz uygulama.",
+        "Ürün seçimi şeffaf olduğunda otomasyon projeleri daha hızlı ilerler; beklentileri ilk günden netleştiririz.",
       list: [
         {
-          title: "Operasyonel Güç",
+          title: "Uygulama odaklı yönlendirme",
           description:
-            "Dokümante süreçler, sıkı QA ve çapraz denetim ile her teslimat ölçülür.",
+            "Kısıtlarınızı kısa bir uygun referans listesine çeviririz — jenerik katalog yığını değil.",
         },
         {
-          title: "Büyük Ölçekli Lojistik",
+          title: "Öngörülebilir tedarik",
           description:
-            "Filo koordinasyonu, yedekli soğuk zincir ve disiplinli sahneleme.",
+            "Net terminler, şeffaf seçenekler ve malzeme yola çıkana kadar düzenli takip.",
         },
         {
-          title: "Kurumsal Disiplin",
+          title: "Satış sonrası erişilebilirlik",
           description:
-            "Kurumsal satın alma beklentileriyle uyumlu şeffaf iletişim ve hesap verebilirlik.",
+            "Entegrasyon, devreye alma veya yedek döngülerinde sorularınız için doğrudan hat.",
         },
         {
-          title: "Sıfır Riskli Uygulama",
+          title: "Türkiye geneli",
           description:
-            "Yedek stok, plan B ve sahada liderlik ile belirsizlik ortadan kalkar.",
+            "Tüm Türkiye'de aynı hız ve standartta yanıt vermeyi hedefleriz.",
         },
       ],
     },
     proof: {
-      kicker: "Galeri & Referanslar",
-      title: "Hata kabul etmeyen ekiplerin tercihi.",
+      kicker: "Galeri",
+      title: "Ürün görsellerimizden bir seçki.",
       description:
-        "Belgelendirilmiş etkinlik kapsamı, doğrulanmış teslim kayıtları ve tekrar eden kurumsal iş birlikleri.",
+        "Aşağıdaki galeriyi gezin — her kare ilgili ürün sayfasına bağlanır.",
       gallery: [
-        {
-          id: 1,
-          title: "Yönetici Gala Sunumu",
-          description: "Lider ekipler için premium tatlı sahneleme.",
-        },
-        {
-          id: 2,
-          title: "Kurumsal Zirve Lounge",
-          description: "Yüksek akışlı servis ve lüks sunum.",
-        },
-        {
-          id: 3,
-          title: "VIP Misafir Suiti",
-          description: "VIP konuklar için white-glove servis.",
-        },
-        {
-          id: 4,
-          title: "Çoklu Mekan Dağıtımı",
-          description: "Karmaşık mekanlarda senkron teslimat.",
-        },
+        { id: 1, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
+        { id: 2, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
+        { id: 3, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
+        { id: 4, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
       ],
-      logos: [
-        "Altair Holdings",
-        "Marmara Finance",
-        "Vertex Global",
-        "Pera Hospitality",
-        "NorthBridge Tech",
-      ],
+      logos: ["Elco", "Gefran", "Endüstri 4.0", "Sürücü", "Sensör"],
     },
     faq: {
       kicker: "SSS",
-      title: "Net cevaplar, hızlı kararlar sağlar.",
+      title: "Sık sorulanlar",
       list: [
         {
-          question: "Büyük ölçekli etkinlikler için ne kadar önce rezervasyon yapmalıyız?",
-          answer:
-            "Kurumsal etkinliklerde lojistik kapasiteyi güvenceye almak için 4-6 hafta önceden planlama öneriyoruz.",
+          question: "Türkiye geneline sevkiyat yapıyor musunuz?",
+          answer: "Evet. Terminleri önceden paylaşarak ülke genelinde gönderim koordine ediyoruz.",
         },
         {
-          question: "Sahada koordinasyon sağlıyor musunuz?",
+          question: "Mevcut panoya uyumluluk kontrolü yapıyor musunuz?",
           answer:
-            "Evet. Her yüksek hacimli etkinlikte kurulum, sıcaklık kontrolü ve servis akışını yöneten saha sorumluları bulunur.",
+            "Fotoğraf, etiket ve varsa dokümanları paylaşın; uygunluğu teyit eder veya en yakın eşdeğeri öneririz.",
         },
         {
-          question: "Çoklu lokasyon dağıtımı yapabiliyor musunuz?",
+          question: "Stok sorusuna ne kadar sürede dönüş olur?",
           answer:
-            "Çoklu mekan dağıtımlarını senkron teslimat planları ve gerçek zamanlı takip ile yürütüyoruz.",
+            "Telefon veya WhatsApp ile ulaştığınızda birçok stok sorusu aynı gün içinde yanıtlanır.",
         },
       ],
     },
     contact: {
-      title: "Etkinliğiniz hata kabul etmez.",
+      title: "İhtiyacınızı birlikte netleştirelim.",
       description:
-        "Liderlik ekibimizle doğrudan iletişime geçin. Saatler içinde planlama, zamanlama ve net bir uygulama yolu sunalım.",
-      whatsapp: "WhatsApp'tan Yazın",
-      call: "Hemen Arayın",
-      phone1: "0 212 466 13 83",
-      phone2: "0 532 617 46 23",
-      phone2WhatsApp: true,
-      email: "info@entatlitelasim.com",
+        "Uygulama notlarınızı telefon veya WhatsApp ile iletin; hızlı ve net adımlarla dönüş yapalım.",
+      whatsapp: "WhatsApp",
+      call: "Hemen Ara",
+      phone1: "+90 553 056 89 39",
+      phone2: "",
+      phone2WhatsApp: false,
+      email: "",
       address: {
-        street: "Kocasinan Merkez Mahallesi, Mareşal Çakmak Caddesi No:25",
-        city: "Bahçelievler / İstanbul",
-        country: "Türkiye",
+        street: "",
+        city: "Türkiye",
+        country: "",
       },
-      website: "entatlitelasim.com",
+      website: "",
     },
     footer: {
-      rights: "© 2026 En Tatlı Telaşım. Tüm hakları saklıdır.",
-      address: "Maslak, İstanbul · +90 212 555 01 02",
+      rights: "© 2026 Yazıcı Otomasyon. Tüm hakları saklıdır.",
+      address: "Türkiye · +90 553 056 89 39",
     },
     chat: {
-      title: "Executive Concierge",
-      description:
-        "Etkinlik tarihinizi ve misafir sayısını paylaşın. Size özel uygulama planı hazırlayalım.",
-      action: "Teklif Başlat",
+      title: "Yazıcı Otomasyon",
+      description: "Uygulamanızı ve zaman çizelgenizi yazın; doğru ürün yolunu birlikte çizelim.",
+      action: "İletişim",
       toggle: "Sohbet",
       aria: "Sohbeti aç/kapat",
     },
@@ -394,9 +344,9 @@ const translations = {
     },
     schema: {
       description:
-        "Kurumsal organizasyonlar ve büyük ölçekli etkinlikler için premium tatlı ve catering lojistiği.",
+        "Yazıcı Otomasyon ile endüstriyel otomasyon ürünleri ve teknik tedarik desteği.",
       serviceDescription:
-        "Kurumsal seviyede tatlı üretimi, lojistik ve sahada misafirperverlik uygulaması.",
+        "Ürün seçimi, uygunluk kontrolü ve güvenilir teslimat ile otomasyon projelerinize destek.",
     },
   },
 } as const;
@@ -464,7 +414,7 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.id;
-            if (sectionId === "services") {
+            if (sectionId === "products") {
               setPageContext("product-list");
             } else if (sectionId === "proof") {
               setPageContext("product-detail");
@@ -506,7 +456,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
           <a href="#" className="flex items-center">
             <Image
-              src="/img/yazılıbeyaz.png"
+              src="/img/yazici-logo.png"
               alt={content.brand}
               width={280}
               height={80}
@@ -597,7 +547,7 @@ export default function Home() {
                   {content.hero.ctaPrimary}
                 </a>
                 <a
-                  href="tel:+902125550102"
+                  href="tel:+905530568939"
                   className="inline-flex items-center justify-center rounded-full border border-white/30 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-soft-lavender hover:text-soft-lavender"
                 >
                   {content.hero.ctaSecondary}
@@ -615,7 +565,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="services" className="section-padding bg-background">
+        <section id="products" className="section-padding bg-background">
           <div className="mx-auto flex max-w-6xl flex-col gap-12">
             <div className="max-w-2xl space-y-4">
               <p className="text-xs uppercase tracking-[0.4em] text-dark-purple">
@@ -631,23 +581,23 @@ export default function Home() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {content.services.list.map((service, idx) => {
                 const serviceIds = [
-                  "corporate-event-catering",
-                  "wedding-engagement-catering",
-                  "festival-large-event-catering",
-                  "workshop-special-experience-catering",
-                  "seminar-conference-catering",
-                  "outdoor-activity-catering",
-                ];
+                  "product-1",
+                  "product-2",
+                  "product-3",
+                  "product-4",
+                  "product-5",
+                  "product-6",
+                ] as const;
                 const serviceImages = [
-                  "/img/corporate-event-catering.jpg",
-                  "/img/wedding-engagement-catering.jpg",
-                  "/img/festival-large-event-catering.jpg",
-                  "/img/workshop-special-experience-catering.jpg",
-                  "/img/seminar-conference-catering.jpg",
-                  "/img/outdoor-activity-catering.jpg",
+                  "/img/product-1.jpg",
+                  "/img/product-2.jpg",
+                  "/img/product-3.jpg",
+                  "/img/product-4.jpg",
+                  "/img/product-5.jpg",
+                  "/img/product-6.jpg",
                 ];
-                const serviceId = serviceIds[idx] || `service-${idx}`;
-                const serviceImage = serviceImages[idx] || "/img/catering.jpg";
+                const serviceId = serviceIds[idx] ?? `product-${idx + 1}`;
+                const serviceImage = serviceImages[idx] ?? "/img/product-1.jpg";
                 return (
                   <Link
                     key={service.title}
@@ -703,7 +653,7 @@ export default function Home() {
               <div className="relative h-56 w-full flex justify-center">
                 <div className="relative h-full w-full max-w-md">
                   <Image
-                    src="/img/logolu.png"
+                    src="/img/yazici-logo-dark.png"
                     alt={content.brand}
                     fill
                     className="object-contain"
@@ -814,7 +764,7 @@ export default function Home() {
             <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
               {/* WhatsApp Button - PRIMARY CTA */}
               <a
-                href="https://wa.me/905326174623"
+                href="https://wa.me/905530568939"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-3 rounded-full bg-lilac px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-soft-lavender hover:text-dark focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark"
@@ -834,7 +784,7 @@ export default function Home() {
 
               {/* Call Button - SECONDARY CTA */}
               <a
-                href="tel:+905326174623"
+                href="tel:+905530568939"
                 className="flex items-center justify-center gap-3 rounded-full border-2 border-white/30 bg-transparent px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-soft-lavender hover:bg-white/10 hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-dark"
                 aria-label={content.contact.call}
               >
@@ -863,26 +813,17 @@ export default function Home() {
                   {lang === "tr" ? "Telefon" : "Phone"}
                 </h3>
                 <div className="space-y-2">
-                  <a
-                    href={`tel:${content.contact.phone1.replace(/\s/g, "")}`}
-                    className="block text-lg font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                    aria-label={`${lang === "tr" ? "Ara" : "Call"} ${content.contact.phone1}`}
-                  >
-                    {content.contact.phone1}
-                  </a>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <a
-                      href={`tel:${content.contact.phone2.replace(/\s/g, "")}`}
+                      href={`tel:${content.contact.phone1.replace(/\s/g, "")}`}
                       className="block text-lg font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                      aria-label={`${lang === "tr" ? "Ara" : "Call"} ${content.contact.phone2}`}
+                      aria-label={`${lang === "tr" ? "Ara" : "Call"} ${content.contact.phone1}`}
                     >
-                      {content.contact.phone2}
+                      {content.contact.phone1}
                     </a>
-                    {content.contact.phone2WhatsApp && (
-                      <span className="rounded-full bg-lilac/20 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.1em] text-soft-lavender">
-                        WhatsApp
-                      </span>
-                    )}
+                    <span className="rounded-full bg-lilac/20 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.1em] text-soft-lavender">
+                      WhatsApp
+                    </span>
                   </div>
                 </div>
               </div>
@@ -893,16 +834,27 @@ export default function Home() {
                   {lang === "tr" ? "Adres" : "Address"}
                 </h3>
                 <address className="not-italic text-base leading-relaxed text-white/80">
-                  <a
-                    href="https://maps.google.com/?q=Kocasinan+Merkez+Mahallesi+Mareşal+Çakmak+Caddesi+No:25+Bahçelievler+İstanbul"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                  >
-                    <div>{content.contact.address.street}</div>
-                    <div>{content.contact.address.city}</div>
-                    <div>{content.contact.address.country}</div>
-                  </a>
+                  {content.contact.address.street ? (
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(
+                        `${content.contact.address.street} ${content.contact.address.city} ${content.contact.address.country}`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
+                    >
+                      <div>{content.contact.address.street}</div>
+                      <div>{content.contact.address.city}</div>
+                      <div>{content.contact.address.country}</div>
+                    </a>
+                  ) : (
+                    <div>
+                      <div>{content.contact.address.city}</div>
+                      {content.contact.address.country ? (
+                        <div>{content.contact.address.country}</div>
+                      ) : null}
+                    </div>
+                  )}
                 </address>
               </div>
 
@@ -912,21 +864,25 @@ export default function Home() {
                   {lang === "tr" ? "İletişim" : "Contact"}
                 </h3>
                 <div className="space-y-2">
-                  <a
-                    href={`mailto:${content.contact.email}`}
-                    className="block text-base font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                    aria-label={`${lang === "tr" ? "E-posta gönder" : "Send email"} ${content.contact.email}`}
-                  >
-                    {content.contact.email}
-                  </a>
-                  <a
-                    href={`https://${content.contact.website}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-sm text-white/60 transition hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
-                  >
-                    {content.contact.website}
-                  </a>
+                  {content.contact.email ? (
+                    <a
+                      href={`mailto:${content.contact.email}`}
+                      className="block text-base font-medium text-white transition hover:text-soft-lavender focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
+                      aria-label={`${lang === "tr" ? "E-posta gönder" : "Send email"} ${content.contact.email}`}
+                    >
+                      {content.contact.email}
+                    </a>
+                  ) : null}
+                  {content.contact.website ? (
+                    <a
+                      href={`https://${content.contact.website}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-sm text-white/60 transition hover:text-white/80 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2 focus:ring-offset-dark rounded"
+                    >
+                      {content.contact.website}
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </div>

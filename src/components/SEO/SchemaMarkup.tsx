@@ -8,6 +8,7 @@ import {
   localBusinessSchema,
   generateBreadcrumbs,
   generateCanonicalUrl,
+  SITE_ORIGIN,
 } from "../../lib/seo";
 
 type SchemaMarkupProps = {
@@ -57,11 +58,11 @@ export function SchemaMarkup({
         name: content.title,
         description: content.description,
         provider: {
-          "@id": "https://entatlitelasim.com/#organization",
+          "@id": `${SITE_ORIGIN}/#organization`,
         },
         areaServed: {
-          "@type": "City",
-          name: "Istanbul",
+          "@type": "Country",
+          name: "Turkey",
         },
         serviceType: content.title,
         offers: {
@@ -80,8 +81,8 @@ export function SchemaMarkup({
 
       // Add service area
       serviceSchema.serviceArea = {
-        "@type": "City",
-        name: "Istanbul",
+        "@type": "Country",
+        name: "Turkey",
       };
 
       // Add aggregate rating if available
@@ -98,9 +99,9 @@ export function SchemaMarkup({
         description: content.description,
         brand: {
           "@type": "Brand",
-          name: "En Tatlı Telaşım",
+          name: "Yazıcı Otomasyon",
         },
-        category: "Event Catering Service",
+        category: "Industrial automation product",
         offers: {
           "@type": "Offer",
           availability: "https://schema.org/InStock",
@@ -139,7 +140,7 @@ export function SchemaMarkup({
           "@context": "https://schema.org",
           "@type": "ImageObject",
           "@id": `${image.src}#image-${index}`,
-          contentUrl: `https://entatlitelasim.com${image.src}`,
+          contentUrl: `${SITE_ORIGIN}${image.src}`,
           description: image.alt,
           name: image.alt,
         });

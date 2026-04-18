@@ -9,133 +9,39 @@ type InternalLinksProps = {
   language: Language;
 };
 
-// Related services mapping for internal linking
-const relatedServices: Record<ServiceId, ServiceId[]> = {
-  "corporate-event-catering": [
-    "seminar-conference-catering",
-    "workshop-special-experience-catering",
-  ],
-  "wedding-engagement-catering": [
-    "workshop-special-experience-catering",
-    "outdoor-activity-catering",
-  ],
-  "festival-large-event-catering": [
-    "corporate-event-catering",
-    "outdoor-activity-catering",
-  ],
-  "workshop-special-experience-catering": [
-    "corporate-event-catering",
-    "wedding-engagement-catering",
-  ],
-  "seminar-conference-catering": [
-    "corporate-event-catering",
-    "workshop-special-experience-catering",
-  ],
-  "outdoor-activity-catering": [
-    "festival-large-event-catering",
-    "wedding-engagement-catering",
-  ],
-  // Legacy IDs
-  "corporate-dessert-logistics": [
-    "seminar-conference-catering",
-    "workshop-special-experience-catering",
-  ],
-  "high-volume-event": [
-    "corporate-event-catering",
-    "outdoor-activity-catering",
-  ],
-  "premium-hospitality": [
-    "corporate-event-catering",
-    "wedding-engagement-catering",
-  ],
+const relatedProducts: Record<ServiceId, ServiceId[]> = {
+  "product-1": ["product-2", "product-6"],
+  "product-2": ["product-1", "product-3"],
+  "product-3": ["product-2", "product-4"],
+  "product-4": ["product-3", "product-5"],
+  "product-5": ["product-4", "product-6"],
+  "product-6": ["product-5", "product-1"],
 };
 
-// Semantic anchor text variations
 const anchorTexts: Record<ServiceId, { tr: string[]; en: string[] }> = {
-  "corporate-event-catering": {
-    tr: [
-      "kurumsal catering operasyonları",
-      "kurumsal etkinlik yemek servisi",
-      "toplantı catering hizmeti",
-    ],
-    en: [
-      "corporate catering operations",
-      "corporate event food service",
-      "meeting catering service",
-    ],
+  "product-1": {
+    tr: ["Ürün 1 detayları", "otomasyon ürünü"],
+    en: ["Product 1 details", "automation product"],
   },
-  "wedding-engagement-catering": {
-    tr: [
-      "düğün catering hizmeti",
-      "nişan catering organizasyonu",
-      "düğün yemek servisi",
-    ],
-    en: [
-      "wedding catering service",
-      "engagement catering organization",
-      "wedding food service",
-    ],
+  "product-2": {
+    tr: ["Ürün 2 detayları", "otomasyon ürünü"],
+    en: ["Product 2 details", "automation product"],
   },
-  "festival-large-event-catering": {
-    tr: [
-      "festival catering hizmeti",
-      "büyük ölçekli etkinlik catering",
-      "toplu ikram hizmeti",
-    ],
-    en: [
-      "festival catering service",
-      "large-scale event catering",
-      "bulk catering service",
-    ],
+  "product-3": {
+    tr: ["Ürün 3 detayları", "otomasyon ürünü"],
+    en: ["Product 3 details", "automation product"],
   },
-  "workshop-special-experience-catering": {
-    tr: [
-      "workshop catering hizmeti",
-      "özel deneyim catering",
-      "küratörlü etkinlik catering",
-    ],
-    en: [
-      "workshop catering service",
-      "special experience catering",
-      "curated event catering",
-    ],
+  "product-4": {
+    tr: ["Ürün 4 detayları", "otomasyon ürünü"],
+    en: ["Product 4 details", "automation product"],
   },
-  "seminar-conference-catering": {
-    tr: [
-      "seminer catering hizmeti",
-      "konferans yemek servisi",
-      "profesyonel etkinlik catering",
-    ],
-    en: [
-      "seminar catering service",
-      "conference food service",
-      "professional event catering",
-    ],
+  "product-5": {
+    tr: ["Ürün 5 detayları", "otomasyon ürünü"],
+    en: ["Product 5 details", "automation product"],
   },
-  "outdoor-activity-catering": {
-    tr: [
-      "açık alan catering",
-      "outdoor etkinlik yemek servisi",
-      "dış mekan catering hizmeti",
-    ],
-    en: [
-      "outdoor catering",
-      "outdoor event food service",
-      "outdoor venue catering service",
-    ],
-  },
-  // Legacy
-  "corporate-dessert-logistics": {
-    tr: ["kurumsal catering operasyonları"],
-    en: ["corporate catering operations"],
-  },
-  "high-volume-event": {
-    tr: ["büyük ölçekli etkinlik catering"],
-    en: ["large-scale event catering"],
-  },
-  "premium-hospitality": {
-    tr: ["özel deneyim catering"],
-    en: ["special experience catering"],
+  "product-6": {
+    tr: ["Ürün 6 detayları", "otomasyon ürünü"],
+    en: ["Product 6 details", "automation product"],
   },
 };
 
@@ -143,15 +49,15 @@ export function InternalLinks({
   currentServiceId,
   language,
 }: InternalLinksProps) {
-  const related = relatedServices[currentServiceId] || [];
-  
+  const related = relatedProducts[currentServiceId] || [];
+
   if (related.length === 0) return null;
 
   return (
     <section className="section-padding bg-background">
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-8 text-2xl font-semibold text-dark sm:text-3xl">
-          {language === "tr" ? "İlgili Hizmetler" : "Related Services"}
+          {language === "tr" ? "Diğer Ürünler" : "Other Products"}
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
           {related.map((serviceId) => {
@@ -169,9 +75,7 @@ export function InternalLinks({
                   {anchorText}
                 </h3>
                 <p className="text-sm text-dark/70">
-                  {language === "tr"
-                    ? "Detayları görüntüle"
-                    : "View details"}
+                  {language === "tr" ? "Detayları görüntüle" : "View details"}
                 </p>
               </Link>
             );

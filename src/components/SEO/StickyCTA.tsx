@@ -25,7 +25,7 @@ export function StickyCTA({ language = "en" }: StickyCTAProps) {
     <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 animate-in fade-in slide-in-from-bottom-4">
       <div className="flex items-center gap-3 rounded-full bg-dark px-6 py-4 shadow-2xl">
         <a
-          href="tel:+902125550102"
+          href="tel:+905530568939"
           className="flex items-center gap-2 rounded-full bg-lilac px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-soft-lavender hover:text-dark"
           aria-label={language === "tr" ? "Hemen ara" : "Call now"}
         >
@@ -44,7 +44,7 @@ export function StickyCTA({ language = "en" }: StickyCTAProps) {
           {language === "tr" ? "Hemen Ara" : "Call Now"}
         </a>
         <a
-          href="https://wa.me/902125550102"
+          href="https://wa.me/905530568939"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition hover:border-soft-lavender hover:text-soft-lavender"

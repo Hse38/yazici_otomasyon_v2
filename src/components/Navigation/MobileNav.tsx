@@ -21,44 +21,24 @@ type MobileNavProps = {
   buttonColor?: "white" | "dark";
 };
 
-// Service slugs mapping
-const serviceSlugs = {
-  tr: {
-    "corporate-event-catering": "kurumsal-etkinlik-catering",
-    "wedding-engagement-catering": "dugun-nisan-catering",
-    "festival-large-event-catering": "festival-buyuk-etkinlik-catering",
-    "workshop-special-experience-catering": "workshop-ozel-deneyim-catering",
-    "seminar-conference-catering": "seminer-konferans-catering",
-    "outdoor-activity-catering": "acik-alan-aktivite-catering",
-  },
-  en: {
-    "corporate-event-catering": "corporate-event-catering",
-    "wedding-engagement-catering": "wedding-engagement-catering",
-    "festival-large-event-catering": "festival-large-event-catering",
-    "workshop-special-experience-catering": "workshop-special-experience-catering",
-    "seminar-conference-catering": "seminar-conference-catering",
-    "outdoor-activity-catering": "outdoor-activity-catering",
-  },
-};
-
-const services = {
+const products = {
   tr: [
-    { id: "corporate-event-catering", title: "Kurumsal Etkinlik Catering" },
-    { id: "wedding-engagement-catering", title: "Düğün & Nişan Catering" },
-    { id: "festival-large-event-catering", title: "Festival & Büyük Etkinlik Catering" },
-    { id: "workshop-special-experience-catering", title: "Workshop & Özel Deneyim Catering" },
-    { id: "seminar-conference-catering", title: "Seminer & Konferans Catering" },
-    { id: "outdoor-activity-catering", title: "Açık Alan & Aktivite Catering" },
+    { id: "product-1", title: "Ürün 1" },
+    { id: "product-2", title: "Ürün 2" },
+    { id: "product-3", title: "Ürün 3" },
+    { id: "product-4", title: "Ürün 4" },
+    { id: "product-5", title: "Ürün 5" },
+    { id: "product-6", title: "Ürün 6" },
   ],
   en: [
-    { id: "corporate-event-catering", title: "Corporate Event Catering" },
-    { id: "wedding-engagement-catering", title: "Wedding & Engagement Catering" },
-    { id: "festival-large-event-catering", title: "Festival & Large Event Catering" },
-    { id: "workshop-special-experience-catering", title: "Workshop & Special Experience Catering" },
-    { id: "seminar-conference-catering", title: "Seminar & Conference Catering" },
-    { id: "outdoor-activity-catering", title: "Outdoor Activity Catering" },
+    { id: "product-1", title: "Product 1" },
+    { id: "product-2", title: "Product 2" },
+    { id: "product-3", title: "Product 3" },
+    { id: "product-4", title: "Product 4" },
+    { id: "product-5", title: "Product 5" },
+    { id: "product-6", title: "Product 6" },
   ],
-};
+} as const;
 
 export function MobileNav({
   language,
@@ -412,23 +392,20 @@ export function MobileNav({
                           {navItems.services}
                         </h2>
 
-                        {/* Services List */}
+                        {/* Products list */}
                         <div className="flex flex-col gap-3">
-                          {services[language].map((service) => {
-                            const slug = serviceSlugs[language][service.id as keyof typeof serviceSlugs["tr"]];
-                            return (
-                              <Link
-                                key={service.id}
-                                href={`/services/${slug}`}
-                                onClick={closeAllMenus}
-                                className="flex min-h-[56px] items-center rounded-lg border border-gray-200 bg-white px-5 py-4 text-left transition hover:border-lilac hover:bg-lilac/5 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2"
-                              >
-                                <span className="text-base font-medium text-dark">
-                                  {service.title}
-                                </span>
-                              </Link>
-                            );
-                          })}
+                          {products[language].map((item) => (
+                            <Link
+                              key={item.id}
+                              href={`/services/${item.id}`}
+                              onClick={closeAllMenus}
+                              className="flex min-h-[56px] items-center rounded-lg border border-gray-200 bg-white px-5 py-4 text-left transition hover:border-lilac hover:bg-lilac/5 focus:outline-none focus:ring-2 focus:ring-lilac/50 focus:ring-offset-2"
+                            >
+                              <span className="text-base font-medium text-dark">
+                                {item.title}
+                              </span>
+                            </Link>
+                          ))}
                         </div>
                       </motion.nav>
                     )}

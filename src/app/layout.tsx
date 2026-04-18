@@ -5,6 +5,7 @@ import { ChatbotProvider } from "../contexts/ChatbotContext";
 import { NavProvider } from "../contexts/NavContext";
 import { IntroVideoOverlay } from "../components/IntroVideoOverlay";
 import { PageTransition } from "../components/PageTransition";
+import { SITE_ORIGIN } from "../lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,52 +18,52 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://entatlitelasim.com"),
-  title: "En Tatlı Telaşım | Premium Dessert & Catering Logistics",
+  metadataBase: new URL(SITE_ORIGIN),
+  title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
   description:
-    "Premium dessert and catering solutions for corporate organizations and large-scale events. Flawless logistics, zero-risk execution, absolute reliability.",
+    "Endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürün gamımızı inceleyin; stok ve teknik bilgi için +90 553 056 89 39.",
   icons: {
     icon: "/icon.png",
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
   keywords: [
-    "premium dessert catering",
-    "corporate catering",
-    "large scale event desserts",
-    "event logistics",
-    "Istanbul catering",
+    "endüstriyel otomasyon",
+    "otomasyon ürünleri",
+    "sürücü",
+    "PLC",
+    "Yazıcı Otomasyon",
   ],
   alternates: {
-    canonical: "https://entatlitelasim.com",
+    canonical: SITE_ORIGIN,
   },
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "En Tatlı Telaşım | Premium Dessert & Catering Logistics",
+    title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
     description:
-      "Premium dessert and catering solutions for corporate organizations and large-scale events. Flawless logistics, zero-risk execution, absolute reliability.",
-    url: "https://entatlitelasim.com",
-    siteName: "En Tatlı Telaşım",
+      "Endüstriyel otomasyon ürünleri ve teknik tedarik desteği. Ürünlerimizi görün, iletişime geçin.",
+    url: SITE_ORIGIN,
+    siteName: "Yazıcı Otomasyon",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/img/product-1.jpg",
         width: 1200,
         height: 630,
-        alt: "En Tatlı Telaşım premium dessert catering",
+        alt: "Yazıcı Otomasyon ürün görseli",
       },
     ],
-    locale: "en_US",
+    locale: "tr_TR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "En Tatlı Telaşım | Premium Dessert & Catering Logistics",
+    title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
     description:
-      "Premium dessert and catering solutions for corporate organizations and large-scale events. Flawless logistics, zero-risk execution, absolute reliability.",
-    images: ["/og-image.svg"],
+      "Endüstriyel otomasyon ürünleri ve teknik tedarik desteği. Ürünlerimizi görün, iletişime geçin.",
+    images: ["/img/product-1.jpg"],
   },
 };
 

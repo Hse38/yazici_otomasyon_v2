@@ -3,186 +3,133 @@ import type { ServiceData } from "../data/services";
 
 export type Language = "tr" | "en";
 
-// URL slug mapping for semantic SEO structure
+export const SITE_ORIGIN = "https://yaziciotomasyon.com";
+
 export const serviceSlugMap: Record<ServiceId, { tr: string; en: string }> = {
-  "corporate-event-catering": {
-    tr: "kurumsal-etkinlik-catering",
-    en: "corporate-event-catering",
-  },
-  "wedding-engagement-catering": {
-    tr: "dugun-nisan-catering",
-    en: "wedding-engagement-catering",
-  },
-  "festival-large-event-catering": {
-    tr: "festival-buyuk-etkinlik-catering",
-    en: "festival-large-event-catering",
-  },
-  "workshop-special-experience-catering": {
-    tr: "workshop-ozel-deneyim-catering",
-    en: "workshop-special-experience-catering",
-  },
-  "seminar-conference-catering": {
-    tr: "seminer-konferans-catering",
-    en: "seminar-conference-catering",
-  },
-  "outdoor-activity-catering": {
-    tr: "acik-alan-aktivite-catering",
-    en: "outdoor-activity-catering",
-  },
-  // Legacy IDs (keep for backward compatibility)
-  "corporate-dessert-logistics": {
-    tr: "kurumsal-etkinlik-catering",
-    en: "corporate-event-catering",
-  },
-  "high-volume-event": {
-    tr: "festival-buyuk-etkinlik-catering",
-    en: "festival-large-event-catering",
-  },
-  "premium-hospitality": {
-    tr: "workshop-ozel-deneyim-catering",
-    en: "workshop-special-experience-catering",
-  },
+  "product-1": { tr: "product-1", en: "product-1" },
+  "product-2": { tr: "product-2", en: "product-2" },
+  "product-3": { tr: "product-3", en: "product-3" },
+  "product-4": { tr: "product-4", en: "product-4" },
+  "product-5": { tr: "product-5", en: "product-5" },
+  "product-6": { tr: "product-6", en: "product-6" },
 };
 
-// Intent-based keyword clusters
 export const keywordClusters = {
   commercial: {
     tr: [
-      "etkinlik catering",
-      "catering organizasyon",
-      "kurumsal etkinlik catering",
-      "düğün catering hizmeti",
-      "festival catering",
-      "büyük ölçekli catering",
-      "toplu ikram hizmeti",
-      "etkinlik yemek servisi",
+      "endüstriyel otomasyon",
+      "sürücü",
+      "PLC",
+      "HMI",
+      "sensör",
+      "saha ekipmanları",
     ],
     en: [
-      "event catering",
-      "catering organization",
-      "corporate event catering",
-      "wedding catering service",
-      "festival catering",
-      "large-scale catering",
-      "bulk catering service",
-      "event food service",
+      "industrial automation",
+      "drives",
+      "PLC",
+      "HMI",
+      "sensors",
+      "field devices",
     ],
   },
   midFunnel: {
     tr: [
-      "büyük etkinlikler için catering",
-      "kurumsal catering çözümleri",
-      "etkinlik catering kapasitesi",
-      "etkinlik yemek lojistiği",
-      "catering planlama hizmeti",
+      "tesis otomasyonu",
+      "makina otomasyonu",
+      "süreç kontrolü",
+      "endüstriyel ürün tedariki",
     ],
     en: [
-      "catering for large events",
-      "corporate catering solutions",
-      "catering capacity for events",
-      "event food logistics",
-      "catering planning service",
+      "plant automation",
+      "machine automation",
+      "process control",
+      "industrial product supply",
     ],
   },
   informational: {
     tr: [
-      "etkinlik catering nasıl çalışır",
-      "festival catering lojistiği",
-      "kurumsal etkinlik catering planlama",
-      "catering organizasyon süreci",
+      "otomasyon ürün seçimi",
+      "teknik veri sayfası",
+      "uyumluluk kontrolü",
     ],
     en: [
-      "how event catering works",
-      "catering logistics for festivals",
-      "catering planning for corporate events",
-      "catering organization process",
+      "automation product selection",
+      "datasheet review",
+      "compatibility check",
     ],
   },
 };
 
-// Generate meta title
 export function generateMetaTitle(
   service: ServiceData | null,
   language: Language
 ): string {
-  const baseBrand = "En Tatlı Telaşım";
-  
+  const baseBrand = "Yazıcı Otomasyon";
+
   if (!service) {
     return language === "tr"
-      ? "Premium Etkinlik Catering & Organizasyon Hizmetleri | En Tatlı Telaşım"
-      : "Premium Event Catering & Organization Services | En Tatlı Telaşım";
+      ? `Endüstriyel Otomasyon Ürünleri | ${baseBrand}`
+      : `Industrial Automation Products | ${baseBrand}`;
   }
 
   const content = service[language];
-  const primaryKeyword = language === "tr" 
-    ? "Etkinlik Catering"
-    : "Event Catering";
-  
-  // Format: [Primary Service] for [Event Type] | [Brand Name]
   return `${content.title} | ${baseBrand}`;
 }
 
-// Generate meta description
 export function generateMetaDescription(
   service: ServiceData | null,
   language: Language
 ): string {
   if (!service) {
     return language === "tr"
-      ? "Büyük ölçekli etkinlikler için profesyonel catering ve organizasyon hizmetleri. Kurumsal seviyede operasyonel güç, güvenilir lojistik, sıfır risk. İstanbul merkezli premium catering çözümleri."
-      : "Professional catering and organization services for large-scale events. Corporate-grade operational strength, reliable logistics, zero risk. Premium catering solutions based in Istanbul.";
+      ? "Yazıcı Otomasyon: endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürünlerimizi inceleyin, stok ve teknik bilgi için arayın."
+      : "Yazıcı Otomasyon: industrial automation products, technical guidance, and supply. Browse our products and call for availability.";
   }
 
   const content = service[language];
   const capacity = content.capacity;
-  
-  // Include: scale, reliability, service scope, soft CTA
-  const description = language === "tr"
-    ? `${content.description} Günlük üretim kapasitesi: ${capacity.dailyProduction}. Etkinlik büyüklüğü: ${capacity.eventSize}. ${capacity.description} İletişime geçin, özel teklif alın.`
-    : `${content.description} Daily production capacity: ${capacity.dailyProduction}. Event size: ${capacity.eventSize}. ${capacity.description} Get in touch for a custom quote.`;
 
-  // Ensure 140-160 chars
+  const description =
+    language === "tr"
+      ? `${content.description} Özet: ${capacity.dailyProduction}. Kapsam: ${capacity.eventSize}. ${capacity.description} Teklif ve bilgi için iletişime geçin.`
+      : `${content.description} Summary: ${capacity.dailyProduction}. Scope: ${capacity.eventSize}. ${capacity.description} Contact us for a quote.`;
+
   if (description.length > 160) {
     return description.substring(0, 157) + "...";
   }
   return description;
 }
 
-// Generate canonical URL
 export function generateCanonicalUrl(
   serviceId: ServiceId | null,
   language: Language
 ): string {
-  const baseUrl = "https://entatlitelasim.com";
-  
   if (!serviceId) {
-    return baseUrl;
+    return SITE_ORIGIN;
   }
 
   const slug = serviceSlugMap[serviceId]?.[language] || serviceId;
-  return `${baseUrl}/services/${slug}`;
+  return `${SITE_ORIGIN}/services/${slug}`;
 }
 
-// Generate breadcrumb items
 export function generateBreadcrumbs(
   service: ServiceData | null,
   language: Language
 ): Array<{ name: string; url: string }> {
-  const baseUrl = "https://entatlitelasim.com";
-  
   const items = [
     {
       name: language === "tr" ? "Ana Sayfa" : "Home",
-      url: baseUrl,
+      url: SITE_ORIGIN,
     },
   ];
 
   if (service) {
     items.push({
-      name: language === "tr" ? "Hizmetler" : "Services",
-      url: `${baseUrl}/#services`,
+      name: language === "tr" ? "Ürünler" : "Products",
+      url: `${SITE_ORIGIN}/#products`,
     });
-    
+
     items.push({
       name: service[language].title,
       url: generateCanonicalUrl(service.id, language),
@@ -192,75 +139,43 @@ export function generateBreadcrumbs(
   return items;
 }
 
-// Organization schema data
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "En Tatlı Telaşım",
-  alternateName: "ENTATLI",
-  url: "https://entatlitelasim.com",
-  logo: "https://entatlitelasim.com/img/yazılıbeyaz.png",
+  name: "Yazıcı Otomasyon",
+  alternateName: "YAZICI OTOMASYON",
+  url: SITE_ORIGIN,
+  logo: `${SITE_ORIGIN}/img/yazici-logo.png`,
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+90-212-466-13-83",
-      contactType: "Customer Service",
-      areaServed: ["TR", "Istanbul"],
-      availableLanguage: ["Turkish", "English"],
-    },
-    {
-      "@type": "ContactPoint",
-      telephone: "+90-532-617-46-23",
-      contactType: "Customer Service",
-      contactOption: "https://schema.org/TollFree",
-      areaServed: ["TR", "Istanbul"],
+      telephone: "+90-553-056-89-39",
+      contactType: "sales",
+      areaServed: "TR",
       availableLanguage: ["Turkish", "English"],
     },
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Kocasinan Merkez Mahallesi, Mareşal Çakmak Caddesi No:25",
-    addressLocality: "Bahçelievler",
-    addressRegion: "Istanbul",
     addressCountry: "TR",
   },
-  sameAs: [
-    // Add social media URLs when available
-  ],
+  sameAs: [] as string[],
 };
 
-// LocalBusiness schema data
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://entatlitelasim.com/#organization",
-  name: "En Tatlı Telaşım",
-  image: "https://entatlitelasim.com/img/yazılıbeyaz.png",
-  telephone: ["+90-212-466-13-83", "+90-532-617-46-23"],
-  email: "info@entatlitelasim.com",
+  "@id": `${SITE_ORIGIN}/#organization`,
+  name: "Yazıcı Otomasyon",
+  image: `${SITE_ORIGIN}/img/yazici-logo.png`,
+  telephone: "+90-553-056-89-39",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Kocasinan Merkez Mahallesi, Mareşal Çakmak Caddesi No:25",
-    addressLocality: "Bahçelievler",
-    addressRegion: "Istanbul",
-    postalCode: "",
     addressCountry: "TR",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: "41.1086",
-    longitude: "29.0100",
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00",
-  },
-  priceRange: "$$$",
-  servesCuisine: "Event Catering",
   areaServed: {
-    "@type": "City",
-    name: "Istanbul",
+    "@type": "Country",
+    name: "Turkey",
   },
+  priceRange: "$$",
 };

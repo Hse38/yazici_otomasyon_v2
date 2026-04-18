@@ -10,7 +10,7 @@ export function MobileStickyCTA({ language = "en" }: MobileStickyCTAProps) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 flex gap-2 border-t border-gray-200 bg-white p-3 shadow-lg md:hidden">
       <Link
-        href="tel:+905326174623"
+        href="tel:+905530568939"
         className="flex flex-1 items-center justify-center gap-2 rounded-full bg-lilac px-4 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-soft-lavender hover:text-dark"
         aria-label={language === "tr" ? "Hemen ara" : "Call now"}
       >
@@ -29,7 +29,7 @@ export function MobileStickyCTA({ language = "en" }: MobileStickyCTAProps) {
         {language === "tr" ? "Ara" : "Call"}
       </Link>
       <Link
-        href="https://wa.me/905326174623"
+        href="https://wa.me/905530568939"
         target="_blank"
         rel="noopener noreferrer"
         className="flex flex-1 items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-dark transition hover:border-lilac hover:bg-lilac/5 hover:text-lilac"

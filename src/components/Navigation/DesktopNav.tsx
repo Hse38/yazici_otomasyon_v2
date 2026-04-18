@@ -24,7 +24,7 @@ export function DesktopNav({
     <nav
       className={`hidden items-center gap-8 text-sm uppercase tracking-[0.2em] transition-colors md:flex ${textColor}`}
     >
-      <Link href="#services" className={`transition ${hoverColor}`}>
+      <Link href="#products" className={`transition ${hoverColor}`}>
         {navItems.services}
       </Link>
       <Link href="#why-us" className={`transition ${hoverColor}`}>
