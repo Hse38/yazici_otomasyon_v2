@@ -5,6 +5,18 @@ export type Language = "tr" | "en";
 
 export const SITE_ORIGIN = "https://yaziciotomasyon.com";
 
+/** Canonical base URL: production domain on Vercel prod, else current deploy URL, else local SITE_ORIGIN. */
+export function getPublicSiteUrl(): string {
+  if (typeof process === "undefined") return SITE_ORIGIN;
+  if (process.env.VERCEL_ENV === "production") {
+    const host =
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+    if (host) return `https://${host}`;
+  }
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return SITE_ORIGIN;
+}
+
 export const serviceSlugMap: Record<ServiceId, { tr: string; en: string }> = {
   "product-1": { tr: "product-1", en: "product-1" },
   "product-2": { tr: "product-2", en: "product-2" },
@@ -105,29 +117,31 @@ export function generateCanonicalUrl(
   serviceId: ServiceId | null,
   language: Language
 ): string {
+  const base = getPublicSiteUrl();
   if (!serviceId) {
-    return SITE_ORIGIN;
+    return base;
   }
 
   const slug = serviceSlugMap[serviceId]?.[language] || serviceId;
-  return `${SITE_ORIGIN}/services/${slug}`;
+  return `${base}/services/${slug}`;
 }
 
 export function generateBreadcrumbs(
   service: ServiceData | null,
   language: Language
 ): Array<{ name: string; url: string }> {
+  const base = getPublicSiteUrl();
   const items = [
     {
       name: language === "tr" ? "Ana Sayfa" : "Home",
-      url: SITE_ORIGIN,
+      url: base,
     },
   ];
 
   if (service) {
     items.push({
       name: language === "tr" ? "Ürünler" : "Products",
-      url: `${SITE_ORIGIN}/#products`,
+      url: `${base}/#products`,
     });
 
     items.push({
@@ -139,13 +153,15 @@ export function generateBreadcrumbs(
   return items;
 }
 
+const schemaOrigin = getPublicSiteUrl();
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Yazıcı Otomasyon",
   alternateName: "YAZICI OTOMASYON",
-  url: SITE_ORIGIN,
-  logo: `${SITE_ORIGIN}/img/yazici-logo.png`,
+  url: schemaOrigin,
+  logo: `${schemaOrigin}/img/yazici-logo.png`,
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -165,9 +181,9 @@ export const organizationSchema = {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": `${SITE_ORIGIN}/#organization`,
+  "@id": `${schemaOrigin}/#organization`,
   name: "Yazıcı Otomasyon",
-  image: `${SITE_ORIGIN}/img/yazici-logo.png`,
+  image: `${schemaOrigin}/img/yazici-logo.png`,
   telephone: "+90-553-056-89-39",
   address: {
     "@type": "PostalAddress",

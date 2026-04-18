@@ -8,7 +8,7 @@ import {
   localBusinessSchema,
   generateBreadcrumbs,
   generateCanonicalUrl,
-  SITE_ORIGIN,
+  getPublicSiteUrl,
 } from "../../lib/seo";
 
 type SchemaMarkupProps = {
@@ -58,7 +58,7 @@ export function SchemaMarkup({
         name: content.title,
         description: content.description,
         provider: {
-          "@id": `${SITE_ORIGIN}/#organization`,
+          "@id": `${getPublicSiteUrl()}/#organization`,
         },
         areaServed: {
           "@type": "Country",
@@ -140,7 +140,7 @@ export function SchemaMarkup({
           "@context": "https://schema.org",
           "@type": "ImageObject",
           "@id": `${image.src}#image-${index}`,
-          contentUrl: `${SITE_ORIGIN}${image.src}`,
+          contentUrl: `${getPublicSiteUrl()}${image.src}`,
           description: image.alt,
           name: image.alt,
         });

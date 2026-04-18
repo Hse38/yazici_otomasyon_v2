@@ -5,7 +5,9 @@ import { ChatbotProvider } from "../contexts/ChatbotContext";
 import { NavProvider } from "../contexts/NavContext";
 import { IntroVideoOverlay } from "../components/IntroVideoOverlay";
 import { PageTransition } from "../components/PageTransition";
-import { SITE_ORIGIN } from "../lib/seo";
+import { getPublicSiteUrl } from "../lib/seo";
+
+const siteUrl = getPublicSiteUrl();
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +20,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_ORIGIN),
+  metadataBase: new URL(siteUrl),
   title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
   description:
     "Endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürün gamımızı inceleyin; stok ve teknik bilgi için +90 553 056 89 39.",
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
     "Yazıcı Otomasyon",
   ],
   alternates: {
-    canonical: SITE_ORIGIN,
+    canonical: siteUrl,
   },
   robots: {
     index: true,
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
     description:
       "Endüstriyel otomasyon ürünleri ve teknik tedarik desteği. Ürünlerimizi görün, iletişime geçin.",
-    url: SITE_ORIGIN,
+    url: siteUrl,
     siteName: "Yazıcı Otomasyon",
     images: [
       {
