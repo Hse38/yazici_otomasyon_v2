@@ -13,14 +13,15 @@ export type AnimatedMapContent = {
 const MAP_QUERY = "Yazıcı Otomasyon İstanbul";
 const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&hl=tr&z=14&ie=UTF8&iwloc=B&output=embed`;
 
+/** Slow drift — map reads as texture, not UI (15–25s loop). */
 const KEN_BURNS = {
-  scale: [1, 1.09],
-  x: ["-1.2%", "1.4%"],
-  y: ["0.4%", "-1.6%"],
+  scale: [1.1, 1.15],
+  x: ["-1.4%", "1.6%"],
+  y: ["0.5%", "-1.8%"],
 };
 
 const KEN_TRANSITION = {
-  duration: 26,
+  duration: 20,
   repeat: Infinity,
   repeatType: "mirror" as const,
   ease: "easeInOut" as const,
@@ -36,7 +37,7 @@ const MapFrame = memo(function MapFrame({ src, title }: { src: string; title: st
     <iframe
       title={title}
       src={src}
-      className="pointer-events-none absolute left-1/2 top-[48%] h-[135%] w-[135%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 opacity-95 [filter:grayscale(1)_brightness(0.35)_blur(2px)]"
+      className="pointer-events-none absolute left-1/2 top-[50%] h-[155%] w-[155%] max-w-none -translate-x-1/2 -translate-y-1/2 border-0 opacity-[0.88] saturate-0 [filter:grayscale(1)_brightness(0.32)_blur(3.5px)_contrast(1.08)]"
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
       tabIndex={-1}
@@ -85,6 +86,9 @@ export function AnimatedMap({ content, contactHref = "#contact" }: AnimatedMapPr
     parallaxY.set(0);
   }, [parallaxX, parallaxY]);
 
+  const kenAnimate = reduceMotion ? { scale: 1.12, x: "0%", y: "0%" } : KEN_BURNS;
+  const kenTransition = reduceMotion ? { duration: 0.01 } : KEN_TRANSITION;
+
   return (
     <motion.section
       ref={rootRef}
@@ -104,94 +108,104 @@ export function AnimatedMap({ content, contactHref = "#contact" }: AnimatedMapPr
           style={{ x: springX, y: springY }}
           className="relative will-change-transform"
         >
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.07] bg-[#02060a] shadow-[0_32px_100px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(59,130,246,0.06)]">
+          <div
+            className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-[#010509] shadow-[0_28px_90px_-20px_rgba(0,0,0,0.88),0_0_0_1px_rgba(59,130,246,0.05)] transition-[box-shadow,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/map:shadow-[0_36px_120px_-18px_rgba(0,0,0,0.92),0_0_60px_-12px_rgba(59,130,246,0.14),0_0_0_1px_rgba(147,197,253,0.12)]"
+          >
             <div className="relative aspect-[21/10] min-h-[min(72vh,560px)] w-full sm:min-h-[440px] md:min-h-[500px]">
               <div
-                className={`absolute inset-0 origin-center overflow-hidden transition-[transform] duration-[680ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
-                  reduceMotion ? "" : "group-hover/map:scale-[1.022]"
+                className={`absolute inset-0 origin-center overflow-hidden transition-[transform] duration-[720ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform ${
+                  reduceMotion ? "" : "group-hover/map:scale-[1.03]"
                 }`}
               >
-                {/* Map stack — scaled & clipped to minimize embed chrome */}
                 <div className="absolute inset-0 overflow-hidden">
                   <motion.div
-                    className="absolute inset-[-8%] origin-center will-change-transform"
-                    animate={reduceMotion ? undefined : KEN_BURNS}
-                    transition={reduceMotion ? undefined : KEN_TRANSITION}
+                    className="absolute inset-[-14%] origin-center will-change-transform"
+                    animate={kenAnimate}
+                    transition={kenTransition}
                   >
                     {loadMap ? (
                       <MapFrame src={MAP_EMBED_SRC} title={MAP_QUERY} />
                     ) : (
                       <div
-                        className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,#0f172a_0%,#02060a_70%)]"
+                        className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,#0c1824_0%,#010509_78%)]"
                         aria-hidden
                       />
                     )}
                   </motion.div>
                 </div>
 
-                {/* Cinematic vignette + edge crush */}
+                {/* Strong spotlight — center only slightly legible as texture */}
                 <div
                   className="pointer-events-none absolute inset-0 z-[1]"
                   style={{
                     background: `
-                    radial-gradient(ellipse 48% 44% at 50% 46%, rgba(2,6,10,0.12) 0%, rgba(2,6,10,0.55) 52%, rgba(0,0,0,0.94) 100%),
-                    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 20%, rgba(0,0,0,0.65) 100%)
-                  `,
+                      radial-gradient(ellipse 38% 36% at 50% 44%, rgba(1,5,9,0.08) 0%, rgba(1,5,9,0.55) 52%, rgba(0,0,0,0.94) 78%, rgba(0,0,0,0.99) 100%),
+                      radial-gradient(ellipse 130% 100% at 50% 50%, transparent 18%, rgba(0,0,0,0.72) 100%)
+                    `,
                   }}
                   aria-hidden
                 />
                 <div
-                  className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-transparent to-black/[0.88]"
+                  className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-transparent to-black/[0.94]"
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_45%,transparent_0%,transparent_22%,rgba(0,0,0,0.25)_100%)]"
                   aria-hidden
                 />
 
-                {/* Pin — focal point */}
+                {/* Pin — primary focal */}
                 <div
                   className="pointer-events-none absolute left-1/2 top-[46%] z-[2] -translate-x-1/2 -translate-y-1/2"
                   aria-hidden
                 >
                   <motion.span
-                    className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#3b82f6]/40"
-                    animate={reduceMotion ? undefined : { scale: [1, 2.5], opacity: [0.5, 0] }}
-                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }}
+                    className="absolute left-1/2 top-1/2 size-[4.5rem] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#3b82f6]/50 bg-[#3b82f6]/5"
+                    animate={reduceMotion ? undefined : { scale: [1, 2.65], opacity: [0.55, 0] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
                   />
                   <motion.span
-                    className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#3b82f6]/30"
-                    animate={reduceMotion ? undefined : { scale: [1, 3.1], opacity: [0.35, 0] }}
-                    transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut", delay: 0.5 }}
+                    className="absolute left-1/2 top-1/2 size-[4.5rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#3b82f6]/35"
+                    animate={reduceMotion ? undefined : { scale: [1, 3.2], opacity: [0.4, 0] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut", delay: 0.45 }}
                   />
-                  <span className="relative flex size-4 items-center justify-center transition-transform duration-500 group-hover/map:scale-110">
+                  <motion.span
+                    className="absolute left-1/2 top-1/2 size-[4.5rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#60a5fa]/25"
+                    animate={reduceMotion ? undefined : { scale: [1, 3.8], opacity: [0.28, 0] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut", delay: 0.95 }}
+                  />
+                  <span className="relative flex size-[18px] items-center justify-center transition-transform duration-500 group-hover/map:scale-[1.12]">
                     <span
-                      className="absolute size-4 rounded-full bg-[#3b82f6] ring-2 ring-white/20 transition-[box-shadow,transform] duration-500 group-hover/map:shadow-[0_0_40px_16px_rgba(59,130,246,0.72)] group-hover/map:ring-[#93c5fd]/45"
-                      style={{ boxShadow: "0 0 28px 10px rgba(59,130,246,0.45)" }}
+                      className="absolute size-[11px] rounded-full bg-[#3b82f6] ring-2 ring-white/30 transition-[box-shadow,transform] duration-500 group-hover/map:scale-105 group-hover/map:ring-[#bfdbfe]/55 group-hover/map:shadow-[0_0_18px_5px_rgba(147,197,253,0.9),0_0_48px_18px_rgba(59,130,246,0.65),0_0_96px_40px_rgba(59,130,246,0.35),0_0_140px_60px_rgba(59,130,246,0.15)] shadow-[0_0_14px_4px_rgba(59,130,246,0.95),0_0_38px_14px_rgba(59,130,246,0.55),0_0_76px_32px_rgba(59,130,246,0.28),0_0_120px_52px_rgba(59,130,246,0.12)]"
                     />
                   </span>
                 </div>
 
-                {/* Bottom mask — covers typical embed footer / hints */}
                 <div
-                  className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-black via-black/95 to-transparent sm:h-32"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-32 bg-gradient-to-t from-black from-25% via-black/[0.97] to-transparent sm:h-36"
                   aria-hidden
                 />
               </div>
 
-              {/* Left content — not scaled on map hover */}
-              <div className="pointer-events-none absolute inset-0 z-[3] flex items-center justify-start px-6 py-10 sm:px-10 sm:py-12 md:px-14 md:py-16">
-                <div className="pointer-events-auto max-w-[20.5rem] space-y-4 sm:max-w-md">
+              <div className="pointer-events-none absolute inset-0 z-[3] flex items-center justify-start px-5 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16">
+                <div className="pointer-events-auto max-w-[22rem] rounded-2xl border border-white/[0.1] bg-black/50 p-6 shadow-[0_24px_56px_-16px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl sm:max-w-md sm:p-8 md:rounded-3xl md:p-9">
                   <h2
                     id="animated-map-heading"
-                    className="font-serif text-2xl font-semibold leading-[1.15] tracking-tight text-white text-balance sm:text-4xl"
+                    className="font-serif text-2xl font-semibold leading-[1.12] tracking-tight text-white text-balance sm:text-4xl"
                   >
                     {content.title}
                   </h2>
-                  <p className="text-sm leading-relaxed text-white/72 sm:text-base">{content.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/75 sm:mt-4 sm:text-base">
+                    {content.description}
+                  </p>
                   <motion.div
+                    className="mt-6 sm:mt-8"
                     whileHover={reduceMotion ? undefined : { scale: 1.03 }}
                     whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                   >
                     <Link
                       href={contactHref}
-                      className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#3b82f6]/90 px-8 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_0_40px_-8px_rgba(59,130,246,0.55)] backdrop-blur-sm transition hover:bg-[#2563eb] hover:shadow-[0_0_48px_-6px_rgba(59,130,246,0.75)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#93c5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-[#02060a]"
+                      className="inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-[#3b82f6] px-8 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_0_36px_-6px_rgba(59,130,246,0.55)] transition hover:bg-[#2563eb] hover:shadow-[0_0_48px_-4px_rgba(59,130,246,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#93c5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-black/80 sm:w-auto"
                     >
                       {content.cta}
                     </Link>
