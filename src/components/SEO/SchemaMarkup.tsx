@@ -4,8 +4,8 @@ import { useMemo } from "react";
 import type { ServiceData } from "../../data/services";
 import type { Language } from "../../lib/seo";
 import {
-  organizationSchema,
-  localBusinessSchema,
+  getOrganizationJsonLd,
+  getLocalBusinessJsonLd,
   generateBreadcrumbs,
   generateCanonicalUrl,
   getPublicSiteUrl,
@@ -28,10 +28,10 @@ export function SchemaMarkup({
     const allSchemas: object[] = [];
 
     // 1. Organization Schema (always present)
-    allSchemas.push(organizationSchema);
+    allSchemas.push(getOrganizationJsonLd());
 
     // 2. LocalBusiness Schema (always present)
-    allSchemas.push(localBusinessSchema);
+    allSchemas.push(getLocalBusinessJsonLd());
 
     // 3. BreadcrumbList Schema
     const breadcrumbs = generateBreadcrumbs(service ?? null, language);
@@ -51,10 +51,11 @@ export function SchemaMarkup({
       const content = service[language];
       const serviceUrl = generateCanonicalUrl(service.id, language);
 
-      const serviceSchema: any = {
+      const serviceSchema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "Service",
         "@id": `${serviceUrl}#service`,
+        url: serviceUrl,
         name: content.title,
         description: content.description,
         provider: {
@@ -65,56 +66,14 @@ export function SchemaMarkup({
           name: "Turkey",
         },
         serviceType: content.title,
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          priceCurrency: "TRY",
-          price: "0",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            priceCurrency: "TRY",
-            price: "0",
-            valueAddedTaxIncluded: true,
-          },
-        },
       };
 
-      // Add service area
       serviceSchema.serviceArea = {
         "@type": "Country",
         name: "Turkey",
       };
 
-      // Add aggregate rating if available
-      // serviceSchema.aggregateRating = { ... }
-
       allSchemas.push(serviceSchema);
-
-      // 5. Product Schema (for catering packages)
-      allSchemas.push({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "@id": `${serviceUrl}#product`,
-        name: content.title,
-        description: content.description,
-        brand: {
-          "@type": "Brand",
-          name: "Yazıcı Otomasyon",
-        },
-        category: "Industrial automation product",
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          priceCurrency: "TRY",
-          price: "0",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            priceCurrency: "TRY",
-            price: "0",
-            valueAddedTaxIncluded: true,
-          },
-        },
-      });
     }
 
     // 6. FAQPage Schema (if FAQ items provided)

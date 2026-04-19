@@ -3,17 +3,26 @@ import type { ServiceData } from "../data/services";
 
 export type Language = "tr" | "en";
 
-export const SITE_ORIGIN = "https://yaziciotomasyon.com";
+/** Varsayılan canlı site; `NEXT_PUBLIC_SITE_URL` ile deploy ortamında override edin. */
+export const SITE_ORIGIN = "https://yaziciotomasyon.ekinciteknoloji.xyz";
 
-/** Canonical base URL: production domain on Vercel prod, else current deploy URL, else local SITE_ORIGIN. */
+const stripTrailingSlash = (value: string) => value.replace(/\/+$/, "");
+
+const withProto = (value: string) => {
+  const v = value.trim();
+  if (!v) return SITE_ORIGIN;
+  if (v.startsWith("http://") || v.startsWith("https://")) return stripTrailingSlash(v);
+  return `https://${stripTrailingSlash(v)}`;
+};
+
+/**
+ * Kanonik site kökü: önce `NEXT_PUBLIC_SITE_URL`, sonra Vercel host, son olarak SITE_ORIGIN.
+ */
 export function getPublicSiteUrl(): string {
   if (typeof process === "undefined") return SITE_ORIGIN;
 
-  const withProto = (value: string) => {
-    const v = value.trim();
-    if (v.startsWith("http://") || v.startsWith("https://")) return v;
-    return `https://${v}`;
-  };
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return withProto(explicit);
 
   if (process.env.VERCEL_ENV === "production") {
     const host =
@@ -102,8 +111,8 @@ export function generateMetaDescription(
 ): string {
   if (!service) {
     return language === "tr"
-      ? "Yazıcı Otomasyon: endüstriyel otomasyon ürünleri, teknik danışmanlık ve tedarik. Ürünlerimizi inceleyin, stok ve teknik bilgi için arayın."
-      : "Yazıcı Otomasyon: industrial automation products, technical guidance, and supply. Browse our products and call for availability.";
+      ? "İstanbul merkezli Yazıcı Otomasyon: safety, sensör, PLC/HMI, encoder ve instrument çözümleri; teknik danışmanlık ve tedarik. +90 553 056 89 39."
+      : "Istanbul-based Yazıcı Otomasyon: safety, sensors, PLC/HMI, encoders, and instrumentation with technical guidance and supply. +90 553 056 89 39.";
   }
 
   const content = service[language];
@@ -160,45 +169,61 @@ export function generateBreadcrumbs(
   return items;
 }
 
-const schemaOrigin = getPublicSiteUrl();
-
-export const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Yazıcı Otomasyon",
-  alternateName: "YAZICI OTOMASYON",
-  url: schemaOrigin,
-  logo: `${schemaOrigin}/img/yazici-logo.png`,
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      telephone: "+90-553-056-89-39",
-      contactType: "sales",
-      areaServed: "TR",
-      availableLanguage: ["Turkish", "English"],
+export function getOrganizationJsonLd(): Record<string, unknown> {
+  const base = getPublicSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Yazıcı Otomasyon",
+    alternateName: "YAZICI OTOMASYON",
+    url: base,
+    logo: `${base}/img/logo1.png`,
+    email: "info@yaziciotomasyon.com",
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+90-553-056-89-39",
+        contactType: "sales",
+        areaServed: "TR",
+        availableLanguage: ["Turkish", "English"],
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: "+90-532-056-34-39",
+        contactType: "customer support",
+        areaServed: "TR",
+        availableLanguage: ["Turkish"],
+      },
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Istanbul",
+      addressCountry: "TR",
     },
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "TR",
-  },
-  sameAs: [] as string[],
-};
+    sameAs: [] as string[],
+  };
+}
 
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${schemaOrigin}/#organization`,
-  name: "Yazıcı Otomasyon",
-  image: `${schemaOrigin}/img/yazici-logo.png`,
-  telephone: "+90-553-056-89-39",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "TR",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Turkey",
-  },
-  priceRange: "$$",
-};
+export function getLocalBusinessJsonLd(): Record<string, unknown> {
+  const base = getPublicSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${base}/#organization`,
+    name: "Yazıcı Otomasyon",
+    image: `${base}/img/logo1.png`,
+    url: base,
+    telephone: "+90-553-056-89-39",
+    email: "info@yaziciotomasyon.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Istanbul",
+      addressCountry: "TR",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Turkey",
+    },
+    priceRange: "$$",
+  };
+}

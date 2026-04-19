@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Yazıcı Otomasyon | Endüstri 4.0 Sensör ve Otomasyon",
   description:
-    "Endüstri 4.0 uyumlu sensör ve otomasyon çözümleri. Üretimde hassasiyet ve düşük hata payı için teknik danışmanlık ve tedarik: +90 553 056 89 39.",
+    "İstanbul merkezli endüstriyel otomasyon tedariki: safety, sensör, PLC/HMI, encoder ve instrument. Otomotiv, gıda, ilaç, tekstil ve OEM hatları için teknik danışmanlık. +90 553 056 89 39 · info@yaziciotomasyon.com",
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
     shortcut: "/favicon.png",
