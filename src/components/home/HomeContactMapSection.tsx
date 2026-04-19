@@ -9,6 +9,7 @@ export type HomeContactMapContent = {
   whatsapp: string;
   call: string;
   phone1: string;
+  phone2: string;
   channelsHint: string;
 };
 
@@ -26,6 +27,7 @@ const MAP_TRANSITION = {
 export function HomeContactMapSection({ content }: { content: HomeContactMapContent }) {
   const reduceMotion = useReducedMotion();
   const tel = content.phone1.replace(/\s/g, "");
+  const tel2 = content.phone2.replace(/\s/g, "");
 
   return (
     <section
@@ -126,6 +128,26 @@ export function HomeContactMapSection({ content }: { content: HomeContactMapCont
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                   {content.call}
+                </a>
+                <a
+                  href={`tel:${tel2}`}
+                  className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2.5 rounded-full border border-white/20 bg-white/[0.05] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/92 shadow-[0_0_24px_-10px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 hover:shadow-[0_0_32px_-8px_rgba(255,255,255,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 sm:min-w-[11rem]"
+                  aria-label={`${content.call} 2`}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  {content.phone2}
                 </a>
               </div>
             </div>

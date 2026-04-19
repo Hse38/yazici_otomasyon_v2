@@ -13,13 +13,13 @@ import { Footer } from "../components/Footer";
 import { Chatbot } from "../components/Chatbot";
 import { useChatbot } from "../contexts/ChatbotContext";
 import { useEffect, useMemo, useState } from "react";
-import { services } from "../data/services";
 import { HomeTrustSection } from "../components/home/HomeTrustSection";
 import { HomeIndustry40Section } from "../components/home/HomeIndustry40Section";
 import { HomeUseCasesSection } from "../components/home/HomeUseCasesSection";
 import { HomeProcessSection } from "../components/home/HomeProcessSection";
 import { HomeFinalCtaSection } from "../components/home/HomeFinalCtaSection";
 import { HomeContactMapSection } from "../components/home/HomeContactMapSection";
+import { HomeProductCatalogSection } from "../components/home/HomeProductCatalogSection";
 
 type Language = "tr" | "en";
 
@@ -146,11 +146,89 @@ const translations = {
       ctaContact: "Contact us",
     },
     services: {
-      kicker: "Products",
-      title: "Value-led product lines",
+      kicker: "Industrial Catalog",
+      title: "Engineering-grade categories and brand ecosystem",
       description:
-        "Each card links to a detailed page. For datasheets, compatibility, and lead times, reach us on phone or WhatsApp.",
-      action: "View details",
+        "Browse our category-based showcase to evaluate capability, standards alignment, and proven brand coverage.",
+      categories: [
+        {
+          key: "safety",
+          title: "Safety Systems",
+          description:
+            "Machine safety architecture for guarding, interlock, emergency stop, and compliance-critical applications.",
+          brands: ["Schmersal", "Euchner", "Bernstein", "Sick", "Pizzato", "Pilz"],
+          features: [
+            "Safety assessment and architecture planning",
+            "Risk analysis and hazard mitigation workflow",
+            "Machine revision and retrofit execution",
+            "ISO 13849 alignment support",
+          ],
+          imageSet: ["/img/product-1.jpg", "/img/product-2.jpg", "/img/product-3.jpg"],
+        },
+        {
+          key: "sensor",
+          title: "Sensor Systems",
+          description:
+            "Reliable sensing layer for position, presence, distance, and process detection in harsh industrial environments.",
+          brands: ["Sick", "IFM", "Balluff", "Turck", "Omron", "Pepperl+Fuchs"],
+          features: [
+            "Application-based sensor selection",
+            "IP and environment fit verification",
+            "Signal quality and false-trigger prevention",
+            "PLC and fieldbus integration planning",
+          ],
+          imageSet: ["/img/product-2.jpg", "/img/product-4.jpg", "/img/product-5.jpg"],
+        },
+        {
+          key: "control",
+          title: "Control System",
+          description:
+            "PLC, HMI, I/O, and communication infrastructure designed for deterministic control and scalable line automation.",
+          brands: [
+            "Siemens",
+            "Schneider Electric",
+            "Mitsubishi Electric",
+            "Omron",
+            "Beckhoff",
+            "Allen-Bradley",
+          ],
+          features: [
+            "Control architecture and CPU sizing",
+            "I/O mapping and communication topology",
+            "HMI/SCADA integration readiness",
+            "Documentation and commissioning discipline",
+          ],
+          imageSet: ["/img/product-3.jpg", "/img/product-4.jpg", "/img/product-6.jpg"],
+        },
+        {
+          key: "encoder",
+          title: "Encoder Solutions",
+          description:
+            "Motion feedback components for precise speed, position, and synchronization requirements on rotary and linear systems.",
+          brands: ["Sick", "Kübler", "Baumer", "Leine Linde", "Omron", "Pepperl+Fuchs"],
+          features: [
+            "Absolute and incremental encoder selection",
+            "Mechanical fit and shaft coupling guidance",
+            "Noise-resilient signal strategy",
+            "Drive and controller compatibility checks",
+          ],
+          imageSet: ["/img/product-1.jpg", "/img/product-5.jpg", "/img/product-6.jpg"],
+        },
+        {
+          key: "instrument",
+          title: "Instrument Solutions",
+          description:
+            "Field instrumentation for pressure, temperature, level, and flow with plant-grade reliability and traceability.",
+          brands: ["Endress+Hauser", "WIKA", "Yokogawa", "Siemens", "KROHNE", "ABB"],
+          features: [
+            "Measurement chain design support",
+            "Calibration and accuracy planning",
+            "Process condition suitability checks",
+            "Installation and maintenance readiness",
+          ],
+          imageSet: ["/img/product-2.jpg", "/img/product-3.jpg", "/img/product-6.jpg"],
+        },
+      ],
     },
     whyUs: {
       kicker: "About us",
@@ -191,7 +269,46 @@ const translations = {
         { id: 3, title: "Product imagery", description: "Representative visuals from our range." },
         { id: 4, title: "Product imagery", description: "Representative visuals from our range." },
       ],
-      logos: ["Elco", "Gefran", "Industry 4.0", "Drives", "Sensors"],
+      sectorsTitle: "Industries we work in and sample firms",
+      sectors: [
+        {
+          sector: "Pharmaceutical",
+          companies: [
+            "Polifarma",
+            "Koçak Farma",
+            "Farmatek",
+            "Abdi İbrahim",
+            "World Medicine",
+            "Recordati İlaç",
+          ],
+        },
+        {
+          sector: "Automotive",
+          companies: ["Tek-Elman Otomotiv", "Hema Endüstri"],
+        },
+        {
+          sector: "Food filling & packaging",
+          companies: ["Opack Makine", "Brightpack"],
+        },
+        {
+          sector: "Printing",
+          companies: [],
+        },
+        {
+          sector: "Furniture & decor",
+          companies: ["Dekor Ahşap", "Lignadecor", "Roma Plastik"],
+        },
+        {
+          sector: "Textile",
+          companies: [
+            "EPA Teknoloji",
+            "Robotek Makina",
+            "DMS Makina",
+            "Planet Makina",
+            "Özmak Makina",
+          ],
+        },
+      ],
     },
     faq: {
       kicker: "FAQ",
@@ -221,7 +338,7 @@ const translations = {
       whatsapp: "WhatsApp",
       call: "Call Now",
       phone1: "+90 553 056 89 39",
-      phone2: "",
+      phone2: "+90 532 056 34 39",
       phone2WhatsApp: false,
       email: "",
       address: {
@@ -386,11 +503,89 @@ const translations = {
       ctaContact: "Bize Ulaşın",
     },
     services: {
-      kicker: "Ürünlerimiz",
-      title: "Fayda odaklı ürün hatlarımız",
+      kicker: "Endüstriyel Katalog",
+      title: "Mühendislik odaklı kategori ve marka ekosistemi",
       description:
-        "Her kart ilgili ürün sayfasına gider. Teknik veri, uyumluluk ve termin için telefon veya WhatsApp ile yazın.",
-      action: "Detayları Gör",
+        "Kategori bazlı vitrin ile teknik yetkinlik, standart uyumu ve güçlü marka kapsamını birlikte değerlendirin.",
+      categories: [
+        {
+          key: "safety",
+          title: "Safety Sistemleri",
+          description:
+            "Makine emniyet mimarisi, interlock, acil stop ve uyumluluk kritik uygulamalarda uçtan uca çözüm yaklaşımı.",
+          brands: ["Schmersal", "Euchner", "Bernstein", "Sick", "Pizzato", "Pilz"],
+          features: [
+            "Emniyet değerlendirmesi",
+            "Risk analizi ve tehlike azaltma akışı",
+            "Makine revizyonu ve retrofit uygulamaları",
+            "ISO 13849 uyumluluk desteği",
+          ],
+          imageSet: ["/img/product-1.jpg", "/img/product-2.jpg", "/img/product-3.jpg"],
+        },
+        {
+          key: "sensor",
+          title: "Sensör Sistemleri",
+          description:
+            "Zorlu üretim ortamlarında konum, varlık, mesafe ve proses algılama için güvenilir sensör katmanı.",
+          brands: ["Sick", "IFM", "Balluff", "Turck", "Omron", "Pepperl+Fuchs"],
+          features: [
+            "Uygulamaya uygun sensör seçimi",
+            "IP sınıfı ve ortam uygunluğu doğrulaması",
+            "Yanlış tetikleme riskini azaltan sinyal kalitesi",
+            "PLC ve saha veri yolu entegrasyon planlaması",
+          ],
+          imageSet: ["/img/product-2.jpg", "/img/product-4.jpg", "/img/product-5.jpg"],
+        },
+        {
+          key: "control",
+          title: "Control System",
+          description:
+            "Deterministik kontrol ve ölçeklenebilir hat otomasyonu için PLC, HMI, I/O ve iletişim altyapısı.",
+          brands: [
+            "Siemens",
+            "Schneider Electric",
+            "Mitsubishi Electric",
+            "Omron",
+            "Beckhoff",
+            "Allen-Bradley",
+          ],
+          features: [
+            "Kontrol mimarisi ve CPU boyutlandırma",
+            "I/O haritalama ve haberleşme topolojisi",
+            "HMI/SCADA entegrasyon hazırlığı",
+            "Dokümantasyon ve devreye alma disiplini",
+          ],
+          imageSet: ["/img/product-3.jpg", "/img/product-4.jpg", "/img/product-6.jpg"],
+        },
+        {
+          key: "encoder",
+          title: "Encoder Çözümleri",
+          description:
+            "Döner ve lineer sistemlerde hız, pozisyon ve senkronizasyon için hassas geri besleme bileşenleri.",
+          brands: ["Sick", "Kübler", "Baumer", "Leine Linde", "Omron", "Pepperl+Fuchs"],
+          features: [
+            "Absolute ve incremental encoder seçimi",
+            "Mekanik uyum ve mil bağlantı yönlendirmesi",
+            "Gürültüye dayanıklı sinyal stratejisi",
+            "Sürücü ve kontrolör uyumluluk kontrolü",
+          ],
+          imageSet: ["/img/product-1.jpg", "/img/product-5.jpg", "/img/product-6.jpg"],
+        },
+        {
+          key: "instrument",
+          title: "Instrument Çözümleri",
+          description:
+            "Basınç, sıcaklık, seviye ve debi ölçümlerinde tesis ölçeğinde güvenilirlik ve izlenebilirlik.",
+          brands: ["Endress+Hauser", "WIKA", "Yokogawa", "Siemens", "KROHNE", "ABB"],
+          features: [
+            "Ölçüm zinciri kurgusu ve saha uygunluğu",
+            "Kalibrasyon ve doğruluk planlaması",
+            "Proses koşullarına göre ürün doğrulama",
+            "Kurulum ve bakım hazırlığı",
+          ],
+          imageSet: ["/img/product-2.jpg", "/img/product-3.jpg", "/img/product-6.jpg"],
+        },
+      ],
     },
     whyUs: {
       kicker: "Hakkımızda",
@@ -431,7 +626,46 @@ const translations = {
         { id: 3, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
         { id: 4, title: "Ürün görselleri", description: "Gamımızdan temsili kareler." },
       ],
-      logos: ["Elco", "Gefran", "Endüstri 4.0", "Sürücü", "Sensör"],
+      sectorsTitle: "Çalıştığımız sektörler ve örnek firmalar",
+      sectors: [
+        {
+          sector: "İlaç",
+          companies: [
+            "Polifarma",
+            "Koçak Farma",
+            "Farmatek",
+            "Abdi İbrahim",
+            "World Medicine",
+            "Recordati İlaç",
+          ],
+        },
+        {
+          sector: "Otomotiv",
+          companies: ["Tek-Elman Otomotiv", "Hema Endüstri"],
+        },
+        {
+          sector: "Gıda dolum & paketleme",
+          companies: ["Opack Makine", "Brightpack"],
+        },
+        {
+          sector: "Matbaa",
+          companies: [],
+        },
+        {
+          sector: "Mobilya & dekor",
+          companies: ["Dekor Ahşap", "Lignadecor", "Roma Plastik"],
+        },
+        {
+          sector: "Tekstil",
+          companies: [
+            "EPA Teknoloji",
+            "Robotek Makina",
+            "DMS Makina",
+            "Planet Makina",
+            "Özmak Makina",
+          ],
+        },
+      ],
     },
     faq: {
       kicker: "SSS",
@@ -461,7 +695,7 @@ const translations = {
       whatsapp: "WhatsApp",
       call: "Hemen Ara",
       phone1: "+90 553 056 89 39",
-      phone2: "",
+      phone2: "+90 532 056 34 39",
       phone2WhatsApp: false,
       email: "",
       address: {
@@ -595,17 +829,6 @@ export default function Home() {
       answer: faq.answer,
     }));
   }, [content.faq.list]);
-
-  const productCards = useMemo(
-    () =>
-      services.map((s) => ({
-        id: s.id,
-        title: s[lang].title,
-        description: s[lang].description,
-        highlight: s[lang].eyebrow,
-      })),
-    [lang]
-  );
 
   return (
     <div className="bg-background text-foreground m-0 p-0">
@@ -814,76 +1037,7 @@ export default function Home() {
         <HomeIndustry40Section content={content.industry40} />
 
         <section id="products" className="section-padding bg-background">
-          <div className="mx-auto flex max-w-6xl flex-col gap-12">
-            <div className="max-w-2xl space-y-4">
-              <p className="text-xs uppercase tracking-[0.4em] text-dark-purple">
-                {content.services.kicker}
-              </p>
-              <h2 className="text-3xl font-semibold text-dark sm:text-4xl">
-                {content.services.title}
-              </h2>
-              <p className="text-lg text-dark/70">
-                {content.services.description}
-              </p>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {productCards.map((service, idx) => {
-                const serviceImages = [
-                  "/img/product-1.jpg",
-                  "/img/product-2.jpg",
-                  "/img/product-3.jpg",
-                  "/img/product-4.jpg",
-                  "/img/product-5.jpg",
-                  "/img/product-6.jpg",
-                ];
-                const serviceImage = serviceImages[idx] ?? "/img/product-1.jpg";
-                return (
-                  <Link
-                    key={service.id}
-                    href={`/services/${service.id}`}
-                    className="group relative block overflow-hidden rounded-3xl border border-dark/10 bg-white p-8 shadow-lg transition hover:-translate-y-2 focus-within:ring-2 focus-within:ring-lilac/50 focus:outline-none cursor-pointer"
-                    aria-label={`${content.services.action}: ${service.title}`}
-                  >
-                    <div className="relative mb-6 h-40 overflow-hidden rounded-2xl">
-                      <Image
-                        src={serviceImage}
-                        alt={service.title}
-                        fill
-                        className="object-cover transition-transform group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <span className="text-xs uppercase tracking-[0.3em] text-dark-purple">
-                        {service.highlight}
-                      </span>
-                      <h3 className="text-2xl font-semibold text-dark">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-dark/70">{service.description}</p>
-                      <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-lilac transition group-hover:text-dark-purple pointer-events-none">
-                        {content.services.action}
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="transition-transform group-hover:translate-x-1"
-                          aria-hidden="true"
-                        >
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+          <HomeProductCatalogSection content={content.services} />
         </section>
 
         <section id="why-us" className="section-padding bg-background">
@@ -951,15 +1105,38 @@ export default function Home() {
               images={getGlobalGalleryImages(lang)}
               language={lang}
             />
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-5">
-              {content.proof.logos.map((logo) => (
-                <div
-                  key={logo}
-                  className="flex items-center justify-center rounded-2xl border border-dark/10 bg-white px-4 py-6 text-center text-xs font-semibold uppercase tracking-[0.2em] text-dark/50"
-                >
-                  {logo}
-                </div>
-              ))}
+            <div className="space-y-5">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-dark/55">
+                {content.proof.sectorsTitle}
+              </h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                {content.proof.sectors.map((item) => (
+                  <article
+                    key={item.sector}
+                    className="rounded-2xl border border-dark/10 bg-white p-5 shadow-sm"
+                  >
+                    <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-dark">
+                      {item.sector}
+                    </h4>
+                    {item.companies.length > 0 ? (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {item.companies.map((company) => (
+                          <span
+                            key={`${item.sector}-${company}`}
+                            className="inline-flex rounded-full border border-dark/10 bg-background px-3 py-1.5 text-xs font-medium text-dark/75"
+                          >
+                            {company}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="mt-3 text-xs font-medium text-dark/55">
+                        {lang === "tr" ? "Örnek firma bilgisi paylaşılacak." : "Sample firms will be shared."}
+                      </p>
+                    )}
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -1000,6 +1177,7 @@ export default function Home() {
             whatsapp: content.contact.whatsapp,
             call: content.contact.call,
             phone1: content.contact.phone1,
+            phone2: content.contact.phone2,
             channelsHint:
               lang === "tr" ? "veya doğrudan kanallar" : "or reach us directly",
           }}

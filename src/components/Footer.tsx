@@ -9,6 +9,8 @@ type FooterProps = {
 
 const CONTACT_PHONE = "+90 553 056 89 39";
 const CONTACT_PHONE_TEL = "+905530568939";
+const CONTACT_PHONE_2 = "+90 532 056 34 39";
+const CONTACT_PHONE_TEL_2 = "+905320563439";
 const CONTACT_EMAIL = "info@yaziciotomasyon.com";
 const WHATSAPP_HREF = "https://wa.me/905530568939";
 
@@ -181,6 +183,12 @@ export function Footer({ language }: FooterProps) {
                     className="mt-1.5 block text-base font-semibold text-white transition hover:text-soft-lavender"
                   >
                     {CONTACT_PHONE}
+                  </a>
+                  <a
+                    href={`tel:${CONTACT_PHONE_TEL_2}`}
+                    className="mt-1 block text-base font-semibold text-white/85 transition hover:text-soft-lavender"
+                  >
+                    {CONTACT_PHONE_2}
                   </a>
                 </div>
                 <div>
