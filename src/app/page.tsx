@@ -807,6 +807,17 @@ const translations = {
   },
 } as const;
 
+function getCompanyMonogram(name: string): string {
+  const cleaned = name
+    .replace(/&/g, " ")
+    .replace(/[-/]/g, " ")
+    .trim();
+  const parts = cleaned.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "CO";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return `${parts[0][0] ?? ""}${parts[1][0] ?? ""}`.toUpperCase();
+}
+
 function Counter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const [display, setDisplay] = useState(0);
 
@@ -1191,19 +1202,25 @@ export default function Home() {
                 {content.proof.sectors.map((item) => (
                   <article
                     key={item.sector}
-                    className="rounded-2xl border border-dark/10 bg-white p-5 shadow-sm"
+                    className="rounded-2xl border border-dark/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                   >
                     <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-dark">
                       {item.sector}
                     </h4>
                     {item.companies.length > 0 ? (
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="mt-3 flex flex-wrap gap-2.5">
                         {item.companies.map((company) => (
                           <span
                             key={`${item.sector}-${company}`}
-                            className="inline-flex rounded-full border border-dark/10 bg-background px-3 py-1.5 text-xs font-medium text-dark/75"
+                            className="inline-flex items-center gap-2 rounded-full border border-dark/10 bg-background px-2.5 py-1.5 text-xs font-medium text-dark/80"
                           >
-                            {company}
+                            <span
+                              aria-hidden="true"
+                              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-dark text-[10px] font-semibold leading-none tracking-wide text-white"
+                            >
+                              {getCompanyMonogram(company)}
+                            </span>
+                            <span>{company}</span>
                           </span>
                         ))}
                       </div>
