@@ -75,6 +75,44 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
   }, [service.id, language, content.title]);
 
   const heroCover = galleryImages[0];
+  const safetyHero = {
+    src: "/img/safety-detail-hero.png",
+    alt:
+      language === "tr"
+        ? "Safety sistemleri detay görseli — Yazıcı Otomasyon"
+        : "Safety systems detail visual — Yazıcı Otomasyon",
+  };
+  const sensorHero = {
+    src: "/img/sensor-detail-hero.png",
+    alt:
+      language === "tr"
+        ? "Sensör sistemleri detay görseli — Yazıcı Otomasyon"
+        : "Sensor systems detail visual — Yazıcı Otomasyon",
+  };
+  const controlSystemHero = {
+    src: "/img/control-system-detail-hero.png",
+    alt:
+      language === "tr"
+        ? "Control System detay görseli — Yazıcı Otomasyon"
+        : "Control System detail visual — Yazıcı Otomasyon",
+  };
+  const encoderHero = {
+    src: "/img/encoder-detail-hero.png",
+    alt:
+      language === "tr"
+        ? "Encoder çözümleri detay görseli — Yazıcı Otomasyon"
+        : "Encoder solutions detail visual — Yazıcı Otomasyon",
+  };
+  const heroDisplay =
+    service.id === "product-1"
+      ? safetyHero
+      : service.id === "product-2"
+        ? sensorHero
+        : service.id === "product-3"
+          ? controlSystemHero
+          : service.id === "product-4"
+            ? encoderHero
+        : heroCover;
 
   return (
     <div className="bg-background text-foreground">
@@ -171,7 +209,7 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
           <div
             className={`grid w-full items-center gap-10 ${heroCover ? "lg:grid-cols-2 lg:gap-12 xl:gap-16" : ""}`}
           >
-            {heroCover && (
+            {heroDisplay && (
               <motion.div
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -179,8 +217,8 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
                 className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl border border-lilac/20 bg-slate-100 shadow-lg shadow-lilac/10 lg:mx-0 lg:max-w-none"
               >
                 <Image
-                  src={heroCover.src}
-                  alt={heroCover.alt}
+                  src={heroDisplay.src}
+                  alt={heroDisplay.alt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
