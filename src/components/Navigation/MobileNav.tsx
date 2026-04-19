@@ -23,20 +23,20 @@ type MobileNavProps = {
 
 const products = {
   tr: [
-    { id: "product-1", title: "Ürün 1" },
-    { id: "product-2", title: "Ürün 2" },
-    { id: "product-3", title: "Ürün 3" },
-    { id: "product-4", title: "Ürün 4" },
-    { id: "product-5", title: "Ürün 5" },
-    { id: "product-6", title: "Ürün 6" },
+    { id: "product-1", title: "Safety sistemleri" },
+    { id: "product-2", title: "Endüstriyel sensörler" },
+    { id: "product-3", title: "Kontrol sistemleri" },
+    { id: "product-4", title: "Encoder çözümleri" },
+    { id: "product-5", title: "Instrument" },
+    { id: "product-6", title: "Pano & güç bileşenleri" },
   ],
   en: [
-    { id: "product-1", title: "Product 1" },
-    { id: "product-2", title: "Product 2" },
-    { id: "product-3", title: "Product 3" },
-    { id: "product-4", title: "Product 4" },
-    { id: "product-5", title: "Product 5" },
-    { id: "product-6", title: "Product 6" },
+    { id: "product-1", title: "Safety systems" },
+    { id: "product-2", title: "Industrial sensors" },
+    { id: "product-3", title: "Control systems" },
+    { id: "product-4", title: "Encoder solutions" },
+    { id: "product-5", title: "Instrumentation" },
+    { id: "product-6", title: "Panel & power" },
   ],
 } as const;
 

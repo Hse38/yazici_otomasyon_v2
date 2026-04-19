@@ -17,12 +17,12 @@ type GlobalGalleryProps = {
 };
 
 const productTitles = {
-  "product-1": { tr: "Ürün 1", en: "Product 1" },
-  "product-2": { tr: "Ürün 2", en: "Product 2" },
-  "product-3": { tr: "Ürün 3", en: "Product 3" },
-  "product-4": { tr: "Ürün 4", en: "Product 4" },
-  "product-5": { tr: "Ürün 5", en: "Product 5" },
-  "product-6": { tr: "Ürün 6", en: "Product 6" },
+  "product-1": { tr: "Safety sistemleri", en: "Safety systems" },
+  "product-2": { tr: "Endüstriyel sensörler", en: "Industrial sensors" },
+  "product-3": { tr: "Kontrol sistemleri", en: "Control systems" },
+  "product-4": { tr: "Encoder çözümleri", en: "Encoder solutions" },
+  "product-5": { tr: "Instrument", en: "Instrumentation" },
+  "product-6": { tr: "Pano & güç bileşenleri", en: "Panel & power" },
 } as const;
 
 export function getGlobalGalleryImages(
