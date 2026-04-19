@@ -9,7 +9,11 @@ type CatalogCategory = {
   serviceId: string;
   title: string;
   description: string;
-  brands: readonly string[];
+  brands: readonly {
+    name: string;
+    logoAlt: string;
+    logoSrc?: string;
+  }[];
   features: readonly string[];
   imageSet: readonly string[];
 };
@@ -107,12 +111,26 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                       }}
                     >
                       {[...category.brands, ...category.brands].map((brand, brandIndex) => (
-                        <span
-                          key={`${category.key}-${brand}-${brandIndex}`}
-                          className="inline-flex shrink-0 items-center rounded-full border border-dark/10 bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-dark/45 transition hover:border-dark/20 hover:text-dark"
+                        <div
+                          key={`${category.key}-${brand.name}-${brandIndex}`}
+                          className="inline-flex h-10 min-w-[124px] shrink-0 items-center justify-center rounded-full border border-dark/10 bg-white px-3.5 transition hover:border-dark/20"
+                          title={brand.name}
                         >
-                          {brand}
-                        </span>
+                          {brand.logoSrc ? (
+                            <Image
+                              src={brand.logoSrc}
+                              alt={brand.logoAlt}
+                              width={110}
+                              height={24}
+                              className="h-5 w-auto object-contain opacity-75 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                              sizes="110px"
+                            />
+                          ) : (
+                            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-dark/45 transition hover:text-dark">
+                              {brand.name}
+                            </span>
+                          )}
+                        </div>
                       ))}
                     </motion.div>
                   </div>

@@ -158,7 +158,14 @@ const translations = {
           title: "Safety Systems",
           description:
             "Machine safety architecture for guarding, interlock, emergency stop, and compliance-critical applications.",
-          brands: ["Schmersal", "Euchner", "Bernstein", "Sick", "Pizzato", "Pilz"],
+          brands: [
+            { name: "Schmersal", logoAlt: "Schmersal logo" },
+            { name: "Euchner", logoAlt: "Euchner logo" },
+            { name: "Bernstein", logoAlt: "Bernstein logo" },
+            { name: "Sick", logoAlt: "Sick logo" },
+            { name: "Pizzato", logoAlt: "Pizzato logo" },
+            { name: "Pilz", logoAlt: "Pilz logo" },
+          ],
           features: [
             "Safety assessment and architecture planning",
             "Risk analysis and hazard mitigation workflow",
@@ -173,7 +180,14 @@ const translations = {
           title: "Sensor Systems",
           description:
             "Reliable sensing layer for position, presence, distance, and process detection in harsh industrial environments.",
-          brands: ["Sick", "IFM", "Balluff", "Turck", "Omron", "Pepperl+Fuchs"],
+          brands: [
+            { name: "Sick", logoAlt: "Sick logo" },
+            { name: "IFM", logoAlt: "IFM logo" },
+            { name: "Balluff", logoAlt: "Balluff logo" },
+            { name: "Turck", logoAlt: "Turck logo" },
+            { name: "Omron", logoAlt: "Omron logo" },
+            { name: "Pepperl+Fuchs", logoAlt: "Pepperl+Fuchs logo" },
+          ],
           features: [
             "Application-based sensor selection",
             "IP and environment fit verification",
@@ -189,12 +203,17 @@ const translations = {
           description:
             "PLC, HMI, I/O, and communication infrastructure designed for deterministic control and scalable line automation.",
           brands: [
-            "Siemens",
-            "Schneider Electric",
-            "Mitsubishi Electric",
-            "Omron",
-            "Beckhoff",
-            "Allen-Bradley",
+            { name: "Siemens", logoAlt: "Siemens logo" },
+            { name: "Schneider Electric", logoAlt: "Schneider Electric logo" },
+            { name: "Mitsubishi Electric", logoAlt: "Mitsubishi Electric logo" },
+            { name: "Omron", logoAlt: "Omron logo" },
+            { name: "Beckhoff", logoAlt: "Beckhoff logo" },
+            { name: "Allen-Bradley", logoAlt: "Allen-Bradley logo" },
+            {
+              name: "Planet Makina",
+              logoSrc: "/img/brands/planet-makina-logo.svg",
+              logoAlt: "Planet Makina logo",
+            },
           ],
           features: [
             "Control architecture and CPU sizing",
@@ -210,7 +229,14 @@ const translations = {
           title: "Encoder Solutions",
           description:
             "Motion feedback components for precise speed, position, and synchronization requirements on rotary and linear systems.",
-          brands: ["Sick", "Kübler", "Baumer", "Leine Linde", "Omron", "Pepperl+Fuchs"],
+          brands: [
+            { name: "Sick", logoAlt: "Sick logo" },
+            { name: "Kübler", logoAlt: "Kübler logo" },
+            { name: "Baumer", logoAlt: "Baumer logo" },
+            { name: "Leine Linde", logoAlt: "Leine Linde logo" },
+            { name: "Omron", logoAlt: "Omron logo" },
+            { name: "Pepperl+Fuchs", logoAlt: "Pepperl+Fuchs logo" },
+          ],
           features: [
             "Absolute and incremental encoder selection",
             "Mechanical fit and shaft coupling guidance",
@@ -225,7 +251,14 @@ const translations = {
           title: "Instrument Solutions",
           description:
             "Field instrumentation for pressure, temperature, level, and flow with plant-grade reliability and traceability.",
-          brands: ["Endress+Hauser", "WIKA", "Yokogawa", "Siemens", "KROHNE", "ABB"],
+          brands: [
+            { name: "Endress+Hauser", logoAlt: "Endress+Hauser logo" },
+            { name: "WIKA", logoAlt: "WIKA logo" },
+            { name: "Yokogawa", logoAlt: "Yokogawa logo" },
+            { name: "Siemens", logoAlt: "Siemens logo" },
+            { name: "KROHNE", logoAlt: "KROHNE logo" },
+            { name: "ABB", logoAlt: "ABB logo" },
+          ],
           features: [
             "Measurement chain design support",
             "Calibration and accuracy planning",
@@ -521,7 +554,14 @@ const translations = {
           title: "Safety Sistemleri",
           description:
             "Makine emniyet mimarisi, interlock, acil stop ve uyumluluk kritik uygulamalarda uçtan uca çözüm yaklaşımı.",
-          brands: ["Schmersal", "Euchner", "Bernstein", "Sick", "Pizzato", "Pilz"],
+          brands: [
+            { name: "Schmersal", logoAlt: "Schmersal logosu" },
+            { name: "Euchner", logoAlt: "Euchner logosu" },
+            { name: "Bernstein", logoAlt: "Bernstein logosu" },
+            { name: "Sick", logoAlt: "Sick logosu" },
+            { name: "Pizzato", logoAlt: "Pizzato logosu" },
+            { name: "Pilz", logoAlt: "Pilz logosu" },
+          ],
           features: [
             "Emniyet değerlendirmesi",
             "Risk analizi ve tehlike azaltma akışı",
@@ -536,7 +576,14 @@ const translations = {
           title: "Sensör Sistemleri",
           description:
             "Zorlu üretim ortamlarında konum, varlık, mesafe ve proses algılama için güvenilir sensör katmanı.",
-          brands: ["Sick", "IFM", "Balluff", "Turck", "Omron", "Pepperl+Fuchs"],
+          brands: [
+            { name: "Sick", logoAlt: "Sick logosu" },
+            { name: "IFM", logoAlt: "IFM logosu" },
+            { name: "Balluff", logoAlt: "Balluff logosu" },
+            { name: "Turck", logoAlt: "Turck logosu" },
+            { name: "Omron", logoAlt: "Omron logosu" },
+            { name: "Pepperl+Fuchs", logoAlt: "Pepperl+Fuchs logosu" },
+          ],
           features: [
             "Uygulamaya uygun sensör seçimi",
             "IP sınıfı ve ortam uygunluğu doğrulaması",
@@ -552,12 +599,17 @@ const translations = {
           description:
             "Deterministik kontrol ve ölçeklenebilir hat otomasyonu için PLC, HMI, I/O ve iletişim altyapısı.",
           brands: [
-            "Siemens",
-            "Schneider Electric",
-            "Mitsubishi Electric",
-            "Omron",
-            "Beckhoff",
-            "Allen-Bradley",
+            { name: "Siemens", logoAlt: "Siemens logosu" },
+            { name: "Schneider Electric", logoAlt: "Schneider Electric logosu" },
+            { name: "Mitsubishi Electric", logoAlt: "Mitsubishi Electric logosu" },
+            { name: "Omron", logoAlt: "Omron logosu" },
+            { name: "Beckhoff", logoAlt: "Beckhoff logosu" },
+            { name: "Allen-Bradley", logoAlt: "Allen-Bradley logosu" },
+            {
+              name: "Planet Makina",
+              logoSrc: "/img/brands/planet-makina-logo.svg",
+              logoAlt: "Planet Makina logosu",
+            },
           ],
           features: [
             "Kontrol mimarisi ve CPU boyutlandırma",
@@ -573,7 +625,14 @@ const translations = {
           title: "Encoder Çözümleri",
           description:
             "Döner ve lineer sistemlerde hız, pozisyon ve senkronizasyon için hassas geri besleme bileşenleri.",
-          brands: ["Sick", "Kübler", "Baumer", "Leine Linde", "Omron", "Pepperl+Fuchs"],
+          brands: [
+            { name: "Sick", logoAlt: "Sick logosu" },
+            { name: "Kübler", logoAlt: "Kübler logosu" },
+            { name: "Baumer", logoAlt: "Baumer logosu" },
+            { name: "Leine Linde", logoAlt: "Leine Linde logosu" },
+            { name: "Omron", logoAlt: "Omron logosu" },
+            { name: "Pepperl+Fuchs", logoAlt: "Pepperl+Fuchs logosu" },
+          ],
           features: [
             "Absolute ve incremental encoder seçimi",
             "Mekanik uyum ve mil bağlantı yönlendirmesi",
@@ -588,7 +647,14 @@ const translations = {
           title: "Instrument Çözümleri",
           description:
             "Basınç, sıcaklık, seviye ve debi ölçümlerinde tesis ölçeğinde güvenilirlik ve izlenebilirlik.",
-          brands: ["Endress+Hauser", "WIKA", "Yokogawa", "Siemens", "KROHNE", "ABB"],
+          brands: [
+            { name: "Endress+Hauser", logoAlt: "Endress+Hauser logosu" },
+            { name: "WIKA", logoAlt: "WIKA logosu" },
+            { name: "Yokogawa", logoAlt: "Yokogawa logosu" },
+            { name: "Siemens", logoAlt: "Siemens logosu" },
+            { name: "KROHNE", logoAlt: "KROHNE logosu" },
+            { name: "ABB", logoAlt: "ABB logosu" },
+          ],
           features: [
             "Ölçüm zinciri kurgusu ve saha uygunluğu",
             "Kalibrasyon ve doğruluk planlaması",
