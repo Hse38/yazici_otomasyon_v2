@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 type CatalogCategory = {
   key: string;
+  serviceId: string;
   title: string;
   description: string;
   brands: readonly string[];
@@ -16,6 +18,7 @@ type CatalogContent = {
   kicker: string;
   title: string;
   description: string;
+  detailAction: string;
   categories: readonly CatalogCategory[];
 };
 
@@ -44,7 +47,28 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                 className={`grid gap-0 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""}`}
               >
                 <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
-                  <h3 className="text-2xl font-semibold text-dark sm:text-3xl">{category.title}</h3>
+                  <Link
+                    href={`/services/${category.serviceId}`}
+                    className="group inline-flex w-fit items-center gap-2"
+                  >
+                    <h3 className="text-2xl font-semibold text-dark transition group-hover:text-dark-purple sm:text-3xl">
+                      {category.title}
+                    </h3>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-dark/55 transition-transform group-hover:translate-x-1 group-hover:text-dark"
+                      aria-hidden
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                   <p className="mt-3 text-sm leading-relaxed text-dark/70 sm:text-base">
                     {category.description}
                   </p>
@@ -72,17 +96,46 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                     </div>
                   </div>
 
-                  <div className="mt-5 overflow-x-auto pb-1">
-                    <div className="flex min-w-max gap-2.5">
-                      {category.brands.map((brand) => (
+                  <div className="mt-5 overflow-hidden pb-1">
+                    <motion.div
+                      className="flex min-w-max gap-2.5"
+                      animate={{ x: ["0%", "-50%"] }}
+                      transition={{
+                        duration: 18,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    >
+                      {[...category.brands, ...category.brands].map((brand, brandIndex) => (
                         <span
-                          key={`${category.key}-${brand}`}
+                          key={`${category.key}-${brand}-${brandIndex}`}
                           className="inline-flex shrink-0 items-center rounded-full border border-dark/10 bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-dark/45 transition hover:border-dark/20 hover:text-dark"
                         >
                           {brand}
                         </span>
                       ))}
-                    </div>
+                    </motion.div>
+                  </div>
+                  <div className="mt-5">
+                    <Link
+                      href={`/services/${category.serviceId}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-dark/70 transition hover:border-dark/25 hover:text-dark"
+                    >
+                      {content.detailAction}
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
               </div>

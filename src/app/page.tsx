@@ -150,9 +150,11 @@ const translations = {
       title: "Engineering-grade categories and brand ecosystem",
       description:
         "Browse our category-based showcase to evaluate capability, standards alignment, and proven brand coverage.",
+      detailAction: "View details",
       categories: [
         {
           key: "safety",
+          serviceId: "product-1",
           title: "Safety Systems",
           description:
             "Machine safety architecture for guarding, interlock, emergency stop, and compliance-critical applications.",
@@ -167,6 +169,7 @@ const translations = {
         },
         {
           key: "sensor",
+          serviceId: "product-2",
           title: "Sensor Systems",
           description:
             "Reliable sensing layer for position, presence, distance, and process detection in harsh industrial environments.",
@@ -181,6 +184,7 @@ const translations = {
         },
         {
           key: "control",
+          serviceId: "product-3",
           title: "Control System",
           description:
             "PLC, HMI, I/O, and communication infrastructure designed for deterministic control and scalable line automation.",
@@ -202,6 +206,7 @@ const translations = {
         },
         {
           key: "encoder",
+          serviceId: "product-4",
           title: "Encoder Solutions",
           description:
             "Motion feedback components for precise speed, position, and synchronization requirements on rotary and linear systems.",
@@ -216,6 +221,7 @@ const translations = {
         },
         {
           key: "instrument",
+          serviceId: "product-5",
           title: "Instrument Solutions",
           description:
             "Field instrumentation for pressure, temperature, level, and flow with plant-grade reliability and traceability.",
@@ -507,9 +513,11 @@ const translations = {
       title: "Mühendislik odaklı kategori ve marka ekosistemi",
       description:
         "Kategori bazlı vitrin ile teknik yetkinlik, standart uyumu ve güçlü marka kapsamını birlikte değerlendirin.",
+      detailAction: "Detay sayfası",
       categories: [
         {
           key: "safety",
+          serviceId: "product-1",
           title: "Safety Sistemleri",
           description:
             "Makine emniyet mimarisi, interlock, acil stop ve uyumluluk kritik uygulamalarda uçtan uca çözüm yaklaşımı.",
@@ -524,6 +532,7 @@ const translations = {
         },
         {
           key: "sensor",
+          serviceId: "product-2",
           title: "Sensör Sistemleri",
           description:
             "Zorlu üretim ortamlarında konum, varlık, mesafe ve proses algılama için güvenilir sensör katmanı.",
@@ -538,6 +547,7 @@ const translations = {
         },
         {
           key: "control",
+          serviceId: "product-3",
           title: "Control System",
           description:
             "Deterministik kontrol ve ölçeklenebilir hat otomasyonu için PLC, HMI, I/O ve iletişim altyapısı.",
@@ -559,6 +569,7 @@ const translations = {
         },
         {
           key: "encoder",
+          serviceId: "product-4",
           title: "Encoder Çözümleri",
           description:
             "Döner ve lineer sistemlerde hız, pozisyon ve senkronizasyon için hassas geri besleme bileşenleri.",
@@ -573,6 +584,7 @@ const translations = {
         },
         {
           key: "instrument",
+          serviceId: "product-5",
           title: "Instrument Çözümleri",
           description:
             "Basınç, sıcaklık, seviye ve debi ölçümlerinde tesis ölçeğinde güvenilirlik ve izlenebilirlik.",
