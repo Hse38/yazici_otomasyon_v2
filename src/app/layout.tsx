@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { ChatbotProvider } from "../contexts/ChatbotContext";
 import { NavProvider } from "../contexts/NavContext";
 import { PageTransition } from "../components/PageTransition";
+import { SmoothScrollProvider } from "../components/SmoothScrollProvider";
 import { getPublicSiteUrl } from "../lib/seo";
 
 const siteUrl = getPublicSiteUrl();
@@ -79,13 +80,15 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ChatbotProvider>
-          <NavProvider>
-            <PageTransition>
-              {children}
-            </PageTransition>
-          </NavProvider>
-        </ChatbotProvider>
+        <SmoothScrollProvider>
+          <ChatbotProvider>
+            <NavProvider>
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </NavProvider>
+          </ChatbotProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

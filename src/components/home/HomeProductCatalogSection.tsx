@@ -29,10 +29,34 @@ type CatalogContent = {
 export function HomeProductCatalogSection({ content }: { content: CatalogContent }) {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-12 md:gap-16">
-      <div className="max-w-3xl space-y-4">
-        <p className="text-xs uppercase tracking-[0.36em] text-dark-purple">{content.kicker}</p>
-        <h2 className="text-3xl font-semibold text-dark sm:text-4xl">{content.title}</h2>
-        <p className="text-base leading-relaxed text-dark/70 sm:text-lg">{content.description}</p>
+      <div className="mb-12 flex flex-col gap-4">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-accent"
+        >
+          {content.kicker}
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="max-w-2xl font-serif text-3xl font-semibold tracking-tight text-dark sm:text-4xl"
+        >
+          {content.title}
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: 0.1 }}
+          className="max-w-xl text-base text-dark/60"
+        >
+          {content.description}
+        </motion.p>
       </div>
 
       <div className="space-y-8 sm:space-y-10">
@@ -45,7 +69,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-70px" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
-              className="overflow-hidden rounded-3xl border border-dark/10 bg-white shadow-[0_16px_36px_-24px_rgba(7,15,22,0.4)]"
+              className="card-hover overflow-hidden rounded-3xl border border-dark/10 bg-white shadow-[0_16px_36px_-24px_rgba(7,15,22,0.4)]"
             >
               <div
                 className={`grid gap-0 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""}`}

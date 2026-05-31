@@ -11,37 +11,48 @@ export type FinalCtaContent = {
 export function HomeFinalCtaSection({ content }: { content: FinalCtaContent }) {
   return (
     <section
-      id="cta-final"
-      className="section-padding border-y border-white/10 bg-dark-purple text-white"
-      aria-labelledby="final-cta-heading"
+      className="relative overflow-hidden section-padding bg-navy text-white"
+      aria-label="Call to action"
     >
-      <div className="mx-auto max-w-4xl text-center">
+      {/* BG effects */}
+      <div className="absolute inset-0 grid-overlay pointer-events-none opacity-40" aria-hidden />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-accent/10 blur-[100px] pointer-events-none" aria-hidden />
+      <div className="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-navy-mid/60 blur-[80px] pointer-events-none" aria-hidden />
+
+      <div className="relative mx-auto max-w-4xl text-center">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-6 h-0.5 w-12 bg-accent"
+        />
         <motion.h2
-          id="final-cta-heading"
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.35 }}
-          className="font-serif text-3xl font-semibold leading-snug tracking-tight text-white sm:text-4xl"
+          transition={{ duration: 0.55 }}
+          className="font-serif text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
         >
           {content.title}
         </motion.h2>
+
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.35, delay: 0.08 }}
-          className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-10 flex flex-wrap justify-center gap-4"
         >
           <a
             href="#contact"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-lilac px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-lg shadow-black/20 transition hover:bg-soft-lavender hover:text-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-accent/40"
           >
             {content.ctaQuote}
           </a>
           <a
             href="tel:+905530568939"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/35 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-soft-lavender hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:-translate-y-0.5"
           >
             {content.ctaContact}
           </a>
