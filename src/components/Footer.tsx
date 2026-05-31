@@ -2,17 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { BranchPhoneCard } from "./BranchPhoneCard";
+import { BRANCHES, CONTACT_EMAIL, WHATSAPP_HREF } from "../data/branches";
 
 type FooterProps = {
   language: "tr" | "en";
 };
-
-const CONTACT_PHONE = "+90 553 056 89 39";
-const CONTACT_PHONE_TEL = "+905530568939";
-const CONTACT_PHONE_2 = "+90 532 056 34 39";
-const CONTACT_PHONE_TEL_2 = "+905320563439";
-const CONTACT_EMAIL = "info@yaziciotomasyon.com";
-const WHATSAPP_HREF = "https://wa.me/905530568939";
 
 const copy = {
   tr: {
@@ -37,7 +32,7 @@ const copy = {
     phoneLabel: "Telefon",
     emailLabel: "E-posta",
     locationLabel: "Lokasyon",
-    location: "İstanbul, Türkiye",
+    location: "İstanbul & Trakya, Türkiye",
     whatsapp: "WhatsApp",
     ctaQuote: "Hızlı Teklif Al",
     explore: "Site",
@@ -73,7 +68,7 @@ const copy = {
     phoneLabel: "Phone",
     emailLabel: "Email",
     locationLabel: "Location",
-    location: "Istanbul, Turkey",
+    location: "Istanbul & Thrace, Turkey",
     whatsapp: "WhatsApp",
     ctaQuote: "Request a quick quote",
     explore: "Explore",
@@ -178,18 +173,16 @@ export function Footer({ language }: FooterProps) {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/38">
                     {t.phoneLabel}
                   </p>
-                  <a
-                    href={`tel:${CONTACT_PHONE_TEL}`}
-                    className="mt-1.5 block text-base font-semibold text-white transition hover:text-soft-lavender"
-                  >
-                    {CONTACT_PHONE}
-                  </a>
-                  <a
-                    href={`tel:${CONTACT_PHONE_TEL_2}`}
-                    className="mt-1 block text-base font-semibold text-white/85 transition hover:text-soft-lavender"
-                  >
-                    {CONTACT_PHONE_2}
-                  </a>
+                  <div className="mt-3 flex flex-col gap-2.5">
+                    {BRANCHES.map((branch) => (
+                      <BranchPhoneCard
+                        key={branch.id}
+                        branch={branch}
+                        language={language}
+                        variant="compact"
+                      />
+                    ))}
+                  </div>
                 </div>
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/38">

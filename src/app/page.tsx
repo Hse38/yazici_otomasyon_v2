@@ -376,6 +376,7 @@ const translations = {
       primaryCta: "Get in touch",
       whatsapp: "WhatsApp",
       call: "Call Now",
+      branchesLabel: "Our branches",
       phone1: "+90 553 056 89 39",
       phone2: "+90 532 056 34 39",
       phone2WhatsApp: false,
@@ -772,6 +773,7 @@ const translations = {
       primaryCta: "İletişime Geç",
       whatsapp: "WhatsApp",
       call: "Hemen Ara",
+      branchesLabel: "Şubelerimiz",
       phone1: "+90 553 056 89 39",
       phone2: "+90 532 056 34 39",
       phone2WhatsApp: false,
@@ -1162,14 +1164,13 @@ export default function Home() {
         <HomeFinalCtaSection content={content.finalCta} />
 
         <HomeContactMapSection
+          language={lang}
           content={{
             title: content.contact.title,
             description: content.contact.description,
             primaryCta: content.contact.primaryCta,
             whatsapp: content.contact.whatsapp,
-            call: content.contact.call,
-            phone1: content.contact.phone1,
-            phone2: content.contact.phone2,
+            branchesLabel: content.contact.branchesLabel,
             channelsHint:
               lang === "tr" ? "veya doğrudan kanallar" : "or reach us directly",
           }}
