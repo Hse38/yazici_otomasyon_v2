@@ -110,7 +110,7 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
       {/* ═══ HERO ═══ */}
       <section
         id="hero"
-        className="relative -mt-[4.5rem] min-h-screen overflow-hidden sm:-mt-20"
+        className="relative isolate z-10 -mt-[4.5rem] h-screen min-h-screen max-h-screen overflow-hidden sm:-mt-20"
         aria-label="Hero"
       >
         {/* Background images — crossfade */}
@@ -171,7 +171,7 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-[4.5rem] text-center sm:px-10 sm:pt-20 lg:px-20">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pb-24 pt-[4.5rem] text-center sm:px-10 sm:pt-20 lg:px-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -243,7 +243,7 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
 
         {/* Slide navigation — bottom */}
         <div
-          className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-4"
+          className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-6"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -253,7 +253,7 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
               type="button"
               onClick={() => setCurrent(i)}
               aria-label={slide.alt}
-              className="flex w-14 flex-col gap-1.5 focus-visible:outline-none"
+              className="flex w-20 flex-col gap-1.5 focus-visible:outline-none"
             >
               <span className={`block h-0.5 rounded-full transition-colors duration-300 ${i === current ? "bg-white/50" : "bg-white/20"}`} />
               <SlideProgress active={i === current && !paused} duration={DURATION} />
@@ -282,9 +282,21 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
         </a>
       </section>
 
+      {/* Separator — hero ends, showcase begins */}
+      <div className="relative z-20 bg-[#071523]" aria-hidden>
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
+        <div className="h-3 w-full bg-[#071523]" />
+      </div>
+
       {/* ═══ SCROLL-DRIVEN SHOWCASE ═══ */}
-      <div id="scroll-showcase" ref={scrollRef} className="relative" style={{ height: "280vh" }}>
-        <div className="sticky top-0 h-screen overflow-hidden">
+      <div
+        id="scroll-showcase"
+        ref={scrollRef}
+        className="relative isolate bg-[#071523]"
+        style={{ height: "280vh" }}
+      >
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#071523]">
+          <div className="absolute inset-0 bg-[#071523]" aria-hidden />
           <div className="absolute inset-0">
             <AnimatePresence initial={false}>
               <MotionPicture
