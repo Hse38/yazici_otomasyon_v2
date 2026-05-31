@@ -1164,13 +1164,14 @@ export default function Home() {
         <HomeFinalCtaSection content={content.finalCta} />
 
         <HomeContactMapSection
-          language={lang}
           content={{
             title: content.contact.title,
             description: content.contact.description,
             primaryCta: content.contact.primaryCta,
             whatsapp: content.contact.whatsapp,
-            branchesLabel: content.contact.branchesLabel,
+            call: content.contact.call,
+            phone1: content.contact.phone1,
+            phone2: content.contact.phone2,
             channelsHint:
               lang === "tr" ? "veya doğrudan kanallar" : "or reach us directly",
           }}
