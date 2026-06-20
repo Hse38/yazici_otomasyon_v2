@@ -64,6 +64,8 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
       <div className="space-y-8 sm:space-y-10">
         {content.categories.map((category, idx) => {
           const reverse = idx % 2 === 1;
+          const detailHref = getServicePath(category.serviceId as ServiceId);
+
           return (
             <motion.article
               key={category.key}
@@ -71,17 +73,18 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-70px" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
-              className="card-hover overflow-hidden rounded-3xl border border-dark/10 bg-white shadow-[0_16px_36px_-24px_rgba(7,15,22,0.4)]"
+              className="card-hover group/card overflow-hidden rounded-3xl border border-dark/10 bg-white shadow-[0_16px_36px_-24px_rgba(7,15,22,0.4)]"
             >
               <div
                 className={`grid gap-0 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : ""}`}
               >
                 <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
                   <Link
-                    href={getServicePath(category.serviceId as ServiceId)}
-                    className="group inline-flex w-fit items-center gap-2"
+                    href={detailHref}
+                    className="group/title inline-flex w-fit max-w-full cursor-pointer items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
+                    aria-label={`${category.title} — ${content.detailAction}`}
                   >
-                    <h3 className="text-2xl font-semibold text-dark transition group-hover:text-dark-purple sm:text-3xl">
+                    <h3 className="text-2xl font-semibold text-dark transition group-hover/title:text-dark-purple sm:text-3xl">
                       {category.title}
                     </h3>
                     <svg
@@ -93,7 +96,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-dark/55 transition-transform group-hover:translate-x-1 group-hover:text-dark"
+                      className="shrink-0 text-dark/55 transition-transform group-hover/title:translate-x-1 group-hover/title:text-dark"
                       aria-hidden
                     >
                       <path d="M5 12h14M12 5l7 7-7 7" />
@@ -116,15 +119,28 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                 </div>
 
                 <div className="border-t border-dark/10 bg-slate-50/70 p-6 sm:p-8 lg:border-l lg:border-t-0">
-                  <div className="rounded-2xl border border-dark/10 bg-white p-4 shadow-sm">
+                  <Link
+                    href={detailHref}
+                    className="group/images block cursor-pointer rounded-2xl border border-dark/10 bg-white p-4 shadow-sm transition duration-300 hover:border-dark/20 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 group-hover/card:border-dark/15 group-hover/card:shadow-md"
+                    aria-label={`${category.title} — ${content.detailAction}`}
+                  >
                     <div className="grid grid-cols-3 gap-3">
                       {category.imageSet.map((src) => (
-                        <div key={`${category.key}-${src}`} className="relative aspect-square overflow-hidden rounded-xl bg-slate-100">
-                          <Image src={src} alt={`${category.title} — Yazıcı Otomasyon endüstriyel otomasyon`} fill className="object-cover" sizes="(max-width:1024px) 33vw, 220px" />
+                        <div
+                          key={`${category.key}-${src}`}
+                          className="relative aspect-square overflow-hidden rounded-xl bg-slate-100"
+                        >
+                          <Image
+                            src={src}
+                            alt={`${category.title} — Yazıcı Otomasyon endüstriyel otomasyon`}
+                            fill
+                            className="object-cover transition duration-300 group-hover/images:scale-[1.03]"
+                            sizes="(max-width:1024px) 33vw, 220px"
+                          />
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </Link>
 
                   <div className="mt-5 overflow-hidden pb-1">
                     <motion.div
@@ -163,8 +179,8 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                   </div>
                   <div className="mt-5">
                     <Link
-                      href={getServicePath(category.serviceId as ServiceId)}
-                      className="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-dark/70 transition hover:border-dark/25 hover:text-dark"
+                      href={detailHref}
+                      className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-dark/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-dark/70 transition hover:-translate-y-0.5 hover:border-dark/25 hover:text-dark hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
                     >
                       {content.detailAction}
                       <svg
