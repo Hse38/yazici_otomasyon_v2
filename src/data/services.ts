@@ -240,6 +240,15 @@ const PRODUCT_EN: ProductLocale[] = [
   },
 ];
 
+const CATEGORY_TITLES: Record<ServiceId, { tr: string; en: string }> = {
+  "product-1": { tr: "Safety Sistemleri", en: "Safety Systems" },
+  "product-2": { tr: "Sensör Sistemleri", en: "Sensor Systems" },
+  "product-3": { tr: "Kontrol Sistemleri", en: "Control Systems" },
+  "product-4": { tr: "Encoder Çözümleri", en: "Encoder Solutions" },
+  "product-5": { tr: "Instrument Çözümleri", en: "Instrument Solutions" },
+  "product-6": { tr: "Pano & Güç Bileşenleri", en: "Panel & Power Components" },
+};
+
 function buildProduct(index: number): ServiceData {
   if (index < 1 || index > 6) {
     throw new Error("Invalid product index");
@@ -253,7 +262,7 @@ function buildProduct(index: number): ServiceData {
     id,
     tr: {
       eyebrow: "ÜRÜNLER",
-      title: `Ürün ${index}`,
+      title: CATEGORY_TITLES[id].tr,
       description: tr.description,
       overview: {
         what: tr.overviewWhat,
@@ -320,7 +329,7 @@ function buildProduct(index: number): ServiceData {
     },
     en: {
       eyebrow: "PRODUCTS",
-      title: `Product ${index}`,
+      title: CATEGORY_TITLES[id].en,
       description: en.description,
       overview: {
         what: en.overviewWhat,

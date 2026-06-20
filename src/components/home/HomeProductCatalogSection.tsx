@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import type { ServiceId } from "../../data/services";
+import { getServicePath } from "../../lib/seo";
 
 type CatalogCategory = {
   key: string;
@@ -76,7 +78,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
               >
                 <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
                   <Link
-                    href={`/services/${category.serviceId}`}
+                    href={getServicePath(category.serviceId as ServiceId)}
                     className="group inline-flex w-fit items-center gap-2"
                   >
                     <h3 className="text-2xl font-semibold text-dark transition group-hover:text-dark-purple sm:text-3xl">
@@ -118,7 +120,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                     <div className="grid grid-cols-3 gap-3">
                       {category.imageSet.map((src) => (
                         <div key={`${category.key}-${src}`} className="relative aspect-square overflow-hidden rounded-xl bg-slate-100">
-                          <Image src={src} alt={`${category.title} visual`} fill className="object-cover" sizes="(max-width:1024px) 33vw, 220px" />
+                          <Image src={src} alt={`${category.title} — Yazıcı Otomasyon endüstriyel otomasyon`} fill className="object-cover" sizes="(max-width:1024px) 33vw, 220px" />
                         </div>
                       ))}
                     </div>
@@ -139,6 +141,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                           key={`${category.key}-${brand.name}-${brandIndex}`}
                           className="inline-flex h-10 min-w-[124px] shrink-0 items-center justify-center rounded-full border border-dark/10 bg-white px-3.5 transition hover:border-dark/20"
                           title={brand.name}
+                          aria-hidden={brandIndex >= category.brands.length}
                         >
                           {brand.logoSrc ? (
                             <Image
@@ -160,7 +163,7 @@ export function HomeProductCatalogSection({ content }: { content: CatalogContent
                   </div>
                   <div className="mt-5">
                     <Link
-                      href={`/services/${category.serviceId}`}
+                      href={getServicePath(category.serviceId as ServiceId)}
                       className="inline-flex items-center gap-2 rounded-full border border-dark/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-dark/70 transition hover:border-dark/25 hover:text-dark"
                     >
                       {content.detailAction}

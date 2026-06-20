@@ -330,10 +330,6 @@ const translations = {
           companies: ["Opack Makine", "Brightpack"],
         },
         {
-          sector: "Printing",
-          companies: [],
-        },
-        {
           sector: "Furniture & decor",
           companies: ["Dekor Ahşap", "Lignadecor", "Roma Plastik"],
         },
@@ -727,10 +723,6 @@ const translations = {
           companies: ["Opack Makine", "Brightpack"],
         },
         {
-          sector: "Matbaa",
-          companies: [],
-        },
-        {
           sector: "Mobilya & dekor",
           companies: ["Dekor Ahşap", "Lignadecor", "Roma Plastik"],
         },
@@ -821,12 +813,13 @@ function getCompanyMonogram(name: string): string {
 }
 
 function Counter({ value, suffix }: { value: number; suffix: string; label?: string }) {
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
     let animationFrame = 0;
     const duration = 1200;
     const start = performance.now();
+    setDisplay(0);
 
     const step = (time: number) => {
       const progress = Math.min((time - start) / duration, 1);

@@ -4,11 +4,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
+import {
+  getServicePath,
+  PRODUCT_CATEGORY_LABELS,
+  SERVICE_IDS,
+} from "../lib/seo";
+import type { ServiceId } from "../data/services";
 
 export type GlobalGalleryImage = {
   src: string;
   alt: string;
-  serviceSlug: string;
+  serviceId: ServiceId;
   serviceTitle: string;
 };
 
@@ -16,34 +22,19 @@ type GlobalGalleryProps = {
   language?: "tr" | "en";
 };
 
-const productTitles = {
-  "product-1": { tr: "Safety sistemleri", en: "Safety systems" },
-  "product-2": { tr: "Endüstriyel sensörler", en: "Industrial sensors" },
-  "product-3": { tr: "Kontrol sistemleri", en: "Control systems" },
-  "product-4": { tr: "Encoder çözümleri", en: "Encoder solutions" },
-  "product-5": { tr: "Instrument", en: "Instrumentation" },
-  "product-6": { tr: "Pano & güç bileşenleri", en: "Panel & power" },
-} as const;
-
 export function getGlobalGalleryImages(
   language: "tr" | "en" = "tr"
 ): GlobalGalleryImage[] {
-  const images: GlobalGalleryImage[] = [];
-  (Object.keys(productTitles) as Array<keyof typeof productTitles>).forEach(
-    (slug) => {
-      const n = slug.replace("product-", "");
-      images.push({
-        src: `/img/product-${n}.jpg`,
-        alt:
-          language === "tr"
-            ? `${productTitles[slug].tr} — Yazıcı Otomasyon`
-            : `${productTitles[slug].en} — Yazıcı Otomasyon`,
-        serviceSlug: slug,
-        serviceTitle: productTitles[slug][language],
-      });
-    }
-  );
-  return images;
+  return SERVICE_IDS.map((serviceId) => {
+    const n = serviceId.replace("product-", "");
+    const labels = PRODUCT_CATEGORY_LABELS[serviceId];
+    return {
+      src: `/img/product-${n}.jpg`,
+      alt: `${labels[language]} — Yazıcı Otomasyon endüstriyel otomasyon`,
+      serviceId,
+      serviceTitle: labels[language],
+    };
+  });
 }
 
 export function GlobalGallery({ language = "tr" }: GlobalGalleryProps) {
@@ -60,7 +51,7 @@ export function GlobalGallery({ language = "tr" }: GlobalGalleryProps) {
           transition={{ duration: 0.4, delay: index * 0.05 }}
         >
           <Link
-            href={`/services/${image.serviceSlug}`}
+            href={getServicePath(image.serviceId)}
             className="group block overflow-hidden rounded-2xl border border-dark/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">

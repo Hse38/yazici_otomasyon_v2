@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, useEffect, type MouseEvent } from "react";
 import type { GlobalGalleryImage } from "./GlobalGallery";
+import { getServicePath } from "../lib/seo";
 
 type HorizontalGalleryProps = {
   images: GlobalGalleryImage[];
@@ -117,7 +118,7 @@ export function HorizontalGallery({
       >
         {images.map((image, idx) => (
           <motion.div
-            key={`${image.serviceSlug}-${idx}`}
+            key={`${image.serviceId}-${idx}`}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -125,7 +126,7 @@ export function HorizontalGallery({
             className="snap-start flex-none"
           >
             <Link
-              href={`/services/${image.serviceSlug}#gallery`}
+              href={`${getServicePath(image.serviceId)}#gallery`}
               className="group relative block aspect-[4/3] w-[280px] sm:w-[320px] lg:w-[360px] overflow-hidden rounded-2xl"
               aria-label={
                 language === "tr"

@@ -52,11 +52,23 @@ const SCROLL_SCENES_EN: ScrollScene[] = [
 
 /* ─── Sub-components ─── */
 
-function SlideProgress({ active, duration }: { active: boolean; duration: number }) {
+function SlideProgress({
+  active,
+  duration,
+  isCurrent,
+}: {
+  active: boolean;
+  duration: number;
+  isCurrent: boolean;
+}) {
   return (
-    <div className="h-0.5 w-full overflow-hidden rounded-full bg-white/15">
+    <div
+      className={`h-0.5 w-full overflow-hidden rounded-full transition-colors duration-300 ${
+        isCurrent ? "bg-white/25" : "bg-white/15"
+      }`}
+    >
       <motion.div
-        className="h-full bg-accent rounded-full"
+        className="h-full rounded-full bg-accent"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: active ? 1 : 0 }}
         transition={{ duration: active ? duration / 1000 : 0, ease: "linear" }}
@@ -253,10 +265,13 @@ export function HeroPhotoSection({ content, language }: HeroPhotoSectionProps) {
               type="button"
               onClick={() => setCurrent(i)}
               aria-label={slide.alt}
-              className="flex w-20 flex-col gap-1.5 focus-visible:outline-none"
+              className="flex w-16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#071523] sm:w-20"
             >
-              <span className={`block h-0.5 rounded-full transition-colors duration-300 ${i === current ? "bg-white/50" : "bg-white/20"}`} />
-              <SlideProgress active={i === current && !paused} duration={DURATION} />
+              <SlideProgress
+                active={i === current && !paused}
+                duration={DURATION}
+                isCurrent={i === current}
+              />
             </button>
           ))}
         </div>

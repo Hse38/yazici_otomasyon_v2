@@ -5,6 +5,8 @@ import { useNav } from "../../contexts/NavContext";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getServicePath, PRODUCT_CATEGORY_LABELS } from "../../lib/seo";
+import type { ServiceId } from "../../data/services";
 
 type MobileNavProps = {
   language: "tr" | "en";
@@ -22,22 +24,12 @@ type MobileNavProps = {
 };
 
 const products = {
-  tr: [
-    { id: "product-1", title: "Safety sistemleri" },
-    { id: "product-2", title: "Endüstriyel sensörler" },
-    { id: "product-3", title: "Kontrol sistemleri" },
-    { id: "product-4", title: "Encoder çözümleri" },
-    { id: "product-5", title: "Instrument" },
-    { id: "product-6", title: "Pano & güç bileşenleri" },
-  ],
-  en: [
-    { id: "product-1", title: "Safety systems" },
-    { id: "product-2", title: "Industrial sensors" },
-    { id: "product-3", title: "Control systems" },
-    { id: "product-4", title: "Encoder solutions" },
-    { id: "product-5", title: "Instrumentation" },
-    { id: "product-6", title: "Panel & power" },
-  ],
+  tr: (["product-1", "product-2", "product-3", "product-4", "product-5", "product-6"] as ServiceId[]).map(
+    (id) => ({ id, title: PRODUCT_CATEGORY_LABELS[id].tr })
+  ),
+  en: (["product-1", "product-2", "product-3", "product-4", "product-5", "product-6"] as ServiceId[]).map(
+    (id) => ({ id, title: PRODUCT_CATEGORY_LABELS[id].en })
+  ),
 } as const;
 
 export function MobileNav({
@@ -403,7 +395,7 @@ export function MobileNav({
                           {products[language].map((item) => (
                             <Link
                               key={item.id}
-                              href={`/services/${item.id}`}
+                              href={getServicePath(item.id)}
                               onClick={closeAllMenus}
                               className="flex min-h-[52px] items-center rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-left transition hover:border-lilac/50 hover:bg-lilac/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-lilac/40"
                             >

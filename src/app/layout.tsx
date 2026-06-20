@@ -19,23 +19,19 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const HOME_TITLE = "Yazıcı Otomasyon | Endüstri 4.0 Sensör ve Otomasyon";
+const HOME_DESCRIPTION =
+  "İstanbul merkezli endüstriyel otomasyon tedariki: safety, sensör, PLC/HMI, encoder ve instrument. Otomotiv, gıda, ilaç, tekstil ve OEM hatları için teknik danışmanlık. +90 553 056 89 39 · info@yaziciotomasyon.com";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Yazıcı Otomasyon | Endüstri 4.0 Sensör ve Otomasyon",
-  description:
-    "İstanbul merkezli endüstriyel otomasyon tedariki: safety, sensör, PLC/HMI, encoder ve instrument. Otomotiv, gıda, ilaç, tekstil ve OEM hatları için teknik danışmanlık. +90 553 056 89 39 · info@yaziciotomasyon.com",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png" }],
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
-  keywords: [
-    "endüstriyel otomasyon",
-    "otomasyon ürünleri",
-    "sürücü",
-    "PLC",
-    "Yazıcı Otomasyon",
-  ],
   alternates: {
     canonical: siteUrl,
   },
@@ -44,7 +40,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
+    title: HOME_TITLE,
     description:
       "Endüstriyel otomasyon ürünleri ve teknik tedarik desteği. Ürünlerimizi görün, iletişime geçin.",
     url: siteUrl,
@@ -54,7 +50,7 @@ export const metadata: Metadata = {
         url: "/img/product-1.jpg",
         width: 1200,
         height: 630,
-        alt: "Yazıcı Otomasyon ürün görseli",
+        alt: "Yazıcı Otomasyon endüstriyel otomasyon ürün gamı",
       },
     ],
     locale: "tr_TR",
@@ -62,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yazıcı Otomasyon | Endüstriyel Otomasyon Ürünleri",
+    title: HOME_TITLE,
     description:
       "Endüstriyel otomasyon ürünleri ve teknik tedarik desteği. Ürünlerimizi görün, iletişime geçin.",
     images: ["/img/product-1.jpg"],

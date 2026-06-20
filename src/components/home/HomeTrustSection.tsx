@@ -53,6 +53,7 @@ export function HomeTrustSection({ content }: { content: TrustContent }) {
             {[...content.logos, ...content.logos].map((name, i) => (
               <div
                 key={i}
+                aria-hidden={i >= content.logos.length}
                 className="flex min-w-[140px] items-center justify-center rounded-xl border border-dark/8 bg-white px-5 py-3.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-dark/40 shadow-sm"
               >
                 {name}

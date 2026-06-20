@@ -4,23 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { BranchPhoneCard } from "./BranchPhoneCard";
 import { BRANCHES, CONTACT_EMAIL, WHATSAPP_HREF } from "../data/branches";
+import { getServicePath, PRODUCT_CATEGORY_LABELS } from "../lib/seo";
+import type { ServiceId } from "../data/services";
 
 type FooterProps = {
   language: "tr" | "en";
 };
+
+const FOOTER_CATEGORY_IDS: ServiceId[] = [
+  "product-1",
+  "product-2",
+  "product-3",
+  "product-4",
+  "product-5",
+  "product-6",
+];
 
 const copy = {
   tr: {
     brandPositioning:
       "Endüstri 4.0 uyumlu sensör ve otomasyon çözümleri ile üretim süreçlerinizi daha verimli hale getiriyoruz.",
     categoriesTitle: "Ürün hatları",
-    categories: [
-      { href: "/services/product-1", label: "Endüstriyel Sensörler" },
-      { href: "/services/product-5", label: "Manyetik Sensörler" },
-      { href: "/services/product-1", label: "Proximity Sensörler" },
-      { href: "/services/product-3", label: "Kontrol Sistemleri" },
-      { href: "/services/product-4", label: "Otomasyon Çözümleri" },
-    ],
     whyTitle: "Neden Biz?",
     whyBullets: [
       "Yerli üretim",
@@ -50,13 +54,6 @@ const copy = {
     brandPositioning:
       "Industry 4.0–ready sensors and automation solutions that make your production processes more efficient.",
     categoriesTitle: "Product lines",
-    categories: [
-      { href: "/services/product-1", label: "Industrial sensors" },
-      { href: "/services/product-5", label: "Magnetic sensors" },
-      { href: "/services/product-1", label: "Proximity sensors" },
-      { href: "/services/product-3", label: "Control systems" },
-      { href: "/services/product-4", label: "Automation solutions" },
-    ],
     whyTitle: "Why us?",
     whyBullets: [
       "Domestic manufacturing",
@@ -86,6 +83,10 @@ const copy = {
 
 export function Footer({ language }: FooterProps) {
   const t = copy[language];
+  const categories = FOOTER_CATEGORY_IDS.map((id) => ({
+    href: getServicePath(id),
+    label: PRODUCT_CATEGORY_LABELS[id][language],
+  }));
 
   return (
     <footer className="border-t border-white/[0.06] bg-[#050a10] text-white">
@@ -100,7 +101,6 @@ export function Footer({ language }: FooterProps) {
         />
         <div className="relative mx-auto max-w-6xl px-6 pb-3 pt-12 sm:px-10 sm:pb-4 sm:pt-16 lg:px-20 lg:pb-4 lg:pt-16">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
-            {/* Brand + positioning + CTA */}
             <div className="space-y-5 lg:space-y-6 lg:col-span-5">
               <Link href="/" className="inline-block transition opacity-90 hover:opacity-100">
                 <Image
@@ -124,15 +124,14 @@ export function Footer({ language }: FooterProps) {
               </div>
             </div>
 
-            {/* Categories */}
             <div className="lg:col-span-2">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/40">
                 {t.categoriesTitle}
               </h3>
               <nav className="mt-5 flex flex-col gap-3.5" aria-label={t.categoriesTitle}>
-                {t.categories.map((item) => (
+                {categories.map((item) => (
                   <Link
-                    key={`${item.href}-${item.label}`}
+                    key={item.href}
                     href={item.href}
                     className="text-sm font-medium text-white/70 transition hover:text-white focus:outline-none focus-visible:text-white focus-visible:underline"
                   >
@@ -142,7 +141,6 @@ export function Footer({ language }: FooterProps) {
               </nav>
             </div>
 
-            {/* Why us */}
             <div className="lg:col-span-2">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/40">
                 {t.whyTitle}
@@ -163,7 +161,6 @@ export function Footer({ language }: FooterProps) {
               </ul>
             </div>
 
-            {/* Contact */}
             <div className="lg:col-span-3">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/40">
                 {t.contactTitle}
@@ -216,7 +213,6 @@ export function Footer({ language }: FooterProps) {
             </div>
           </div>
 
-          {/* Secondary nav — compact single band */}
           <nav
             className="mt-5 flex min-h-0 flex-wrap items-center gap-x-4 gap-y-0.5 border-t border-white/[0.06] py-2 sm:gap-x-6 sm:py-2.5"
             aria-label={t.explore}

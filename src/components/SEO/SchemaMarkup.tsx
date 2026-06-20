@@ -30,8 +30,8 @@ export function SchemaMarkup({
     // 1. Organization Schema (always present)
     allSchemas.push(getOrganizationJsonLd());
 
-    // 2. LocalBusiness Schema (always present)
-    allSchemas.push(getLocalBusinessJsonLd());
+    // 2. LocalBusiness Schema — iki şube
+    allSchemas.push(...getLocalBusinessJsonLd());
 
     // 3. BreadcrumbList Schema
     const breadcrumbs = generateBreadcrumbs(service ?? null, language);

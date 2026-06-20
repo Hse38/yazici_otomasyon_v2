@@ -1,15 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getPublicSiteUrl } from "../lib/seo";
-import type { ServiceId } from "../data/services";
-
-const SERVICE_IDS: ServiceId[] = [
-  "product-1",
-  "product-2",
-  "product-3",
-  "product-4",
-  "product-5",
-  "product-6",
-];
+import { getPublicSiteUrl, SERVICE_IDS, getServicePath } from "../lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getPublicSiteUrl();
@@ -27,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const serviceEntries: MetadataRoute.Sitemap = SERVICE_IDS.map((id) => ({
-    url: `${base}/services/${id}`,
+    url: `${base}${getServicePath(id)}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 0.85,

@@ -6,7 +6,9 @@ import { Chatbot } from "./Chatbot";
 import { useChatbot } from "../contexts/ChatbotContext";
 import { ServiceGallery } from "./ServiceGallery";
 import { SchemaMarkup } from "./SEO/SchemaMarkup";
+import { ProductBreadcrumbs } from "./SEO/ProductBreadcrumbs";
 import { InternalLinks } from "./SEO/InternalLinks";
+import { PRODUCT_CATEGORY_LABELS } from "../lib/seo";
 import { StickyCTA } from "./SEO/StickyCTA";
 import { MobileNav } from "./Navigation/MobileNav";
 import { DesktopNav } from "./Navigation/DesktopNav";
@@ -79,29 +81,29 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
     src: "/img/safety-detail-hero.png",
     alt:
       language === "tr"
-        ? "Safety sistemleri detay görseli — Yazıcı Otomasyon"
-        : "Safety systems detail visual — Yazıcı Otomasyon",
+        ? "Schmersal güvenlik anahtarı — makine emniyet sistemleri"
+        : "Schmersal safety switch — machine safety systems",
   };
   const sensorHero = {
     src: "/img/sensor-detail-hero.png",
     alt:
       language === "tr"
-        ? "Sensör sistemleri detay görseli — Yazıcı Otomasyon"
-        : "Sensor systems detail visual — Yazıcı Otomasyon",
+        ? "Endüstriyel proximity sensör — otomasyon algılama sistemleri"
+        : "Industrial proximity sensor — automation sensing systems",
   };
   const controlSystemHero = {
     src: "/img/control-system-detail-hero.png",
     alt:
       language === "tr"
-        ? "Control System detay görseli — Yazıcı Otomasyon"
-        : "Control System detail visual — Yazıcı Otomasyon",
+        ? "Siemens PLC kontrol paneli — endüstriyel kontrol sistemleri"
+        : "Siemens PLC control panel — industrial control systems",
   };
   const encoderHero = {
     src: "/img/encoder-detail-hero.png",
     alt:
       language === "tr"
-        ? "Encoder çözümleri detay görseli — Yazıcı Otomasyon"
-        : "Encoder solutions detail visual — Yazıcı Otomasyon",
+        ? "Endüstriyel rotary encoder — hassas pozisyon ölçümü"
+        : "Industrial rotary encoder — precision position measurement",
   };
   const heroDisplay =
     service.id === "product-1"
@@ -412,6 +414,7 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
 
   return (
     <div className="bg-background text-foreground">
+      <SchemaMarkup service={service} language={language} />
       {/* Header */}
       <header className="sticky top-0 z-20 w-full border-b border-gray-100 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
@@ -497,6 +500,8 @@ export function ServiceDetailPage({ service, language }: ServiceDetailPageProps)
           </div>
         </div>
       </header>
+
+      <ProductBreadcrumbs service={service} language={language} />
 
       {/* 1. Hero Section */}
       <section className="relative min-h-[70vh] overflow-hidden bg-gradient-to-b from-background via-background to-lilac/5">
